@@ -1,67 +1,163 @@
-# Payload Blank Template
+# AI Onboarded — aionboarded.ai
 
-This template comes configured with the bare minimum to get started on anything you need.
+A production-grade community website for **AI Onboarded** — a 100+ member community creating awareness and sharing knowledge on AI tools and latest AI developments.
 
-## Quick start
+Built with **Next.js 15** + **Payload CMS 3.x** + **TypeScript** + **Tailwind CSS** + **PostgreSQL**.
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+## Features
 
-## Quick Start - local setup
+- 📝 **Blog** — Articles with categories, tags, author info, reading time, SEO
+- 🎙️ **Podcast** — Episodes with Spotify/Apple/YouTube embeds, show notes, transcripts
+- 📰 **Newsletter** — Archive with double opt-in email subscription (Resend)
+- 🗞️ **AI News** — Curated developments with "Top 5 This Week" section
+- 🔍 **Site-wide Search** — Across all content types
+- 🌙 **Dark/Light Mode** — System-aware with manual toggle
+- 📱 **Responsive** — Mobile-first design
+- 🔒 **Security** — HSTS, CSP headers, rate limiting, RBAC
+- 🤖 **SEO** — Sitemap, robots.txt, OpenGraph, structured data (JSON-LD)
+- 📡 **RSS Feeds** — Blog and Podcast with iTunes extensions
+- 🛠️ **Admin CMS** — Full Payload CMS admin panel at `/admin`
 
-To spin up this template locally, follow these steps:
+## Quick Start
 
-### Clone
+### Prerequisites
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+- Node.js 20+ (or 22)
+- PostgreSQL 16 (or Docker)
 
-### Development
+### 1. Clone & Install
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+```bash
+git clone <your-repo-url> aionboarded
+cd aionboarded
+npm install
+```
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+### 2. Set Up Database
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+**Option A: Docker (recommended)**
+```bash
+docker compose up postgres -d
+```
 
-#### Docker (Optional)
+**Option B: Local PostgreSQL**
+Create a database called `aionboarded`.
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+### 3. Configure Environment
 
-To do so, follow these steps:
+```bash
+cp .env.example .env
+# Edit .env with your values
+```
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+Key variables:
+| Variable | Description | Required |
+|---|---|---|
+| `DATABASE_URL` | PostgreSQL connection string | ✅ |
+| `PAYLOAD_SECRET` | Random secret for Payload CMS auth | ✅ |
+| `NEXT_PUBLIC_SITE_URL` | Your site URL | ✅ |
+| `RESEND_API_KEY` | Resend API key for newsletter emails | Optional |
 
-## How it works
+### 4. Run Development Server
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+```bash
+npm run dev
+```
 
-### Collections
+The site will be at `http://localhost:3000` and admin at `http://localhost:3000/admin`.
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+### 5. Seed Sample Data
 
-- #### Users (Authentication)
+```bash
+npx tsx seed/index.ts
+```
 
-  Users are auth-enabled collections that have access to the admin panel.
+This creates an admin user, sample content, tags, and categories.
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+**Admin login:** `admin@aionboarded.ai` / `admin123!`
 
-- #### Media
+> ⚠️ Change the admin password immediately after first login!
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+## Docker (Full Stack)
 
-### Docker
+```bash
+docker compose up
+```
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+This starts both PostgreSQL and the app. The site will be at `http://localhost:3000`.
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+## Project Structure
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+```
+src/
+├── app/
+│   ├── (frontend)/     # Public pages (blog, podcast, newsletter, news, etc.)
+│   ├── (payload)/      # Payload CMS admin routes
+│   ├── api/            # API routes (subscribe, contact, search)
+│   ├── rss/            # RSS feed generators
+│   └── sitemap.ts      # Dynamic sitemap
+├── collections/        # Payload CMS data model (10 collections)
+├── components/         # React components (layout, UI)
+└── lib/                # Utilities (SEO, payload client, helpers)
+```
 
-## Questions
+## Content Types
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+| Collection | Description |
+|---|---|
+| **Users** | Admin/Editor roles with RBAC |
+| **Blog Posts** | Articles with SEO, reading time, categories |
+| **Podcast Episodes** | Multi-platform embeds, show notes, transcripts |
+| **Newsletter Issues** | Numbered issues with archive |
+| **News Items** | Curated news with source attribution |
+| **Tags** | Cross-content tagging |
+| **Categories** | Blog categorization |
+| **Media** | Image upload with auto-optimization |
+| **Subscribers** | Newsletter email list with double opt-in |
+| **Pages** | Static pages (about, etc.) |
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push to GitHub
+2. Import project in Vercel
+3. Set environment variables
+4. Deploy
+
+Vercel auto-detects Next.js and handles builds. Use a managed PostgreSQL (Neon, Supabase, or Vercel Postgres).
+
+### Hostinger Node.js Hosting
+
+1. Push to GitHub
+2. Connect GitHub repo in Hostinger dashboard
+3. Set Node.js version to 20+
+4. Set start command: `npm run build && npm start`
+5. Configure environment variables
+6. Set up PostgreSQL database and update `DATABASE_URL`
+
+See [docs/deployment.md](docs/deployment.md) for detailed instructions.
+
+## Scripts
+
+```bash
+npm run dev          # Development server
+npm run build        # Production build
+npm start            # Start production server
+npm run lint         # ESLint check
+npx tsx seed/index.ts  # Seed database
+```
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **CMS:** Payload CMS 3.x (integrated)
+- **Database:** PostgreSQL 16
+- **Styling:** Tailwind CSS v4
+- **Language:** TypeScript
+- **Email:** Resend
+- **Image Processing:** Sharp
+
+## License
+
+MIT
