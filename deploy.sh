@@ -60,7 +60,7 @@ update() {
     docker compose -f "$COMPOSE_FILE" --env-file "$ENV_FILE" up -d --build app
 
     log "Restarting nginx to pick up changes..."
-    docker compose -f "$COMPOSE_FILE" restart nginx
+    docker compose -f "$COMPOSE_FILE" restart nginx certbot
 
     log "Checking service status..."
     docker compose -f "$COMPOSE_FILE" ps
@@ -76,6 +76,15 @@ logs() {
     docker compose -f "$COMPOSE_FILE" logs -f --tail=100
 }
 
+# Renew SSL certificates
+ssl_renew() {
+    log "Renewing SSL certificates..."
+    docker compose -f "$COMPOSE_FILE" run --rm certbot renew
+    log "Reloading nginx to pick up new certificates..."
+    docker compose -f "$COMPOSE_FILE" exec nginx nginx -s reload
+    log "SSL renewal complete!"
+}
+
 # Main
 case "${1:-first-run}" in
     first-run)
@@ -84,11 +93,14 @@ case "${1:-first-run}" in
     update)
         update
         ;;
+    ssl-renew)
+        ssl_renew
+        ;;
     logs)
         logs
         ;;
     *)
-        echo "Usage: $0 [first-run|update|logs]"
+        echo "Usage: $0 [first-run|update|ssl-renew|logs]"
         exit 1
         ;;
 esac
