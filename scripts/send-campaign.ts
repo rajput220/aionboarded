@@ -11,8 +11,6 @@
 import { getPayload } from 'payload'
 import config from './../src/payload.config'
 import { Resend } from 'resend'
-import * as fs from 'fs'
-import * as path from 'path'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -40,15 +38,6 @@ async function sendCampaign() {
       process.exit(0)
     }
 
-    // Read the email draft we created earlier
-    const emailDraftPath = path.join(__dirname, '../../aionboarded-newsletter/content/week-7/email-draft.md')
-    let emailContent = ''
-    try {
-        emailContent = fs.readFileSync(emailDraftPath, 'utf8')
-    } catch (e) {
-        console.warn("Could not read markdown draft, using fallback HTML.")
-    }
-
     console.log('Sending emails via Resend...')
     
     // We send emails in batches to avoid rate limits
@@ -56,8 +45,8 @@ async function sendCampaign() {
     let failureCount = 0
 
     for (const sub of confirmedSubs) {
-      const firstName = (sub as any).firstName || 'there'
-      const email = (sub as any).email
+      const firstName = (sub as Record<string, unknown>).firstName || 'there'
+      const email = (sub as Record<string, unknown>).email as string
       
       const htmlBody = `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
