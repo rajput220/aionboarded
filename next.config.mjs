@@ -11,6 +11,18 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/newsletter',
+        destination: '/newsletter/index.html',
+      },
+      {
+        source: '/newsletter/archive',
+        destination: '/newsletter/archive.html',
+      },
+    ]
+  },
   async headers() {
     return [
       {
