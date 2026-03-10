@@ -45,8 +45,8 @@ async function sendCampaign() {
     let failureCount = 0
 
     for (const sub of confirmedSubs) {
-      const firstName = (sub as Record<string, unknown>).firstName || 'there'
-      const email = (sub as Record<string, unknown>).email as string
+      const firstName = ((sub as unknown) as Record<string, unknown>).firstName || 'there'
+      const email = ((sub as unknown) as Record<string, unknown>).email as string
       
       const htmlBody = `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
