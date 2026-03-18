@@ -30,6 +30,7 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       NODE_ENV: production
     volumes:
+      - ./public:/app/public
       - media-data:/app/public/media
     networks:
       - app-network
