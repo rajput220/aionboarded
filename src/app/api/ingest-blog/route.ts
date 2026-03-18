@@ -179,6 +179,10 @@ export async function POST(req: NextRequest) {
 
     } catch (error: any) {
         console.error('Ingestion API error:', error)
-        return NextResponse.json({ error: error.message }, { status: 500 })
+        return NextResponse.json({ 
+            error: error.message,
+            stack: error.stack,
+            details: error.data || error.errors || null
+        }, { status: 500 })
     }
 }
