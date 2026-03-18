@@ -15,11 +15,6 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: 'public/media',
     mimeTypes: ['image/*', 'audio/*'],
-    imageSizes: [
-      { name: 'thumbnail', width: 300, height: 200, position: 'centre' },
-      { name: 'card', width: 768, height: 432, position: 'centre' },
-      { name: 'hero', width: 1920, height: 1080, position: 'centre' },
-    ],
   },
   fields: [
     {

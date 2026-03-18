@@ -66,6 +66,14 @@ export async function POST(req: NextRequest) {
 
         if (fullImagePath && fs.existsSync(fullImagePath)) {
             console.log(`API: Uploading hero image: ${fullImagePath}`)
+            
+            // Ensure media directory exists
+            const mediaDir = path.join(process.cwd(), 'public/media')
+            if (!fs.existsSync(mediaDir)) {
+                console.log(`API: Creating media directory: ${mediaDir}`)
+                fs.mkdirSync(mediaDir, { recursive: true })
+            }
+
             const stats = fs.statSync(fullImagePath)
             const fileBuffer = fs.readFileSync(fullImagePath)
             
