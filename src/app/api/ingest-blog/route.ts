@@ -15,13 +15,18 @@ export async function POST(req: NextRequest) {
         console.log('API: Initializing Payload CMS for blog ingestion...')
         const payload = await getPayloadClient()
 
-        // 1. Ensure Admin User
-        const adminUsers = await payload.find({ 
+        // 1. Ensure Admin or Editor User
+        const authorUsers = await payload.find({ 
             collection: 'users', 
-            where: { role: { equals: 'admin' } }, 
+            where: { 
+                or: [
+                    { role: { equals: 'admin' } },
+                    { role: { equals: 'editor' } }
+                ]
+            }, 
             limit: 1 
         })
-        const adminId = adminUsers.docs[0]?.id
+        const adminId = authorUsers.docs[0]?.id
         if (!adminId) {
             return NextResponse.json({ error: 'No admin user found' }, { status: 500 })
         }
