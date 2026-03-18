@@ -13,6 +13,7 @@ export const Media: CollectionConfig = {
     defaultColumns: ['alt', 'filename', 'mimeType', 'updatedAt'],
   },
   upload: {
+    staticDir: 'media',
     mimeTypes: ['image/*', 'audio/*'],
     imageSizes: [
       { name: 'thumbnail', width: 300, height: 200, position: 'centre' },

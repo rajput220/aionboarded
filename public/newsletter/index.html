@@ -3,23 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scaling Action in the Agentic Era — Week 7 | AI Onboarded</title>
-    <meta name="description" content="We are moving from a system that simply thinks to a system that acts. Welcome to the Agentic Era." />
+    <title>The Agentic Pivot: From AI as Software to AI as Colleagues — Week 8 | AI Onboarded</title>
+    <meta name="description" content="The AI industry is undergoing a fundamental shift: we are moving from prompting passive software to delegating to active digital colleagues." />
     <meta
       property="og:title"
-      content="Scaling Action in the Agentic Era — Week 7 | AI Onboarded"
+      content="The Agentic Pivot: From AI as Software to AI as Colleagues — Week 8 | AI Onboarded"
     />
-    <meta property="og:description" content="We are moving from a system that simply thinks to a system that acts. Welcome to the Agentic Era." />
+    <meta property="og:description" content="The AI industry is undergoing a fundamental shift: we are moving from prompting passive software to delegating to active digital colleagues." />
     <meta property="og:type" content="article" />
     <meta
       property="og:url"
-      content="https://aionboarded.ai/newsletter/week-7"
+      content="https://aionboarded.ai/newsletter/week-8"
     />
     <meta
       property="og:image"
-      content="https://aionboarded.ai/newsletter/assets/images/week-7-hero.png"
+      content="https://aionboarded.ai/newsletter/assets/images/week-8-hero.png"
     />
-    <link rel="canonical" href="https://aionboarded.ai/newsletter/week-7" />
+    <link rel="canonical" href="https://aionboarded.ai/newsletter/week-8" />
     <style>
       /* ============================================================
    AIOnboarded Newsletter — Design System
@@ -63,7 +63,7 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --max-width: 1100px;
+  --max-width: 1200px;
 }
 
 /* ----- Reset & Base ----- */
@@ -322,8 +322,8 @@ a:hover {
 /* ----- Story Cards ----- */
 .stories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 32px;
 }
 
 .story-card {
@@ -345,9 +345,9 @@ a:hover {
 
 .story-card-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  background: var(--light);
+  height: 350px;
+  object-fit: contain;
+  background: var(--light-200);
 }
 
 .story-card-body {
@@ -412,8 +412,10 @@ a:hover {
 /* ----- Visual Insights Section ----- */
 .visual-insights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .visual-card {
@@ -909,8 +911,8 @@ a:hover {
           <div class="header-logo-text">AI <span>Onboarded</span></div>
         </a>
         <div class="header-meta">
-          <span>March 10, 2026</span>
-          <span class="header-badge">Week 7</span>
+          <span>March 16, 2026</span>
+          <span class="header-badge">Week 8</span>
         </div>
       </div>
     </header>
@@ -919,12 +921,12 @@ a:hover {
     <section class="hero" id="hero">
       <div class="container hero-inner">
         <div class="hero-content">
-          <div class="hero-eyebrow">📡 Weekly Brief — Week 7</div>
-          <h1 class="hero-title">Scaling Action in the Agentic Era</h1>
-          <p class="hero-subtitle">We are moving from a system that simply thinks to a system that acts. Our mastery of AI follows a clear trajectory from passive commands to structured environments.</p>
+          <div class="hero-eyebrow">📡 Weekly Brief — Week 8</div>
+          <h1 class="hero-title">The Agentic Pivot</h1>
+          <p class="hero-subtitle">From AI as Software to AI as Colleagues</p>
         </div>
         <div class="hero-image">
-          <img src="/newsletter/assets/images/image1.png" alt="Scaling Action in the Agentic Era" loading="eager" />
+          <img src="./assets/images/Slide_1.png" alt="The Agentic Pivot: From AI as Software to AI as Colleagues" loading="eager" />
         </div>
       </div>
     </section>
@@ -935,12 +937,14 @@ a:hover {
         <div class="toc">
           <div class="toc-title">📋 In This Issue</div>
           <ul class="toc-list">
-                      <li><a href="#top-stories">The Rise of Agentic AI</a></li>
-          <li><a href="#top-stories">The Three Pillars of Agentic AI</a></li>
-          <li><a href="#top-stories">Roles in the Agentic Era</a></li>
-          <li><a href="#top-stories">The Sovereign Agentic Shift</a></li>
-          <li><a href="#top-stories">White House Energy Pledge</a></li>
-          <li><a href="#top-stories">GPT-5.4 & Extreme Reasoning</a></li>
+                      <li><a href="#top-stories">Sam Altman Previews OpenAI’s Multi-Agent Future</a></li>
+          <li><a href="#top-stories">DeepMind Unveils Gopher-Agent for Complex System Navigation</a></li>
+          <li><a href="#top-stories">Microsoft Integrates Autonomous Agents into Epic Systems Healthcare</a></li>
+          <li><a href="#top-stories">Apple MacBook Neo Launch: Democratizing AI Hardware</a></li>
+          <li><a href="#top-stories">Microsoft and Europol Disrupt Tycoon 2FA Phishing Platform</a></li>
+          <li><a href="#top-stories">Demo 1: The Digital Janitor</a></li>
+          <li><a href="#top-stories">Demo 2: The AI News Analyst</a></li>
+          <li><a href="#top-stories">Demo 3: The Global Research Assistant</a></li>
           </ul>
         </div>
       </div>
@@ -955,56 +959,82 @@ a:hover {
         </div>
         <div class="stories-grid">
         <article class="story-card">
-          <img src="/newsletter/assets/images/image2.png" alt="The Rise of Agentic AI" class="story-card-image" loading="lazy">
+          <img src="./assets/images/Slide_2.png" alt="Sam Altman Previews OpenAI’s Multi-Agent Future" class="story-card-image" loading="lazy">
           <div class="story-card-body">
-            <h3 class="story-card-headline">The Rise of Agentic AI</h3>
-            <p class="story-card-summary">The era of AI as a static digital encyclopedia is over. AI evolution moves from static prompts to multi-step reasoning, environment architecture, and finally, autonomous agentic action. We are seeing a fundamental shift from chatbots that answer questions to autonomous agents that execute workflows. This transition—often referred to as 'scaling action' instead of 'scaling laws'—means AI can now research, plan, execute, and self-correct across complex environments without human intervention.</p>
+            <h3 class="story-card-headline">Sam Altman Previews OpenAI’s Multi-Agent Future</h3>
+            <p class="story-card-summary">In a recent interview, Sam Altman emphasized that while AI models will continue to get smarter, the next major leap in productivity will come from 'autonomous agents.' He envisions a near future where systems aren't just answering questions, but actively managing workflows—like reading your emails, scheduling meetings, and drafting responses without continuous human prompting.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> This confirms that OpenAI’s next major product focus isn't just a smarter chatbot, but a capable digital coworker. Prepare for a shift where prompt engineering is replaced by 'process delegation.'</div>
+            <div class="story-card-sourcelink" style="margin-top: 10px; font-size: 0.9rem;"><a href="https://techcrunch.com/2026/02/18/sam-altman-the-future-is-autonomous-multi-agent-systems/" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 500; text-decoration: none;">Read the full source ↗</a></div>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <img src="./assets/images/Slide_3.png" alt="DeepMind Unveils Gopher-Agent for Complex System Navigation" class="story-card-image" loading="lazy">
+          <div class="story-card-body">
+            <h3 class="story-card-headline">DeepMind Unveils Gopher-Agent for Complex System Navigation</h3>
+            <p class="story-card-summary">DeepMind published a paper detailing 'Gopher-Agent,' an AI designed specifically to navigate complex, multi-step digital environments. Unlike standard LLMs, this agent can autonomously click through web interfaces, interact with databases, and synthesize information across different enterprise tools to complete open-ended tasks.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> This is a massive step toward true enterprise automation. It shows that AI is moving out of the chat window and directly into the software systems where businesses actually operate.</div>
+            <div class="story-card-sourcelink" style="margin-top: 10px; font-size: 0.9rem;"><a href="https://www.technologyreview.com/2026/03/01/deepmind-gopher-agent-enterprise/" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 500; text-decoration: none;">Read the full source ↗</a></div>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <img src="./assets/images/Slide_4.png" alt="Microsoft Integrates Autonomous Agents into Epic Systems Healthcare" class="story-card-image" loading="lazy">
+          <div class="story-card-body">
+            <h3 class="story-card-headline">Microsoft Integrates Autonomous Agents into Epic Systems Healthcare</h3>
+            <p class="story-card-summary">Microsoft announced a deep integration of autonomous agents into Epic Systems, the largest electronic health records provider. The agents are tasked with auto-drafting responses to patient messages, summarizing complex medical histories for doctors before appointments, and flagging missing billing codes.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> Healthcare is the 'proving ground' for agentic reliability. If an AI can safely handle a clinical summary, it can handle a corporate quarterly report. The 'measurable business impact' of clinical AI is already being reported as a high return on investment.</div>
+            <div class="story-card-sourcelink" style="margin-top: 10px; font-size: 0.9rem;"><a href="https://www.microsoft.com/en-us/ai/blog/" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 500; text-decoration: none;">Read the full source ↗</a></div>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <img src="./assets/images/Slide_5.png" alt="Apple MacBook Neo Launch: Democratizing AI Hardware" class="story-card-image" loading="lazy">
+          <div class="story-card-body">
+            <h3 class="story-card-headline">Apple MacBook Neo Launch: Democratizing AI Hardware</h3>
+            <p class="story-card-summary">Apple entered the mass-market AI hardware space this week with the launch of the 'MacBook Neo,' starting at $599. Powered by the A18 Pro chip, the Neo is designed specifically to handle local AI workloads and agentic tasks. This 'AI for all' strategy aims to lower the barrier for non-technical users to access frontier AI capabilities.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> AI hardware is becoming affordable. You no longer need a $2,000 machine to run high-performance local agents. For students and people getting onboarded, the MacBook Neo is now the 'entry-level' standard for AI-native education and work.</div>
+            <div class="story-card-sourcelink" style="margin-top: 10px; font-size: 0.9rem;"><a href="https://finance.yahoo.com/news/apple-expands-ai-ecosystem-budget-210921782.html" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 500; text-decoration: none;">Read the full source ↗</a></div>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <img src="./assets/images/Slide_6.png" alt="Microsoft and Europol Disrupt Tycoon 2FA Phishing Platform" class="story-card-image" loading="lazy">
+          <div class="story-card-body">
+            <h3 class="story-card-headline">Microsoft and Europol Disrupt Tycoon 2FA Phishing Platform</h3>
+            <p class="story-card-summary">Microsoft and Europol announced on March 5, 2026, the successful disruption of 'Tycoon 2FA,' a global phishing platform. The service helped cybercriminals bypass multifactor authentication, leading to massive business email compromises. Microsoft used AI-assisted analysis to identify and dismantle the platform's infrastructure.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> AI is a 'double-edged sword' in security. While it powers more sophisticated phishing, it is also providing the tools to take those platforms down at scale. Businesses should focus on 'AI-Proofing' their security posture by adopting the latest Microsoft and Apple 2FA upgrades.</div>
+            <div class="story-card-sourcelink" style="margin-top: 10px; font-size: 0.9rem;"><a href="https://www.cybersecuritydive.com/news/microsoft-europol-disrupt-phishing-tycoon-2fa/813904/" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 500; text-decoration: none;">Read the full source ↗</a></div>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <img src="./assets/images/Slide_7.png" alt="Demo 1: The Digital Janitor" class="story-card-image" loading="lazy">
+          <div class="story-card-body">
+            <h3 class="story-card-headline">Demo 1: The Digital Janitor</h3>
+            <p class="story-card-summary">Claude semantically analyzes the content of each file to decide where it belongs. It performs a real-time audit, proposes a logical folder hierarchy, and physically creates the new subdirectories and moves the files without requiring you to upload individual files to a chat window.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> This replaces 10–15 minutes of tedious drag-and-drop work with a single 'Approve' button, showing the efficiency of the agentic workforce.</div>
             
           </div>
         </article>
 
         <article class="story-card">
-          <img src="/newsletter/assets/images/image3.png" alt="The Three Pillars of Agentic AI" class="story-card-image" loading="lazy">
+          <img src="./assets/images/Slide_8.png" alt="Demo 2: The AI News Analyst" class="story-card-image" loading="lazy">
           <div class="story-card-body">
-            <h3 class="story-card-headline">The Three Pillars of Agentic AI</h3>
-            <p class="story-card-summary">Agentic AI stands on three foundational capabilities: Autonomous Planning (decomposing high-level goals into logical sub-tasks), Tool-Use (accessing external environments like browsers, APIs and CRMs), and Self-Correction (iteratively reviewing output against requirements). For example, rather than just writing code, an agent can write code, run tests, read the error logs, and fix its own bugs in a continuous loop.</p>
-            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> These pillars transform AI from a passive information retriever to a proactive digital worker.</div>
+            <h3 class="story-card-headline">Demo 2: The AI News Analyst</h3>
+            <p class="story-card-summary">The agent operates as a specialized newsroom. It searches for 'hidden' insights in private project folders, scans professional newsletters in your inbox, and cross-references those findings with the live global web. It concludes by generating a customized, formatting Google doc.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> A task that would take a human 2–3 hours of deep focus is condensed into a background process. By handling the 'collection and formatting,' the human is freed to focus on high-level strategy instead.</div>
+            
           </div>
         </article>
 
         <article class="story-card">
-          <img src="/newsletter/assets/images/image5.png" alt="Roles in the Agentic Era" class="story-card-image" loading="lazy">
+          <img src="./assets/images/Slide_9.png" alt="Demo 3: The Global Research Assistant" class="story-card-image" loading="lazy">
           <div class="story-card-body">
-            <h3 class="story-card-headline">Roles in the Agentic Era</h3>
-            <p class="story-card-summary">The labor market shifts from Individual Contributors to Agentic Orchestrators. New roles like AI Workflow Architect, Agentic Governance Lead, and Context Designer are emerging to manage digital pods of 50+ agents. A single orchestrator can rapidly dictate strategy to a fleet of specialized AI workers, dramatically shifting the bottleneck from execution to conceptualization.</p>
-            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> Stop thinking of AI as a Chatbot and start thinking of it as a Staff Officer... scale Action, not just information.</div>
-          </div>
-        </article>
-
-        <article class="story-card">
-          <img src="/newsletter/assets/images/image6.png" alt="The Sovereign Agentic Shift" class="story-card-image" loading="lazy">
-          <div class="story-card-body">
-            <h3 class="story-card-headline">The Sovereign Agentic Shift</h3>
-            <p class="story-card-summary">Enterprise work is moving to disconnected, high-security sovereign clouds. Models like GPT-5.4 and Gemini 3.1 Pro bring feature native computer use, while hardwired weights are etched directly into silicon for speeds up to 17,000 tokens/sec. This shift allows sensitive government and financial institutions to deploy autonomous agents without exposing critical data to public endpoints.</p>
-            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> The average task horizon increases from 20 minutes to 2.5 hours.</div>
-          </div>
-        </article>
-
-        <article class="story-card">
-          <img src="/newsletter/assets/images/image7.png" alt="White House Energy Pledge" class="story-card-image" loading="lazy">
-          <div class="story-card-body">
-            <h3 class="story-card-headline">White House Energy Pledge</h3>
-            <p class="story-card-summary">Seven leading AI firms sign an agreement to build, bring, or buy dedicated power supplies, funding infrastructure upgrades to protect residents from rate hikes and investing multi-billions in Small Modular Reactors (SMRs). The massive power demands of scaling agentic inference mean energy infrastructure is now the primary bottleneck to AI expansion.</p>
-            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> Prevents the socialization of costs—ensuring private AI expansion isn't subsidized by taxpayers.</div>
-          </div>
-        </article>
-
-        <article class="story-card">
-          <img src="/newsletter/assets/images/image8.png" alt="GPT-5.4 & Extreme Reasoning" class="story-card-image" loading="lazy">
-          <div class="story-card-body">
-            <h3 class="story-card-headline">GPT-5.4 & Extreme Reasoning</h3>
-            <p class="story-card-summary">OpenAI launches the Thinking family for complex, high-reliability professional tasks with a one-million-token context window capable of processing entire codebases and asynchronous internal loops. By forcing models to generate latent chain-of-thought pathways before responding, 'System 2' reasoning takes hold, prioritizing reliability over speed.</p>
-            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> Achieves a 95% reduction in technical and legal hallucinations, marking the shift to slow and precise AI.</div>
+            <h3 class="story-card-headline">Demo 3: The Global Research Assistant</h3>
+            <p class="story-card-summary">Acting as a dedicated librarian and market analyst, the agent conducts a deep dive across academic research (Google Scholar) and consumer market trends (Amazon). It synthesizes these disparate data points into a single, structured research briefing saved locally as a .docx.</p>
+            <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> It demonstrates exhaustive accuracy without getting tired, provides cost/access awareness to identify paywalled content, and transforms hours of 'search and copy-paste' into a single, high-value briefing.</div>
+            
           </div>
         </article></div>
       </div>
@@ -1023,18 +1053,28 @@ a:hover {
         </div>
         <div class="visual-insights-grid">
         <div class="visual-card">
-          <img src="/newsletter/assets/images/image4.png" alt="Visual Insight" loading="lazy">
-          <div class="visual-card-caption">Traditional AI vs Agentic AI: A shift in input, output, behavior, and reliability.</div>
+          <img src="./assets/images/Slide_10.png" alt="Visual Insight" loading="lazy">
+          <div class="visual-card-caption">Agentic Architecture Shift</div>
         </div>
 
         <div class="visual-card">
-          <img src="/newsletter/assets/images/image10.png" alt="Visual Insight" loading="lazy">
-          <div class="visual-card-caption">NVIDIA Vera Rubin 10x Revolution: Integrating CPU/GPU with HBM4 memory for 22 TB/s bandwidth.</div>
+          <img src="./assets/images/Slide_11.png" alt="Visual Insight" loading="lazy">
+          <div class="visual-card-caption">Workflow Automation Flow</div>
         </div>
 
         <div class="visual-card">
-          <img src="/newsletter/assets/images/image9.png" alt="Visual Insight" loading="lazy">
-          <div class="visual-card-caption">Ecosystem & Security: The Anthropic Divide between Defense-First and Safety-First camps.</div>
+          <img src="./assets/images/Slide_12.png" alt="Visual Insight" loading="lazy">
+          <div class="visual-card-caption">Efficiency Gains with Agents vs Legacy Systems</div>
+        </div>
+
+        <div class="visual-card">
+          <img src="./assets/images/Slide_13.png" alt="Visual Insight" loading="lazy">
+          <div class="visual-card-caption">Multi-Agent System Blueprint</div>
+        </div>
+
+        <div class="visual-card">
+          <img src="./assets/images/Slide_14.png" alt="Visual Insight" loading="lazy">
+          <div class="visual-card-caption">The Future of AI Collaboration</div>
         </div></div>
       </div>
     </section>
@@ -1046,30 +1086,7 @@ a:hover {
           <div class="section-label">⚡ Market Pulse</div>
           <h2 class="section-title">Rapid Industry <span>Updates</span></h2>
         </div>
-        <div class="pulse-grid">
-        <div class="pulse-item">
-          <div class="pulse-icon">⚡</div>
-          <h3 class="pulse-title">Gemini Flash-Lite</h3>
-          <p class="pulse-text">Ultra-fast model launched at $0.25/1M tokens.</p>
-        </div>
-
-        <div class="pulse-item">
-          <div class="pulse-icon">💻</div>
-          <h3 class="pulse-title">Alibaba Local AI</h3>
-          <p class="pulse-text">Compact models outperforming GPT-4 on standard laptops.</p>
-        </div>
-
-        <div class="pulse-item">
-          <div class="pulse-icon">📱</div>
-          <h3 class="pulse-title">Samsung Agentic OS</h3>
-          <p class="pulse-text">Rolling out to 800 million devices by year-end.</p>
-        </div>
-
-        <div class="pulse-item">
-          <div class="pulse-icon">🎵</div>
-          <h3 class="pulse-title">Apple Transparency</h3>
-          <p class="pulse-text">Synthesized Tags for AI music content provenance.</p>
-        </div></div>
+        <div class="pulse-grid"></div>
       </div>
     </section>
 
@@ -1083,7 +1100,7 @@ a:hover {
         </p>
         <div class="community-buttons">
           <a
-            href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ?mode=gi_t"
+            href="https://chat.whatsapp.com/example"
             class="btn btn-whatsapp"
             target="_blank"
             rel="noopener"
@@ -1099,7 +1116,7 @@ a:hover {
             WhatsApp Community
           </a>
           <a
-            href="https://discord.com/invite/SW4HZAv37"
+            href="https://discord.gg/example"
             class="btn btn-discord"
             target="_blank"
             rel="noopener"

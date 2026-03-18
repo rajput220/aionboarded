@@ -46,26 +46,47 @@ export async function POST(req: NextRequest) {
       const email = ((sub as unknown) as Record<string, unknown>).email as string
       
       const htmlBody = `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-          <p style="color: #666; font-size: 16px; line-height: 1.6;">Hi ${firstName},</p>
-          <p style="color: #666; font-size: 16px; line-height: 1.6;">Welcome to Week 7 of the AI Onboarded Weekly Brief! 🎉</p>
-          <p style="color: #666; font-size: 16px; line-height: 1.6;">The era of AI as a static digital encyclopedia is over. We are seeing a fundamental shift from chatbots that simply answer questions, to autonomous agents that can execute entire workflows.</p>
-          <p style="color: #666; font-size: 16px; line-height: 1.6;">In this week's edition, we are covering <strong>The Agentic Era</strong>, including The Three Pillars of Agentic AI, The Sovereign Agentic Shift, GPT-5.4 & Extreme Reasoning, and more.</p>
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #334155; line-height: 1.7;">
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="background: linear-gradient(135deg, #0A84FF, #1DB954); color: white; display: inline-block; padding: 8px 16px; border-radius: 8px; font-weight: 800; font-size: 20px; margin-bottom: 12px;">AI</div>
+            <h1 style="color: #0F172A; font-size: 24px; font-weight: 800; margin: 0;">AI Onboarded Weekly Brief</h1>
+            <p style="color: #64748B; font-size: 14px; margin-top: 4px;">Week 8: The Agentic Pivot</p>
+          </div>
+
+          <p style="font-size: 16px;">Hi ${firstName},</p>
           
-          <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://aionboarded.ai'}/newsletter/week-7.html"
-             style="display: inline-block; background: linear-gradient(135deg, #0A84FF, #1DB954); color: white; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-weight: 600; margin: 24px 0;">
-            Read the Week 7 Newsletter
-          </a>
+          <p style="font-size: 16px; font-weight: 500; color: #0F172A;">The AI industry is undergoing a fundamental shift: we are moving from prompting passive software to delegating to active digital colleagues.</p>
           
-          <h3 style="color: #1a1a1a; font-size: 20px; margin-top: 32px; margin-bottom: 16px;">Join the Conversation</h3>
-          <p style="color: #666; font-size: 16px; line-height: 1.6;">Connect with over 100+ fellow AI enthusiasts:</p>
-          <p>💬 <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ?mode=gi_t" style="color: #0A84FF;">Join our WhatsApp Group</a></p>
-          <p>🎮 <a href="https://discord.com/invite/SW4HZAv37" style="color: #0A84FF;">Join our Discord Server</a></p>
+          <p style="font-size: 16px;">In this week's edition, we explore <strong>The Agentic Pivot</strong> and what it means for the future of work. Highlights include:</p>
           
-          <p style="color: #999; font-size: 14px; margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
-            Best,<br>
+          <ul style="padding-left: 20px; font-size: 15px;">
+            <li style="margin-bottom: 8px;"><strong>Sam Altman's Multi-Agent Vision:</strong> Preparing for the jump from chatbots to autonomous coworkers.</li>
+            <li style="margin-bottom: 8px;"><strong>DeepMind's Gopher-Agent:</strong> AI that navigates complex enterprise software directly.</li>
+            <li style="margin-bottom: 8px;"><strong>Apple MacBook Neo:</strong> How powerful local AI hardware is democratizing agentic work.</li>
+            <li style="margin-bottom: 8px;"><strong>The Digital Janitor & News Analyst:</strong> Real-world demos of agents clearing the "boring" path.</li>
+          </ul>
+
+          <div style="text-align: center; margin: 40px 0;">
+            <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://aionboarded.ai'}/newsletter/week-8.html"
+               style="display: inline-block; background: #0A84FF; color: white; text-decoration: none; padding: 14px 36px; border-radius: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 4px 15px rgba(10, 132, 255, 0.3);">
+              Read the Full Week 8 Newsletter
+            </a>
+          </div>
+          
+          <div style="background: #F8FAFC; border-radius: 16px; padding: 24px; margin: 32px 0; border: 1px solid #E2E8F0;">
+            <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 0; margin-bottom: 12px;">Join the Community</h3>
+            <p style="font-size: 14px; margin-bottom: 20px;">Connect with 100+ fellow AI enthusiasts and get early access to agent demos:</p>
+            <div style="display: flex; gap: 12px;">
+              <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" style="color: #0A84FF; text-decoration: none; font-weight: 600; font-size: 14px;">💬 WhatsApp Group</a>
+              <span style="color: #CBD5E1;">&bull;</span>
+              <a href="https://discord.com/invite/SW4HZAv37" style="color: #0A84FF; text-decoration: none; font-weight: 600; font-size: 14px;">🎮 Discord Server</a>
+            </div>
+          </div>
+          
+          <p style="color: #94A3B8; font-size: 13px; margin-top: 48px; border-top: 1px solid #E2E8F0; padding-top: 24px;">
+            You received this because you subscribed to AI Onboarded updates. <br>
             <strong>The AI Onboarded Team</strong><br>
-            <a href="https://aionboarded.ai" style="color: #999;">aionboarded.ai</a>
+            <a href="https://aionboarded.ai" style="color: #94A3B8;">aionboarded.ai</a>
           </p>
         </div>
       `
@@ -74,7 +95,7 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: 'AI Onboarded <newsletter@aionboarded.ai>',
           to: email,
-          subject: 'Welcome to Week 7! 🚀 Scaling Action in the Agentic Era',
+          subject: 'The Agentic Pivot: From AI as Software to AI as Colleagues 🤖',
           html: htmlBody,
         })
         successCount++

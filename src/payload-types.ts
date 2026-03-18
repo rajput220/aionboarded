@@ -6,25 +6,60 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * Supported timezones in IANA format.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportedTimezones".
+ */
 export type SupportedTimezones =
   | 'Pacific/Midway'
+  | 'Pacific/Niue'
   | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
   | 'America/Anchorage'
+  | 'Pacific/Gambier'
   | 'America/Los_Angeles'
+  | 'America/Tijuana'
   | 'America/Denver'
+  | 'America/Phoenix'
   | 'America/Chicago'
+  | 'America/Guatemala'
   | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
   | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
   | 'Europe/London'
   | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
   | 'Europe/Moscow'
+  | 'Asia/Riyadh'
   | 'Asia/Dubai'
+  | 'Asia/Baku'
   | 'Asia/Karachi'
+  | 'Asia/Tashkent'
   | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
   | 'Asia/Shanghai'
+  | 'Asia/Singapore'
   | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
   | 'Australia/Sydney'
-  | 'Pacific/Auckland';
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
@@ -65,7 +100,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
   globals: {};
@@ -77,19 +112,33 @@ export interface Config {
     workflows: unknown;
   };
 }
-
 export interface UserAuthOperations {
-  forgotPassword: { email: string; password: string };
-  login: { email: string; password: string };
-  registerFirstUser: { email: string; password: string };
-  unlock: { email: string; password: string };
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
 export interface User {
-  id: string;
+  id: number;
   name: string;
   role: 'admin' | 'editor';
-  avatar?: (string | null) | Media;
+  avatar?: (number | null) | Media;
   bio?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -100,13 +149,22 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
-  sessions?: { id: string; createdAt?: string | null; expiresAt: string }[] | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
   collection: 'users';
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   caption?: string | null;
   updatedAt: string;
@@ -121,122 +179,283 @@ export interface Media {
   focalX?: number | null;
   focalY?: number | null;
   sizes?: {
-    thumbnail?: { url?: string | null; width?: number | null; height?: number | null; mimeType?: string | null; filesize?: number | null; filename?: string | null };
-    card?: { url?: string | null; width?: number | null; height?: number | null; mimeType?: string | null; filesize?: number | null; filename?: string | null };
-    hero?: { url?: string | null; width?: number | null; height?: number | null; mimeType?: string | null; filesize?: number | null; filename?: string | null };
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts".
+ */
 export interface BlogPost {
-  id: string;
+  id: number;
   title: string;
   slug: string;
   excerpt: string;
-  heroImage?: (string | null) | Media;
-  content: any;
-  author: string | User;
-  categories?: (string | Category)[] | null;
-  tags?: (string | Tag)[] | null;
+  heroImage?: (number | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  author: number | User;
+  categories?: (number | Category)[] | null;
+  tags?: (number | Tag)[] | null;
   status: 'draft' | 'published';
   publishedAt?: string | null;
+  /**
+   * Auto-calculated from content
+   */
   readingTime?: number | null;
   seo?: {
     metaTitle?: string | null;
     metaDescription?: string | null;
-    ogImage?: (string | null) | Media;
+    ogImage?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
 }
-
-export interface PodcastEpisode {
-  id: string;
-  title: string;
-  slug: string;
-  episodeNumber: number;
-  seasonNumber?: number | null;
-  description: string;
-  heroImage?: (string | null) | Media;
-  showNotes?: any;
-  audioFile?: (string | null) | Media;
-  spotifyUrl?: string | null;
-  applePodcastUrl?: string | null;
-  youtubeUrl?: string | null;
-  transcript?: any;
-  duration?: number | null;
-  hosts?: (string | User)[] | null;
-  tags?: (string | Tag)[] | null;
-  status: 'draft' | 'published';
-  publishedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-
-export interface NewsletterIssue {
-  id: string;
-  title: string;
-  slug: string;
-  issueNumber: number;
-  excerpt: string;
-  content: any;
-  author?: (string | null) | User;
-  tags?: (string | Tag)[] | null;
-  status: 'draft' | 'published';
-  publishedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-
-export interface NewsItem {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: any;
-  heroImage?: (string | null) | Media;
-  sourceUrl?: string | null;
-  sourceName?: string | null;
-  featured?: boolean | null;
-  author?: (string | null) | User;
-  tags?: (string | Tag)[] | null;
-  status: 'draft' | 'published';
-  publishedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-
-export interface Tag {
-  id: string;
-  name: string;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-}
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
 export interface Category {
-  id: string;
+  id: number;
   name: string;
   slug: string;
   description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  name: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "podcast-episodes".
+ */
+export interface PodcastEpisode {
+  id: number;
+  title: string;
+  slug: string;
+  episodeNumber: number;
+  seasonNumber?: number | null;
+  description: string;
+  heroImage?: (number | null) | Media;
+  showNotes?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Upload self-hosted audio (MP3)
+   */
+  audioFile?: (number | null) | Media;
+  /**
+   * Spotify episode URL
+   */
+  spotifyUrl?: string | null;
+  /**
+   * Apple Podcasts episode URL
+   */
+  applePodcastUrl?: string | null;
+  /**
+   * YouTube video URL
+   */
+  youtubeUrl?: string | null;
+  transcript?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Duration in minutes
+   */
+  duration?: number | null;
+  hosts?: (number | User)[] | null;
+  tags?: (number | Tag)[] | null;
+  status: 'draft' | 'published';
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-issues".
+ */
+export interface NewsletterIssue {
+  id: number;
+  title: string;
+  slug: string;
+  issueNumber: number;
+  excerpt: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  author?: (number | null) | User;
+  tags?: (number | Tag)[] | null;
+  status: 'draft' | 'published';
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-items".
+ */
+export interface NewsItem {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  heroImage?: (number | null) | Media;
+  /**
+   * Original source URL
+   */
+  sourceUrl?: string | null;
+  /**
+   * Source publication name (e.g., "TechCrunch")
+   */
+  sourceName?: string | null;
+  /**
+   * Include in "Top 5 this week"
+   */
+  featured?: boolean | null;
+  author?: (number | null) | User;
+  tags?: (number | Tag)[] | null;
+  status: 'draft' | 'published';
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers".
+ */
 export interface Subscriber {
-  id: string;
+  id: number;
   email: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  /**
+   * Email confirmed via double opt-in
+   */
   confirmed?: boolean | null;
   confirmToken?: string | null;
   subscribedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   slug: string;
-  content: any;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   status: 'draft' | 'published';
   seo?: {
     metaTitle?: string | null;
@@ -245,132 +464,381 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
-  data: { [k: string]: unknown } | unknown[] | string | number | boolean | null;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
-  | ({ relationTo: 'users'; value: string | User } | null)
-  | ({ relationTo: 'media'; value: string | Media } | null)
-  | ({ relationTo: 'blog-posts'; value: string | BlogPost } | null)
-  | ({ relationTo: 'podcast-episodes'; value: string | PodcastEpisode } | null)
-  | ({ relationTo: 'newsletter-issues'; value: string | NewsletterIssue } | null)
-  | ({ relationTo: 'news-items'; value: string | NewsItem } | null)
-  | ({ relationTo: 'tags'; value: string | Tag } | null)
-  | ({ relationTo: 'categories'; value: string | Category } | null)
-  | ({ relationTo: 'subscribers'; value: string | Subscriber } | null)
-  | ({ relationTo: 'pages'; value: string | Page } | null);
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'blog-posts';
+        value: number | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'podcast-episodes';
+        value: number | PodcastEpisode;
+      } | null)
+    | ({
+        relationTo: 'newsletter-issues';
+        value: number | NewsletterIssue;
+      } | null)
+    | ({
+        relationTo: 'news-items';
+        value: number | NewsItem;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'subscribers';
+        value: number | Subscriber;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null);
   globalSlug?: string | null;
-  user: { relationTo: 'users'; value: string | User };
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences".
+ */
 export interface PayloadPreference {
-  id: string;
-  user: { relationTo: 'users'; value: string | User };
+  id: number;
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
   key?: string | null;
-  value?: { [k: string]: unknown } | unknown[] | string | number | boolean | null;
+  value?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations".
+ */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
 }
-
-// Select interfaces
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T; role?: T; avatar?: T; bio?: T;
-  updatedAt?: T; createdAt?: T; email?: T;
-  resetPasswordToken?: T; resetPasswordExpiration?: T;
-  salt?: T; hash?: T; loginAttempts?: T; lockUntil?: T;
-  sessions?: T | { id?: T; createdAt?: T; expiresAt?: T };
+  name?: T;
+  role?: T;
+  avatar?: T;
+  bio?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T; caption?: T; updatedAt?: T; createdAt?: T;
-  url?: T; thumbnailURL?: T; filename?: T; mimeType?: T;
-  filesize?: T; width?: T; height?: T; focalX?: T; focalY?: T;
-  sizes?: T | { thumbnail?: T; card?: T; hero?: T };
+  alt?: T;
+  caption?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts_select".
+ */
 export interface BlogPostsSelect<T extends boolean = true> {
-  title?: T; slug?: T; excerpt?: T; heroImage?: T; content?: T;
-  author?: T; categories?: T; tags?: T; status?: T; publishedAt?: T;
-  readingTime?: T; seo?: T | { metaTitle?: T; metaDescription?: T; ogImage?: T };
-  updatedAt?: T; createdAt?: T;
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  heroImage?: T;
+  content?: T;
+  author?: T;
+  categories?: T;
+  tags?: T;
+  status?: T;
+  publishedAt?: T;
+  readingTime?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "podcast-episodes_select".
+ */
 export interface PodcastEpisodesSelect<T extends boolean = true> {
-  title?: T; slug?: T; episodeNumber?: T; seasonNumber?: T; description?: T;
-  heroImage?: T; showNotes?: T; audioFile?: T; spotifyUrl?: T;
-  applePodcastUrl?: T; youtubeUrl?: T; transcript?: T; duration?: T;
-  hosts?: T; tags?: T; status?: T; publishedAt?: T;
-  updatedAt?: T; createdAt?: T;
+  title?: T;
+  slug?: T;
+  episodeNumber?: T;
+  seasonNumber?: T;
+  description?: T;
+  heroImage?: T;
+  showNotes?: T;
+  audioFile?: T;
+  spotifyUrl?: T;
+  applePodcastUrl?: T;
+  youtubeUrl?: T;
+  transcript?: T;
+  duration?: T;
+  hosts?: T;
+  tags?: T;
+  status?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-issues_select".
+ */
 export interface NewsletterIssuesSelect<T extends boolean = true> {
-  title?: T; slug?: T; issueNumber?: T; excerpt?: T; content?: T;
-  author?: T; tags?: T; status?: T; publishedAt?: T;
-  updatedAt?: T; createdAt?: T;
+  title?: T;
+  slug?: T;
+  issueNumber?: T;
+  excerpt?: T;
+  content?: T;
+  author?: T;
+  tags?: T;
+  status?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-items_select".
+ */
 export interface NewsItemsSelect<T extends boolean = true> {
-  title?: T; slug?: T; excerpt?: T; content?: T; heroImage?: T;
-  sourceUrl?: T; sourceName?: T; featured?: T; author?: T;
-  tags?: T; status?: T; publishedAt?: T;
-  updatedAt?: T; createdAt?: T;
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  content?: T;
+  heroImage?: T;
+  sourceUrl?: T;
+  sourceName?: T;
+  featured?: T;
+  author?: T;
+  tags?: T;
+  status?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
 export interface TagsSelect<T extends boolean = true> {
-  name?: T; slug?: T; updatedAt?: T; createdAt?: T;
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
 export interface CategoriesSelect<T extends boolean = true> {
-  name?: T; slug?: T; description?: T; updatedAt?: T; createdAt?: T;
+  name?: T;
+  slug?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers_select".
+ */
 export interface SubscribersSelect<T extends boolean = true> {
-  email?: T; confirmed?: T; confirmToken?: T; subscribedAt?: T;
-  updatedAt?: T; createdAt?: T;
+  email?: T;
+  firstName?: T;
+  lastName?: T;
+  confirmed?: T;
+  confirmToken?: T;
+  subscribedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
 export interface PagesSelect<T extends boolean = true> {
-  title?: T; slug?: T; content?: T; status?: T;
-  seo?: T | { metaTitle?: T; metaDescription?: T };
-  updatedAt?: T; createdAt?: T;
+  title?: T;
+  slug?: T;
+  content?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T; data?: T;
+  key?: T;
+  data?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T; globalSlug?: T; user?: T; updatedAt?: T; createdAt?: T;
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T; key?: T; value?: T; updatedAt?: T; createdAt?: T;
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T; batch?: T; updatedAt?: T; createdAt?: T;
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auth".
+ */
 export interface Auth {
   [k: string]: unknown;
 }
 
+
 declare module 'payload' {
-  export interface GeneratedTypes extends Config { }
+  export interface GeneratedTypes extends Config {}
 }

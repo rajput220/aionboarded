@@ -29,6 +29,8 @@ services:
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       NODE_ENV: production
+    volumes:
+      - media-data:/app/public/media
     networks:
       - app-network
 
@@ -56,6 +58,7 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done'"
 
 volumes:
+  media-data:
   pgdata:
   certbot-webroot:
   certbot-certs:
