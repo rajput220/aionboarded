@@ -74,7 +74,7 @@ async function sendCampaign() {
           
           <div style="background: #F8FAFC; border-radius: 16px; padding: 24px; margin: 32px 0; border: 1px solid #E2E8F0;">
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 0; margin-bottom: 12px;">Join the Community</h3>
-            <p style="font-size: 14px; margin-bottom: 20px;">Connect with 100+ fellow AI enthusiasts and get early access to agent demos:</p>
+            <p style="font-size: 14px; margin-bottom: 20px;">Connect with 150+ fellow AI enthusiasts and get early access to agent demos:</p>
             <div style="display: flex; gap: 12px;">
               <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" style="color: #0A84FF; text-decoration: none; font-weight: 600; font-size: 14px;">💬 WhatsApp Group</a>
               <span style="color: #CBD5E1;">&bull;</span>

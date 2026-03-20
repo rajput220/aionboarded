@@ -2,17 +2,19 @@ import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
 import { SubscribeForm } from '@/components/ui/SubscribeForm'
 import { ContentCard, EpisodeCard, NewsCard } from '@/components/ui/ContentCards'
+import { Counter } from '@/components/ui/Counter'
 
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const payload = await getPayloadClient()
 
-  const [blogPosts, episodes, newsletters, newsItems] = await Promise.all([
+  const [blogPosts, episodes, newsletters, newsItems, subscribers] = await Promise.all([
     payload.find({ collection: 'blog-posts', where: { status: { equals: 'published' } }, sort: '-publishedAt', limit: 3 }),
     payload.find({ collection: 'podcast-episodes', where: { status: { equals: 'published' } }, sort: '-publishedAt', limit: 3 }),
     payload.find({ collection: 'newsletter-issues', where: { status: { equals: 'published' } }, sort: '-publishedAt', limit: 1 }),
     payload.find({ collection: 'news-items', where: { status: { equals: 'published' } }, sort: '-publishedAt', limit: 4 }),
+    payload.find({ collection: 'subscribers', limit: 0 }), // Fetch total count
   ])
 
   const latestNewsletter = newsletters.docs[0]
@@ -30,7 +32,7 @@ export default async function HomePage() {
           <div className="animate-slide-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8" style={{ background: 'var(--bg-secondary)', color: 'var(--text-secondary)', border: '1px solid var(--border-color)' }}>
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              100+ members and growing
+              150+ members and growing
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1]" style={{ color: 'var(--text-primary)' }}>
@@ -54,12 +56,14 @@ export default async function HomePage() {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-8 mt-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             {[
-              { value: '100+', label: 'Community Members' },
-              { value: `${episodes.totalDocs}+`, label: 'Podcast Episodes' },
-              { value: `${newsletters.totalDocs}+`, label: 'Newsletter Issues' },
+              { value: 150 + subscribers.totalDocs, label: 'Community Members', suffix: '+' },
+              { value: episodes.totalDocs, label: 'Podcast Episodes', suffix: '+' },
+              { value: newsletters.totalDocs, label: 'Newsletter Issues', suffix: '+' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-3xl font-black gradient-text">{stat.value}</div>
+                <div className="text-3xl font-black gradient-text">
+                  <Counter value={stat.value} suffix={stat.suffix} />
+                </div>
                 <div className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
               </div>
             ))}
