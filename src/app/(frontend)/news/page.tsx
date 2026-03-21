@@ -40,6 +40,15 @@ export default async function NewsPage() {
                     </p>
                 </div>
 
+                <div className="mb-12 p-6 rounded-2xl border" style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
+                    <h2 className="text-xl font-bold flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+                        <span className="text-blue-500">📅</span> Week of March 16–22, 2026
+                    </h2>
+                    <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+                        Strategic intelligence briefing: Subagents, Governance, and the Corporate Reckoning.
+                    </p>
+                </div>
+
                 {/* Top 5 This Week */}
                 {featured.docs.length > 0 && (
                     <section className="mb-16">
