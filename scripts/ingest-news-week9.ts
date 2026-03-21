@@ -8,16 +8,19 @@ async function ingestNews() {
     const payload = await getPayload({ config })
 
     try {
-        // 1. Ensure Admin User
-        const adminUsers = await payload.find({ 
-            collection: 'users', 
-            where: { role: { equals: 'admin' } }, 
-            limit: 1 
+        // 1. Ensure User (Admin or first available)
+        const users = await payload.find({ 
+            collection: 'users',
+            limit: 10
         })
-        const adminId = adminUsers.docs[0]?.id
+        
+        const adminId = users.docs.find((u: any) => u.role === 'admin')?.id || users.docs[0]?.id
+        
         if (!adminId) {
-            throw new Error('No admin user found. Please create an admin user first.')
+            console.warn('⚠️ No user found in database. Please ensure a user exists.')
+            process.exit(1)
         }
+        console.log(`👤 Using user ID: ${adminId} as author`)
 
         const newsItems = [
             {
