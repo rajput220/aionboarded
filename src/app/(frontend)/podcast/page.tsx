@@ -33,7 +33,7 @@ export default async function PodcastPage() {
                         <div>
                             <h1 className="text-4xl sm:text-5xl font-black" style={{ color: 'var(--text-primary)' }}>Podcast</h1>
                             <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
-                                {episodes.totalDocs} episode{episodes.totalDocs !== 1 ? 's' : ''}
+                                {1 + episodes.totalDocs} episode{ (1 + episodes.totalDocs) !== 1 ? 's' : ''}
                             </p>
                         </div>
                     </div>

@@ -57,8 +57,8 @@ export default async function HomePage() {
           <div className="flex flex-wrap justify-center gap-8 mt-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             {[
               { value: 150 + subscribers.totalDocs, label: 'Community Members', suffix: '+' },
-              { value: episodes.totalDocs, label: 'Podcast Episodes', suffix: '+' },
-              { value: newsletters.totalDocs, label: 'Newsletter Issues', suffix: '+' },
+              { value: 1 + episodes.totalDocs, label: 'Podcast Episodes', suffix: '+' },
+              { value: 10 + newsletters.totalDocs, label: 'Newsletter Issues', suffix: '+' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl font-black gradient-text">
