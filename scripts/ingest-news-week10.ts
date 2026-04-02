@@ -31,12 +31,12 @@ async function ingestNews() {
             {
                 title: "White House National AI Policy Framework: Federal Preemption Revealed",
                 slug: "white-house-national-ai-policy-framework-2026",
-                excerpt: "The U.S. government's new framework prioritizes federal oversight, preempting state-level AI regulations to eliminate the 'patchwork' of conflicting rules.",
+                excerpt: "The U.S. government's new framework prioritizes federal oversight, preempting state-level AI regulations to accelerate American AI dominance.",
                 sourceName: "WilmerHale Privacy Blog",
                 sourceUrl: "https://www.wilmerhale.com/en/insights/blogs/wilmerhale-privacy-and-cybersecurity-law/20260323-white-house-releases-national-policy-framework-for-artificial-intelligence",
                 publishedAt: "2026-03-23T00:00:00.000Z",
                 featured: true,
-                imagePath: "seed/week10_images/image1.png",
+                imagePath: "seed/week10_images/image6.png",
                 content: "The U.S. government released the National Policy Framework for Artificial Intelligence on March 20, 2026. A comprehensive blueprint for federal AI governance that prioritizes American AI dominance and recommends preempting state-level AI regulations. The framework targets state-level safety mandates as barriers to innovation, seeking a single federal standard for frontier model oversight."
             },
             {
@@ -47,7 +47,7 @@ async function ingestNews() {
                 sourceUrl: "https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/",
                 publishedAt: "2026-03-26T00:00:00.000Z",
                 featured: true,
-                imagePath: "seed/week10_images/image2.png",
+                imagePath: "seed/week10_images/image5.png",
                 content: "On March 28, 2026, an internal error made documentation of an unreleased model codenamed Claude Mythos discoverable. Representing the first entry into a new capability tier called 'Capybara', it sits above the current Opus flagship with step-change performance in academic reasoning and cybersecurity tasks."
             },
             {
@@ -58,7 +58,7 @@ async function ingestNews() {
                 sourceUrl: "https://stateofsurveillance.org/news/anthropic-pentagon-supply-chain-risk-amicus-tech-coalition-2026/",
                 publishedAt: "2026-03-23T00:00:00.000Z",
                 featured: true,
-                imagePath: "seed/week10_images/image3.png",
+                imagePath: "seed/week10_images/image10.png",
                 content: "Anthropic sued the U.S. Department of Defense after being designated a supply-chain risk. The dispute centers on Anthropic's safety charter, which prohibits lethal action without human intervention. The case will determine if private AI safety charters have legal standing against national security mandates."
             },
             {
@@ -69,7 +69,7 @@ async function ingestNews() {
                 sourceUrl: "https://www.infoworld.com/article/4147837/openai-buys-python-tools-builder-astral.html",
                 publishedAt: "2026-03-19T00:00:00.000Z",
                 featured: true,
-                imagePath: "seed/week10_images/image4.png",
+                imagePath: "seed/week10_images/image8.png",
                 content: "OpenAI announced the acquisition of Astral, the startup behind 'uv' and 'Ruff'. OpenAI plans to integrate these tools directly into its Codex models, allowing AI agents to plan changes, lint, and verify code autonomously before human review."
             },
             {
@@ -80,7 +80,7 @@ async function ingestNews() {
                 sourceUrl: "https://thenewstack.io/anthropic-march-2026-roundup/",
                 publishedAt: "2026-03-23T00:00:00.000Z",
                 featured: true,
-                imagePath: "seed/week10_images/image5.png",
+                imagePath: "seed/week10_images/image2.png",
                 content: "Anthropic released a research preview allowing Claude to interact with user interfaces directly. By seeing the screen, moving the cursor, and typing, Claude can now complete multi-step tasks across legacy software and proprietary tools that lack official AI APIs."
             },
             {
@@ -91,7 +91,7 @@ async function ingestNews() {
                 sourceUrl: "https://www.microsoft.com/en-us/industry/blog/content-type/news-and-announcements/",
                 publishedAt: "2026-03-24T00:00:00.000Z",
                 featured: true,
-                imagePath: "seed/week10_images/image6.png",
+                imagePath: "seed/week10_images/image7.png",
                 content: "Microsoft and Nvidia announced a partnership to use AI for building nuclear energy infrastructure. Digital Twin technology will simulate safety tests and performance, potentially cutting years off permitting. This energy-compute co-design aims to solve the energy wall threatening AI scaling."
             },
             {
@@ -102,8 +102,41 @@ async function ingestNews() {
                 sourceUrl: "https://blog.mean.ceo/new-ai-model-releases-news-march-2026/",
                 publishedAt: "2026-03-25T00:00:00.000Z",
                 featured: true,
-                imagePath: "seed/week10_images/image7.png",
+                imagePath: "seed/week10_images/image3.png",
                 content: "MiniMax M2.5 released with performance rivaling Claude Opus in coding and agentic tasks but at one-tenth the operational cost. This triggers a global cost war, enabling startups to build complex agentic workflows previously too expensive to scale."
+            },
+            {
+                title: "Strategic Insight: Apple's Platform Broker Strategy",
+                slug: "apple-platform-broker-strategy",
+                excerpt: "By owning the daily touchpoint for 2 billion users, Apple retains structural leverage over every AI lab regardless of benchmark rankings.",
+                sourceName: "Weekly Strategy Dossier",
+                sourceUrl: "https://aionboarded.ai/news",
+                publishedAt: "2026-03-27T00:00:00.000Z",
+                featured: false,
+                imagePath: "seed/week10_images/image4.png",
+                content: "Apple's iOS 27 repositions Siri as a traffic broker, completely abstracting the underlying AI models away from the user. Control of the interface is the ultimate moat in the agentic era."
+            },
+            {
+                title: "Action Plan: 5 Mandates for the Week of March 23",
+                slug: "action-plan-march-23-2026",
+                excerpt: "Delegate at the OS level, own the orchestrator identity, and audit enterprise ethics: five actionable steps for this week.",
+                sourceName: "Weekly Strategy Dossier",
+                sourceUrl: "https://aionboarded.ai/news",
+                publishedAt: "2026-03-29T00:00:00.000Z",
+                featured: false,
+                imagePath: "seed/week10_images/image9.png",
+                content: "The action plan for this week emphasizes OS-level delegation via Claude Dispatch and the importance of auditing AI plugins for security. This week marks the shift from chatbot interaction to agentic orchestration."
+            },
+            {
+                title: "The Agentic Inflection: Week at a Glance Briefing",
+                slug: "week-at-a-glance-briefing-2026",
+                excerpt: "Technical shifts, governance collisions, and infrastructure co-design: the structural shifts defining the week of March 23.",
+                sourceName: "Weekly Strategy Dossier",
+                sourceUrl: "https://aionboarded.ai/news",
+                publishedAt: "2026-03-22T00:00:00.000Z",
+                featured: false,
+                imagePath: "seed/week10_images/image1.png",
+                content: "A high-level summary of the week's intelligence briefing, highlighting the technical, governance, and infrastructure shifts defining the Agentic Era."
             }
         ]
 
