@@ -33,6 +33,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Ensure maintenance dependencies are present for standalone scripts
+RUN npm install pg resend --no-save
+
 USER nextjs
 
 EXPOSE 3000
