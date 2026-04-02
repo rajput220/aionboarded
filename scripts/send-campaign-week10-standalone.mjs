@@ -1,7 +1,9 @@
 /**
- * AIOnboarded - Standalone Campaign Sender (Week 9)
+ * AIOnboarded - Standalone Campaign Sender (Week 10)
  * Self-contained: queries Postgres directly, no Payload CMS dependency.
- * Run inside the Docker container with: node scripts/send-campaign-week9-standalone.mjs
+ * Run inside the Docker container with: node scripts/send-campaign-week10-standalone.mjs
+ * 
+ * Theme: The Agentic Inflection: AI Becomes Your Digital Coworker
  */
 
 import pg from 'pg'
@@ -44,29 +46,29 @@ async function sendCampaign() {
       const htmlBody = `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #334155; line-height: 1.7;">
           <div style="text-align: center; margin-bottom: 32px;">
-            <div style="background: linear-gradient(135deg, #0A84FF, #1DB954); color: white; display: inline-block; padding: 8px 16px; border-radius: 8px; font-weight: 800; font-size: 20px; margin-bottom: 12px;">AI</div>
+            <div style="background: linear-gradient(135deg, #FF9500, #FF3B30); color: white; display: inline-block; padding: 8px 16px; border-radius: 8px; font-weight: 800; font-size: 20px; margin-bottom: 12px;">AI</div>
             <h1 style="color: #0F172A; font-size: 24px; font-weight: 800; margin: 0;">AI Onboarded Weekly Brief</h1>
-            <p style="color: #64748B; font-size: 14px; margin-top: 4px;">Week 9: The Agentic Era</p>
+            <p style="color: #64748B; font-size: 14px; margin-top: 4px;">Week 10: The Agentic Inflection</p>
           </div>
 
           <p style="font-size: 16px;">Hi ${firstName},</p>
           
-          <p style="font-size: 16px; font-weight: 500; color: #0F172A;">From OpenAI's subagent hierarchy to Meta's rogue AI incident and the White House's new regulatory framework — the agentic era is no longer a forecast. It's here.</p>
+          <p style="font-size: 16px; font-weight: 500; color: #0F172A;">From OpenAI's agentic commerce protocol to Anthropic's 'Computer Use' for Mac and the White House's new regulatory framework — the agentic era has officially arrived.</p>
           
-          <p style="font-size: 16px;">In this week's edition, we cover <strong>The Agentic Era</strong>. Highlights include:</p>
+          <p style="font-size: 16px;">In this week's edition, we cover <strong>The Agentic Inflection</strong>. Highlights include:</p>
           
           <ul style="padding-left: 20px; font-size: 15px;">
-            <li style="margin-bottom: 8px;"><strong>OpenAI GPT-5.4 Mini & Nano:</strong> A new subagent hierarchy that 3x's your agent session capacity at a fraction of the cost.</li>
-            <li style="margin-bottom: 8px;"><strong>Meta's Rogue AI Agent:</strong> An internal AI posted unauthorized data, triggering a Sev 1 incident — the clearest warning yet for human-in-the-loop policies.</li>
-            <li style="margin-bottom: 8px;"><strong>Google Stitch & Vibe Coding:</strong> Free, full-stack app generation from natural language — design to production in one conversation.</li>
-            <li style="margin-bottom: 8px;"><strong>White House AI Framework vs EU AI Omnibus:</strong> Two radically different visions for regulating the agentic economy take shape this week.</li>
-            <li style="margin-bottom: 8px;"><strong>NVIDIA GTC:</strong> Jensen Huang's $1 trillion forecast and the declaration that "every SaaS becomes an agent company."</li>
+            <li style="margin-bottom: 8px;"><strong>White House AI Framework:</strong> A new federal standard that preempts state regulations to accelerate American AI dominance.</li>
+            <li style="margin-bottom: 8px;"><strong>Claude Mythos / Capybara:</strong> A configuration leak revealed a new capability tier from Anthropic that steps beyond current frontier models.</li>
+            <li style="margin-bottom: 8px;"><strong>Anthropic vs. Pentagon:</strong> The landmark lawsuit that will define whether private AI safety charters can withstand national security pressure.</li>
+            <li style="margin-bottom: 8px;"><strong>Anthropic Computer Use for Mac:</strong> A research preview allowing Claude to view screens, click, and type across any software.</li>
+            <li style="margin-bottom: 8px;"><strong>MiniMax M2.5:</strong> Frontier-class performance at 1/10th the cost — the global AI cost war begins.</li>
           </ul>
 
           <div style="text-align: center; margin: 40px 0;">
-            <a href="${SITE_URL}/newsletter/week-9.html"
-               style="display: inline-block; background: #0A84FF; color: white; text-decoration: none; padding: 14px 36px; border-radius: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 4px 15px rgba(10, 132, 255, 0.3);">
-              Read the Full Week 9 Newsletter
+            <a href="${SITE_URL}/newsletter/week-10.html"
+               style="display: inline-block; background: #FF9500; color: white; text-decoration: none; padding: 14px 36px; border-radius: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 4px 15px rgba(255, 149, 0, 0.3);">
+              Read the Full Week 10 Newsletter
             </a>
           </div>
           
@@ -74,9 +76,9 @@ async function sendCampaign() {
             <h3 style="color: #1a1a1a; font-size: 18px; margin-top: 0; margin-bottom: 12px;">Join the Community</h3>
             <p style="font-size: 14px; margin-bottom: 20px;">Connect with 150+ fellow AI enthusiasts and get early access to agent demos:</p>
             <div style="display: flex; gap: 12px;">
-              <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" style="color: #0A84FF; text-decoration: none; font-weight: 600; font-size: 14px;">💬 WhatsApp Group</a>
+              <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" style="color: #FF9500; text-decoration: none; font-weight: 600; font-size: 14px;">💬 WhatsApp Group</a>
               <span style="color: #CBD5E1;">&bull;</span>
-              <a href="https://discord.com/invite/SW4HZAv37" style="color: #0A84FF; text-decoration: none; font-weight: 600; font-size: 14px;">🎮 Discord Server</a>
+              <a href="https://discord.com/invite/SW4HZAv37" style="color: #FF9500; text-decoration: none; font-weight: 600; font-size: 14px;">🎮 Discord Server</a>
             </div>
           </div>
           
@@ -92,7 +94,7 @@ async function sendCampaign() {
         await resend.emails.send({
           from: 'AI Onboarded <newsletter@aionboarded.ai>',
           to: email,
-          subject: 'The Agentic Era: Rogue Agents, $1T Forecasts & the Race to Regulate 🤖',
+          subject: 'The Agentic Inflection: AI Becomes Your Digital Coworker 🤖',
           html: htmlBody,
         })
         successCount++
@@ -106,7 +108,7 @@ async function sendCampaign() {
     }
 
     await client.end()
-    console.log(`\nWeek 9 Campaign Complete.`)
+    console.log(`\nWeek 10 Campaign Complete.`)
     console.log(`Successfully sent: ${successCount}`)
     console.log(`Failed: ${failureCount}`)
     process.exit(0)
