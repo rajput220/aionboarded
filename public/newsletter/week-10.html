@@ -179,6 +179,31 @@ a:hover {
   letter-spacing: 0.3px;
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+  margin-right: 32px;
+}
+
+.header-nav a {
+  color: var(--gray);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.header-nav a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 900px) {
+  .header-nav {
+    display: none;
+  }
+}
+
 /* ----- Hero Section ----- */
 .hero {
   background: var(--gradient-hero);
@@ -910,6 +935,14 @@ a:hover {
           <div class="header-logo-icon">AI</div>
           <div class="header-logo-text">AI <span>Onboarded</span></div>
         </a>
+        <nav class="header-nav">
+          <a href="https://aionboarded.ai/blog">Blog</a>
+          <a href="https://aionboarded.ai/podcast">Podcast</a>
+          <a href="https://aionboarded.ai/newsletter">Newsletter</a>
+          <a href="https://aionboarded.ai/news">News</a>
+          <a href="https://aionboarded.ai/about">About</a>
+          <a href="https://aionboarded.ai/contact">Contact</a>
+        </nav>
         <div class="header-meta">
           <span>March 28, 2026</span>
           <span class="header-badge">Week 10</span>

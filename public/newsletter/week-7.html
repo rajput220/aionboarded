@@ -63,7 +63,7 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --max-width: 1100px;
+  --max-width: 1200px;
 }
 
 /* ----- Reset & Base ----- */
@@ -177,6 +177,31 @@ a:hover {
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.3px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+  margin-right: 32px;
+}
+
+.header-nav a {
+  color: var(--gray);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.header-nav a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 900px) {
+  .header-nav {
+    display: none;
+  }
 }
 
 /* ----- Hero Section ----- */
@@ -322,8 +347,8 @@ a:hover {
 /* ----- Story Cards ----- */
 .stories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 32px;
 }
 
 .story-card {
@@ -345,9 +370,9 @@ a:hover {
 
 .story-card-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  background: var(--light);
+  height: 350px;
+  object-fit: contain;
+  background: var(--light-200);
 }
 
 .story-card-body {
@@ -412,8 +437,10 @@ a:hover {
 /* ----- Visual Insights Section ----- */
 .visual-insights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .visual-card {
@@ -908,6 +935,14 @@ a:hover {
           <div class="header-logo-icon">AI</div>
           <div class="header-logo-text">AI <span>Onboarded</span></div>
         </a>
+        <nav class="header-nav">
+          <a href="https://aionboarded.ai/blog">Blog</a>
+          <a href="https://aionboarded.ai/podcast">Podcast</a>
+          <a href="https://aionboarded.ai/newsletter">Newsletter</a>
+          <a href="https://aionboarded.ai/news">News</a>
+          <a href="https://aionboarded.ai/about">About</a>
+          <a href="https://aionboarded.ai/contact">Contact</a>
+        </nav>
         <div class="header-meta">
           <span>March 10, 2026</span>
           <span class="header-badge">Week 7</span>
@@ -960,6 +995,7 @@ a:hover {
             <h3 class="story-card-headline">The Rise of Agentic AI</h3>
             <p class="story-card-summary">The era of AI as a static digital encyclopedia is over. AI evolution moves from static prompts to multi-step reasoning, environment architecture, and finally, autonomous agentic action. We are seeing a fundamental shift from chatbots that answer questions to autonomous agents that execute workflows. This transition—often referred to as 'scaling action' instead of 'scaling laws'—means AI can now research, plan, execute, and self-correct across complex environments without human intervention.</p>
             
+            
           </div>
         </article>
 
@@ -969,6 +1005,7 @@ a:hover {
             <h3 class="story-card-headline">The Three Pillars of Agentic AI</h3>
             <p class="story-card-summary">Agentic AI stands on three foundational capabilities: Autonomous Planning (decomposing high-level goals into logical sub-tasks), Tool-Use (accessing external environments like browsers, APIs and CRMs), and Self-Correction (iteratively reviewing output against requirements). For example, rather than just writing code, an agent can write code, run tests, read the error logs, and fix its own bugs in a continuous loop.</p>
             <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> These pillars transform AI from a passive information retriever to a proactive digital worker.</div>
+            
           </div>
         </article>
 
@@ -978,6 +1015,7 @@ a:hover {
             <h3 class="story-card-headline">Roles in the Agentic Era</h3>
             <p class="story-card-summary">The labor market shifts from Individual Contributors to Agentic Orchestrators. New roles like AI Workflow Architect, Agentic Governance Lead, and Context Designer are emerging to manage digital pods of 50+ agents. A single orchestrator can rapidly dictate strategy to a fleet of specialized AI workers, dramatically shifting the bottleneck from execution to conceptualization.</p>
             <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> Stop thinking of AI as a Chatbot and start thinking of it as a Staff Officer... scale Action, not just information.</div>
+            
           </div>
         </article>
 
@@ -987,6 +1025,7 @@ a:hover {
             <h3 class="story-card-headline">The Sovereign Agentic Shift</h3>
             <p class="story-card-summary">Enterprise work is moving to disconnected, high-security sovereign clouds. Models like GPT-5.4 and Gemini 3.1 Pro bring feature native computer use, while hardwired weights are etched directly into silicon for speeds up to 17,000 tokens/sec. This shift allows sensitive government and financial institutions to deploy autonomous agents without exposing critical data to public endpoints.</p>
             <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> The average task horizon increases from 20 minutes to 2.5 hours.</div>
+            
           </div>
         </article>
 
@@ -996,6 +1035,7 @@ a:hover {
             <h3 class="story-card-headline">White House Energy Pledge</h3>
             <p class="story-card-summary">Seven leading AI firms sign an agreement to build, bring, or buy dedicated power supplies, funding infrastructure upgrades to protect residents from rate hikes and investing multi-billions in Small Modular Reactors (SMRs). The massive power demands of scaling agentic inference mean energy infrastructure is now the primary bottleneck to AI expansion.</p>
             <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> Prevents the socialization of costs—ensuring private AI expansion isn't subsidized by taxpayers.</div>
+            
           </div>
         </article>
 
@@ -1005,6 +1045,7 @@ a:hover {
             <h3 class="story-card-headline">GPT-5.4 & Extreme Reasoning</h3>
             <p class="story-card-summary">OpenAI launches the Thinking family for complex, high-reliability professional tasks with a one-million-token context window capable of processing entire codebases and asynchronous internal loops. By forcing models to generate latent chain-of-thought pathways before responding, 'System 2' reasoning takes hold, prioritizing reliability over speed.</p>
             <div class="story-card-whyitmatters"><strong>Why it Matters:</strong> Achieves a 95% reduction in technical and legal hallucinations, marking the shift to slow and precise AI.</div>
+            
           </div>
         </article></div>
       </div>
