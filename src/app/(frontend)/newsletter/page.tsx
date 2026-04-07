@@ -211,7 +211,7 @@ export default function NewsletterArchivePage() {
                 <div className="mt-12 p-8 rounded-3xl border text-center"
                     style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
                     <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-                        Don't miss next week's briefing
+                        Don&apos;t miss next week&apos;s briefing
                     </h2>
                     <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
                         Join 150+ AI practitioners getting the weekly strategic intelligence briefing every Sunday.
