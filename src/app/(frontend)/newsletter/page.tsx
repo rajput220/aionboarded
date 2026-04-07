@@ -10,6 +10,22 @@ export const metadata: Metadata = generateSeo({
 // Static newsletter archive — add new entries here as new weeks are published
 const newsletters = [
     {
+        week: 12,
+        slug: 'week-11',
+        title: 'Claude Cowork Skills & Ecosystem Shift',
+        subtitle: 'Stop re-explaining yourself. Teach Claude your workflow once, use it forever.',
+        dateRange: 'April 6–12, 2026',
+        theme: 'Building custom Claude Skills to automate workflows, alongside major ecosystem shifts from OpenAI and Google.',
+        highlights: [
+            'What is a Skill? Frontmatter and instructions',
+            'Demo: Building a custom LinkedIn Post Skill',
+            'OpenAI closes $122B raise at $852B valuation',
+            'Google Gemma 4: open-weight frontier, Apache 2.0',
+        ],
+        emoji: '🧠',
+        htmlFile: '/newsletter/week-11.html',
+    },
+    {
         week: 11,
         slug: 'week-10', // HTML file name (week-10.html maps to week 11 content)
         title: 'From Models to Ecosystems',
