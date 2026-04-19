@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPayloadClient } from '@/lib/payload'
 import fs from 'fs'
 import path from 'path'
-import { newsItemsWeek12 } from '@/lib/data/news-week-12'
 import { newsItemsWeek13 } from '@/lib/data/news-week-13'
 
 const weekDataMap: Record<number, any[]> = {
-    12: newsItemsWeek12,
     13: newsItemsWeek13
 }
 
