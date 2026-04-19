@@ -35,6 +35,11 @@ function formatDate(dateStr: string) {
 
 // Week theme metadata (hardcoded for known weeks, falls back gracefully)
 const weekThemes: Record<string, { title: string; theme: string; emoji: string }> = {
+    '2026-04-06': {
+        title: 'Week 12',
+        theme: 'The Sovereign Intelligence Threshold — AI as National Security Asset',
+        emoji: '🛡️',
+    },
     '2026-03-30': {
         title: 'Week 11',
         theme: 'From Models to Ecosystems — AI Swallows the Enterprise Stack',
