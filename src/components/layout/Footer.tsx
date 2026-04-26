@@ -14,16 +14,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="relative w-8 h-8 group-hover:scale-105 transition-transform">
+            <Link href="/" className="flex items-center mb-6 group">
+              <div className="relative w-[100px] h-[100px] lg:w-[140px] lg:h-[140px] group-hover:scale-105 transition-transform">
                 <Image src="/logo.png" alt="AI Onboarded Logo" fill className="object-contain" />
               </div>
-              <span
-                className="text-lg font-bold tracking-tight"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                AI <span className="gradient-text">Onboarded</span>
-              </span>
             </Link>
             <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
               Creating awareness and sharing knowledge on AI tools and latest AI developments. Join

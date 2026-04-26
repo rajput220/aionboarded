@@ -66,7 +66,7 @@ export default function NewsArchiveClient({ weeks }: Props) {
     const meta = weekThemes[activeWeek]
 
     return (
-        <div className="pt-28 pb-20">
+        <div className="pt-36 lg:pt-44 pb-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Page Header */}

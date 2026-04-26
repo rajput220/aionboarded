@@ -9,7 +9,7 @@ export const metadata: Metadata = generateSeo({
 
 export default function AboutPage() {
     return (
-        <div className="pt-28 pb-20">
+        <div className="pt-36 lg:pt-44 pb-20">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl sm:text-5xl font-black mb-6" style={{ color: 'var(--text-primary)' }}>
                     About <span className="gradient-text">AI Onboarded</span>
