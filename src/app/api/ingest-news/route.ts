@@ -3,9 +3,11 @@ import { getPayloadClient } from '@/lib/payload'
 import fs from 'fs'
 import path from 'path'
 import { newsItemsWeek13 } from '@/lib/data/news-week-13'
+import { newsItemsWeek14 } from '@/lib/data/news-week-14'
 
 const weekDataMap: Record<number, any[]> = {
-    13: newsItemsWeek13
+    13: newsItemsWeek13,
+    14: newsItemsWeek14
 }
 
 export async function POST(req: NextRequest) {
