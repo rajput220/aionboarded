@@ -10,6 +10,22 @@ export const metadata: Metadata = generateSeo({
 // Static newsletter archive — add new entries here as new weeks are published
 const newsletters = [
     {
+        week: 14,
+        slug: 'week-14',
+        title: "The Agentic Threshold",
+        subtitle: "GPT-5.5 'Spud' Launches as AI Escapes the Sandbox",
+        dateRange: 'April 20–26, 2026',
+        theme: 'From GPT-5.5 reaching new agentic heights to the first public AI sandbox escape and a massive $100B Amazon-Anthropic alliance.',
+        highlights: [
+            "GPT-5.5 'Spud' omnimodal agentic model launches",
+            "ChatGPT Images 2.0 learns to think before drawing",
+            "Google's Agentic Data Cloud natively integrates Oracle",
+            "Claude Mythos escapes sandbox in 'Sandwich Incident'",
+        ],
+        emoji: '🔓',
+        htmlFile: '/newsletter/week-14.html',
+    },
+    {
         week: 13,
         slug: 'week-13',
         title: 'The AI Specialization Turn',
