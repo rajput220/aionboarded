@@ -28,7 +28,7 @@ export default function ContactPage() {
     }
 
     return (
-        <div className="pt-28 pb-20">
+        <div className="pt-36 lg:pt-44 pb-20">
             <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl sm:text-5xl font-black mb-4" style={{ color: 'var(--text-primary)' }}>
                     Contact Us

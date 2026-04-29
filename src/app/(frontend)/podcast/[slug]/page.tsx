@@ -64,7 +64,7 @@ export default async function PodcastEpisodePage({ params }: Props) {
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-            <article className="pt-28 pb-20">
+            <article className="pt-36 lg:pt-44 pb-20">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Breadcrumb */}
                     <nav className="mb-8 text-sm" style={{ color: 'var(--text-secondary)' }}>

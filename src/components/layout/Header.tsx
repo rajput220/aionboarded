@@ -59,10 +59,10 @@ export function Header() {
         }
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-28 lg:h-36">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group" onClick={() => setMobileOpen(false)}>
-              <div className="relative w-10 h-10 group-hover:scale-105 transition-transform">
+            <Link href="/" className="flex items-center group" onClick={() => setMobileOpen(false)}>
+              <div className="relative w-[100px] h-[100px] lg:w-[140px] lg:h-[140px] group-hover:scale-105 transition-transform">
                 <Image
                   src="/logo.png"
                   alt="AI Onboarded Logo"
@@ -71,12 +71,6 @@ export function Header() {
                   priority
                 />
               </div>
-              <span
-                className="text-xl font-bold tracking-tight"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                AI <span className="gradient-text">Onboarded</span>
-              </span>
             </Link>
 
             {/* Desktop Nav */}
@@ -197,16 +191,13 @@ export function Header() {
 
       {/* Mobile Menu — Full-screen overlay, rendered outside header so it fills viewport */}
       {mobileOpen && (
-        <div
-          className="fixed inset-0 z-40 lg:hidden"
-          style={{ background: 'var(--bg-primary)' }}
-        >
+          <div className="fixed inset-0 z-40 lg:hidden" style={{ background: 'var(--bg-primary)' }}>
           {/* Spacer to push content below header bar */}
-          <div className="h-16" />
+          <div className="h-28" />
 
           {/* Scrollable content area */}
           <div
-            className="h-[calc(100vh-4rem)] overflow-y-auto px-4 py-6 flex flex-col"
+            className="h-[calc(100vh-7rem)] overflow-y-auto px-4 py-6 flex flex-col"
             style={{ borderTop: '1px solid var(--border-color)' }}
           >
             {/* Nav Links */}

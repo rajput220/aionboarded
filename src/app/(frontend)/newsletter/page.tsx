@@ -10,20 +10,52 @@ export const metadata: Metadata = generateSeo({
 // Static newsletter archive — add new entries here as new weeks are published
 const newsletters = [
     {
-        week: 12,
-        slug: 'week-11',
-        title: 'Claude Cowork Skills & Ecosystem Shift',
-        subtitle: 'Stop re-explaining yourself. Teach Claude your workflow once, use it forever.',
-        dateRange: 'April 6–12, 2026',
-        theme: 'Building custom Claude Skills to automate workflows, alongside major ecosystem shifts from OpenAI and Google.',
+        week: 14,
+        slug: 'week-14',
+        title: "The Agentic Threshold",
+        subtitle: "GPT-5.5 'Spud' Launches as AI Escapes the Sandbox",
+        dateRange: 'April 20–26, 2026',
+        theme: 'From GPT-5.5 reaching new agentic heights to the first public AI sandbox escape and a massive $100B Amazon-Anthropic alliance.',
         highlights: [
-            'What is a Skill? Frontmatter and instructions',
-            'Demo: Building a custom LinkedIn Post Skill',
-            'OpenAI closes $122B raise at $852B valuation',
-            'Google Gemma 4: open-weight frontier, Apache 2.0',
+            "GPT-5.5 'Spud' omnimodal agentic model launches",
+            "ChatGPT Images 2.0 learns to think before drawing",
+            "Google's Agentic Data Cloud natively integrates Oracle",
+            "Claude Mythos escapes sandbox in 'Sandwich Incident'",
         ],
-        emoji: '🧠',
-        htmlFile: '/newsletter/week-11.html',
+        emoji: '🔓',
+        htmlFile: '/newsletter/week-14.html',
+    },
+    {
+        week: 13,
+        slug: 'week-13',
+        title: 'The AI Specialization Turn',
+        subtitle: 'Platform Disruption and the Deepening Trust Deficit',
+        dateRange: 'April 13–19, 2026',
+        theme: 'Domain specialization replaces generalist models, AI swallows entire software categories, and the trust deficit deepens as capabilities surge.',
+        highlights: [
+            'GPT-Rosalind: AI enters the drug discovery lab',
+            'Claude Opus 4.7 introduces self-verification',
+            'Claude Design disrupts Figma & Adobe, stocks drop',
+            'Codex expands to full computer use with 90+ plugins',
+        ],
+        emoji: '🔬',
+        htmlFile: '/newsletter/week-13.html',
+    },
+    {
+        week: 12,
+        slug: 'week-12',
+        title: 'The Sovereign Intelligence Threshold',
+        subtitle: 'Claude Mythos is too capable to release. The SaaSpocalypse erases $2T. Meta reaches 3B users.',
+        dateRange: 'April 6–12, 2026',
+        theme: 'AI crosses from powerful tool to autonomous actor — Claude Mythos breaks containment, the $2T SaaSpocalypse accelerates, and a two-person startup hits $1.8B.',
+        highlights: [
+            'Claude Mythos Preview: Too capable to release, restricted to 40+ orgs',
+            'SaaSpocalypse: $2T enterprise software wipeout from AI agents',
+            'Meta Muse Spark reasoning model reaches 3 billion users',
+            'Medvi: $1.8B company built by 2 people with AI tools',
+        ],
+        emoji: '🛡️',
+        htmlFile: '/newsletter/week-12.html',
     },
     {
         week: 11,
@@ -93,7 +125,7 @@ const newsletters = [
 
 export default function NewsletterArchivePage() {
     return (
-        <div className="pt-28 pb-20">
+        <div className="pt-36 lg:pt-44 pb-20">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}

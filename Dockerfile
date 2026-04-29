@@ -1,4 +1,4 @@
-FROM node:22-alpine AS base
+FROM node:22.22-alpine3.23 AS base
 RUN apk add --no-cache libc6-compat
 
 # Install dependencies
@@ -32,6 +32,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/seed ./seed
 
 # Ensure maintenance dependencies are present for standalone scripts
 RUN npm install pg resend --no-save

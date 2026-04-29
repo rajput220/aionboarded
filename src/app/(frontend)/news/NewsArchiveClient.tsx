@@ -35,6 +35,11 @@ function formatDate(dateStr: string) {
 
 // Week theme metadata (hardcoded for known weeks, falls back gracefully)
 const weekThemes: Record<string, { title: string; theme: string; emoji: string }> = {
+    '2026-04-06': {
+        title: 'Week 12',
+        theme: 'The Sovereign Intelligence Threshold — AI as National Security Asset',
+        emoji: '🛡️',
+    },
     '2026-03-30': {
         title: 'Week 11',
         theme: 'From Models to Ecosystems — AI Swallows the Enterprise Stack',
@@ -61,7 +66,7 @@ export default function NewsArchiveClient({ weeks }: Props) {
     const meta = weekThemes[activeWeek]
 
     return (
-        <div className="pt-28 pb-20">
+        <div className="pt-36 lg:pt-44 pb-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Page Header */}

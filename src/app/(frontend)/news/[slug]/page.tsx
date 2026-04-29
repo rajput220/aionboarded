@@ -44,7 +44,7 @@ export default async function NewsItemPage({ params }: Props) {
     if (!item) notFound()
 
     return (
-        <article className="pt-28 pb-20">
+        <article className="pt-36 lg:pt-44 pb-20">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav className="mb-8 text-sm" style={{ color: 'var(--text-secondary)' }}>
                     <Link href="/news" className="hover:text-[var(--color-brand-600)] transition-colors">AI Developments</Link>
