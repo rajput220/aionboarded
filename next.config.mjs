@@ -21,6 +21,11 @@ const nextConfig = {
         source: '/newsletter/archive',
         destination: '/newsletter/archive.html',
       },
+      {
+        // Clean URLs: /newsletter/week-14 → /newsletter/week-14.html
+        source: '/newsletter/:slug(week-\\d+)',
+        destination: '/newsletter/:slug.html',
+      },
     ]
   },
   async headers() {
