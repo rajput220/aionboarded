@@ -61,9 +61,7 @@ services:
 volumes:
   pgdata:
   certbot-webroot:
-    external: true
   certbot-certs:
-    external: true
 
 networks:
   app-network:
