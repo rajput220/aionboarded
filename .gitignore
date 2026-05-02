@@ -49,3 +49,7 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Pipeline — NEVER commit these
+google-service-account.json
+/tmp-pipeline/

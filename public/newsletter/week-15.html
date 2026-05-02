@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Governance Stakes Get Real — Week 15 | AI Onboarded</title>
+    <meta name="description" content="This week, AI governance moved from boardroom debate to billion-dollar consequence. The Pentagon formally excluded Anthropic from classified contracts over safe" />
+    <meta property="og:title" content="Governance Stakes Get Real — Week 15 | AI Onboarded" />
+    <meta property="og:description" content="This week, AI governance moved from boardroom debate to billion-dollar consequence. The Pentagon formally excluded Anthropic from classified contracts over safe" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://aionboarded.ai/newsletter/week-15" />
+    <link rel="canonical" href="https://aionboarded.ai/newsletter/week-15" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #0a84ff; --primary-dark: #0066cc; --accent: #1db954;
+        --dark: #0f172a; --dark-700: #334155; --dark-600: #475569;
+        --gray: #64748b; --gray-light: #94a3b8; --light: #f8fafc;
+        --light-200: #e2e8f0; --white: #ffffff;
+        --gradient-primary: linear-gradient(135deg, #0a84ff, #1db954);
+        --gradient-hero: linear-gradient(135deg, #0a84ff 0%, #0066cc 40%, #1db954 100%);
+        --gradient-dark: linear-gradient(135deg, #0f172a, #1e293b);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+        --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+        --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+        --transition: all .3s cubic-bezier(.4,0,.2,1);
+        --max-width: 1200px;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; font-size: 16px; }
+      a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+      a:hover { color: var(--primary-dark); }
+      .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+      /* Header */
+      .newsletter-header { background: rgba(255,255,255,.92); border-bottom: 1px solid var(--light-200); padding: 16px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; }
+      .header-logo { display: flex; align-items: center; gap: 12px; }
+      .header-logo-icon { width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px; }
+      .header-logo-text { font-weight: 700; font-size: 18px; color: var(--dark); }
+      .header-logo-text span { color: var(--primary); }
+      .header-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--gray); }
+      .header-badge { background: var(--gradient-primary); color: white; padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+
+      /* Hero */
+      .hero { background: var(--gradient-hero); padding: 80px 0; position: relative; overflow: hidden; }
+      .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(29,185,84,.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(10,132,255,.2) 0%, transparent 50%); }
+      .hero-inner { position: relative; z-index: 1; }
+      .hero-content { color: white; max-width: 720px; }
+      .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.2); }
+      .hero-title { font-size: 42px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.5px; }
+      .hero-subtitle { font-size: 18px; line-height: 1.6; opacity: .9; max-width: 600px; font-weight: 300; }
+
+      /* Section */
+      .section { padding: 64px 0; }
+      .section-header { text-align: center; margin-bottom: 48px; }
+      .section-label { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(10,132,255,.08), rgba(29,185,84,.08)); color: var(--primary); padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+      .section-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; }
+      .section-title span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+      /* Story cards */
+      .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px; }
+      .story-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); transition: var(--transition); display: flex; flex-direction: column; }
+      .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(10,132,255,.2); }
+      .story-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; width: fit-content; }
+      .story-card-headline { font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--dark); }
+      .story-card-summary { font-size: 15px; line-height: 1.7; color: var(--dark-600); flex: 1; }
+      .story-card-whyitmatters { padding: 14px 16px; background: linear-gradient(135deg, rgba(10,132,255,.04), rgba(29,185,84,.04)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: var(--dark-700); line-height: 1.6; }
+      .story-card-whyitmatters strong { color: #17a34a; }
+      .story-source { font-size: 13px; color: var(--gray); margin-top: 4px; }
+      .story-source:hover { color: var(--primary); }
+
+      /* TOC */
+      .toc { background: var(--white); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 48px; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); }
+      .toc-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+      .toc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; list-style: none; }
+      .toc-list li a { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 14px; color: var(--dark-600); transition: var(--transition); }
+      .toc-list li a:hover { background: rgba(10,132,255,.06); color: var(--primary); }
+      .toc-list li a::before { content: "→"; color: var(--primary); font-weight: 600; }
+
+      /* What to watch */
+      .watch-next { background: var(--gradient-dark); border-radius: var(--radius-lg); padding: 40px; color: white; margin: 64px 0; }
+      .watch-next h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+      .watch-next p { font-size: 16px; line-height: 1.7; opacity: .9; }
+
+      /* Community */
+      .community { background: var(--gradient-dark); padding: 64px 0; text-align: center; }
+      .community-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 10px; }
+      .community-subtitle { font-size: 16px; color: var(--gray-light); margin-bottom: 36px; }
+      .community-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; transition: var(--transition); text-decoration: none; }
+      .btn-whatsapp { background: #25d366; color: white; }
+      .btn-whatsapp:hover { background: #20bd5a; transform: translateY(-2px); color: white; }
+      .btn-discord { background: #5865f2; color: white; }
+      .btn-discord:hover { background: #4752c4; transform: translateY(-2px); color: white; }
+      .btn-website { background: rgba(255,255,255,.1); color: white; border: 1px solid rgba(255,255,255,.2); }
+      .btn-website:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); color: white; }
+
+      /* Footer */
+      .newsletter-footer { background: var(--dark); color: var(--gray-light); padding: 48px 0 32px; }
+      .footer-bottom { border-top: 1px solid var(--dark-700); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--gray); margin-top: 32px; }
+
+      @media (max-width: 768px) {
+        .hero { padding: 48px 0; }
+        .hero-title { font-size: 28px; }
+        .stories-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header class="newsletter-header">
+      <div class="container">
+        <div class="header-inner">
+          <a href="https://aionboarded.ai" class="header-logo">
+            <div class="header-logo-icon">AI</div>
+            <span class="header-logo-text">AI <span>Onboarded</span></span>
+          </a>
+          <div class="header-meta">
+            <span>May 2, 2026</span>
+            <span class="header-badge">Week 15</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-eyebrow">📡 Weekly AI Brief · Week 15</div>
+            <h1 class="hero-title">Governance Stakes Get Real</h1>
+            <p class="hero-subtitle">This week, AI governance moved from boardroom debate to billion-dollar consequence. The Pentagon formally excluded Anthropic from classified contracts over safety guardrail disputes, while Big Tech committed a staggering $725 billion to AI infrastructure. Meanwhile, GPT-5.5 rolled out across all Codex tiers and the EU AI Act reform talks collapsed — putting August 2026 compliance deadlines back in play.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="section">
+      <div class="container">
+
+        <!-- TOC -->
+        <nav class="toc">
+          <p class="toc-title">📋 This Week's Stories</p>
+          <ul class="toc-list">
+            
+      <li><a href="#story-1">Pentagon Signs AI Deals with Seven Companies, Formally Excludes Anthropic</a></li>
+
+      <li><a href="#story-2">GPT-5.5 Becomes Default Codex Model with 400K Context Window</a></li>
+
+      <li><a href="#story-3">Big Tech Commits $725 Billion to AI Infrastructure in 2026</a></li>
+
+      <li><a href="#story-4">Microsoft-OpenAI Partnership Goes Non-Exclusive Through 2032</a></li>
+
+      <li><a href="#story-5">EU AI Act Reform Talks Collapse After 12-Hour Negotiations</a></li>
+
+      <li><a href="#story-6">Microsoft AI Revenue Hits $37 Billion Annualized, Up 123% YoY</a></li>
+
+      <li><a href="#story-7">Alphabet Q1 2026: Google Cloud Surges 63%, AI Capex Raised to $185B</a></li>
+
+      <li><a href="#story-8">Gemini Generates Downloadable Word, PDF, and Excel Files from Chat</a></li>
+
+      <li><a href="#story-9">Mistral Launches Medium 3.5 and Cloud-Based Async Agents</a></li>
+
+      <li><a href="#story-10">OpenClaw Pi Hits 68K GitHub Stars as Open-Source Coding Agent Goes Viral</a></li>
+
+      <li><a href="#story-11">Musk vs. OpenAI Trial Begins: Landmark Governance Case</a></li>
+
+      <li><a href="#story-12">GPT-5.5-Cyber: Restricted Cybersecurity Model for Critical Defenders</a></li>
+          </ul>
+        </nav>
+
+        <div class="section-header">
+          <span class="section-label">🔍 Week 15 Coverage</span>
+          <h2 class="section-title">This Week in <span>Artificial Intelligence</span></h2>
+        </div>
+
+        <div class="stories-grid">
+          
+    <article class="story-card" id="story-1">
+      <div class="story-card-body">
+        <span class="story-card-tag">Governance</span>
+        <h2 class="story-card-headline">Pentagon Signs AI Deals with Seven Companies, Formally Excludes Anthropic</h2>
+        <p class="story-card-summary">The Department of Defense formalized Anthropic&#039;s exclusion from classified AI contracts on May 1, signing deals with OpenAI, Google, Microsoft, Amazon, NVIDIA, SpaceX, and Reflection. The exclusion stems from Anthropic&#039;s refusal to remove safety guardrails for autonomous weapons and mass surveillance applications.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> This decision transforms AI governance from abstract policy discussion into commercial reality with billion-dollar stakes. Every major AI provider now faces a documented choice: accept government contracts requiring safety guardrail removal, or face exclusion from significant procurement markets.
+          </div>
+        <a href="https://defensescoop.com/2026/05/01/dod-expands-classified-ai-work-with-8-companies-excluding-anthropic/" target="_blank" rel="noopener" class="story-source">
+            📰 DefenseScoop →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-2">
+      <div class="story-card-body">
+        <span class="story-card-tag">OpenAI</span>
+        <h2 class="story-card-headline">GPT-5.5 Becomes Default Codex Model with 400K Context Window</h2>
+        <p class="story-card-summary">OpenAI completed the broad rollout of GPT-5.5 as the recommended default model in Codex across Plus, Pro, Business, Enterprise, Edu, and Go tiers. The integration brings a 400K context window, new Fast mode, and NVIDIA&#039;s full infrastructure backing to the world&#039;s most-used coding agent.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The Terminal-Bench score of 82.7% and Dynamic Reasoning Time of up to 7 hours translate directly into real-world capability: this model can handle end-to-end agentic tasks that were impossible six months ago. The NVIDIA partnership creates a feedback loop accelerating the entire AI stack.
+          </div>
+        <a href="https://developers.openai.com/codex/models" target="_blank" rel="noopener" class="story-source">
+            📰 OpenAI Developer Docs →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-3">
+      <div class="story-card-body">
+        <span class="story-card-tag">Industry</span>
+        <h2 class="story-card-headline">Big Tech Commits $725 Billion to AI Infrastructure in 2026</h2>
+        <p class="story-card-summary">The four hyperscalers — Microsoft, Meta, Alphabet, and Amazon — collectively committed $725 billion in AI infrastructure capex for 2026 following Q1 earnings, a 77% increase over 2025&#039;s record $410 billion. This is the largest synchronized capital investment in any technology in human history.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> This spending creates a compounding moat: organizations building AI capabilities today are riding infrastructure costs that latecomers will never see again. For developers and enterprises, this signals that AI infrastructure will be abundant and competitively priced in 2026-2027.
+          </div>
+        <a href="https://europeanbusinessmagazine.com/business-hyperscaler-ai-capex-725-billion-google-cloud-q1-2026" target="_blank" rel="noopener" class="story-source">
+            📰 European Business Magazine →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-4">
+      <div class="story-card-body">
+        <span class="story-card-tag">Microsoft</span>
+        <h2 class="story-card-headline">Microsoft-OpenAI Partnership Goes Non-Exclusive Through 2032</h2>
+        <p class="story-card-summary">Microsoft and OpenAI announced a major restructuring: Microsoft&#039;s license to OpenAI IP is now non-exclusive through 2032, revenue share payments are capped, the AGI clause is removed, and OpenAI can now serve customers across any cloud provider — setting up multi-cloud distribution ahead of a potential IPO.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> This deal marks the beginning of OpenAI&#039;s transition from Microsoft-dependent startup to standalone AI platform company. For enterprise customers with OpenAI integrations on Azure, this signals that OpenAI-as-a-service will become available through more cloud providers.
+          </div>
+        <a href="https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/" target="_blank" rel="noopener" class="story-source">
+            📰 Microsoft Official Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-5">
+      <div class="story-card-body">
+        <span class="story-card-tag">Governance</span>
+        <h2 class="story-card-headline">EU AI Act Reform Talks Collapse After 12-Hour Negotiations</h2>
+        <p class="story-card-summary">After 12 hours of negotiations, the European Parliament and Council failed to reach agreement on the Digital Omnibus AI simplification package. If talks stall through May, organizations relying on the extension face immediate compliance obligations under the original August 2026 deadline.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Organizations that built AI Act compliance roadmaps around the Omnibus extension are now facing a scenario where the original 2026 deadlines apply. Immediate pressure-testing against August 2026 requirements is critical for any organization deploying high-risk AI in the EU.
+          </div>
+        <a href="https://iapp.org/news/a/eu-ai-act-reform-talks-stall-as-key-compliance-deadline-looms" target="_blank" rel="noopener" class="story-source">
+            📰 IAPP →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-6">
+      <div class="story-card-body">
+        <span class="story-card-tag">Microsoft</span>
+        <h2 class="story-card-headline">Microsoft AI Revenue Hits $37 Billion Annualized, Up 123% YoY</h2>
+        <p class="story-card-summary">Microsoft reported its AI-specific business is running at $37 billion in annualized revenue, up 123% year-over-year, with Azure cloud growth driven primarily by AI workloads. Microsoft raised full-year capex guidance to over $40 billion.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The 123% YoY growth rate indicates enterprise AI adoption has crossed the early adopter phase. Mainstream enterprise deployment is well underway, and Microsoft is capturing the majority of the budget.
+          </div>
+        <a href="https://thenextweb.com/news/alphabet-amazon-meta-q1-2026-earnings-ai-cloud" target="_blank" rel="noopener" class="story-source">
+            📰 The Next Web →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-7">
+      <div class="story-card-body">
+        <span class="story-card-tag">Google</span>
+        <h2 class="story-card-headline">Alphabet Q1 2026: Google Cloud Surges 63%, AI Capex Raised to $185B</h2>
+        <p class="story-card-summary">Alphabet reported standout Q1 2026 results: Google Cloud revenue hit $20 billion (up 63% YoY), driven by AI workloads, while Alphabet raised its full-year capex guidance to $180-190 billion — the most ambitious AI infrastructure commitment in the company&#039;s history.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Alphabet&#039;s stock gain vs. Meta and Microsoft&#039;s after-hours declines shows the market is now differentiating between AI spenders who show revenue and those who project it. The TPU efficiency advantage is real for organizations running large model inference workloads.
+          </div>
+        <a href="https://fortune.com/2026/04/29/microsoft-meta-google-ai-capex-spending-billions/" target="_blank" rel="noopener" class="story-source">
+            📰 Fortune →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-8">
+      <div class="story-card-body">
+        <span class="story-card-tag">Google</span>
+        <h2 class="story-card-headline">Gemini Generates Downloadable Word, PDF, and Excel Files from Chat</h2>
+        <p class="story-card-summary">Google announced that Gemini users can now generate fully formatted, downloadable files — Word documents, PDFs, Excel spreadsheets, CSVs, and Markdown — directly inside their chat session, turning AI conversations into finished business output without copy-pasting.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Combined with Deep Research (now free for all users), Gemini can now research a topic AND deliver the output as a ready-to-use report file. That end-to-end workflow is a genuine productivity step change for knowledge workers.
+          </div>
+        <a href="https://www.androidsage.com/2026/04/30/gemini-update-file-generation-gemini-enterprise-macos-app/" target="_blank" rel="noopener" class="story-source">
+            📰 Android Sage →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-9">
+      <div class="story-card-body">
+        <span class="story-card-tag">Research</span>
+        <h2 class="story-card-headline">Mistral Launches Medium 3.5 and Cloud-Based Async Agents</h2>
+        <p class="story-card-summary">Mistral AI released Medium 3.5 — a 128-billion-parameter dense open-weight model unifying chat, reasoning, and code — alongside cloud-based remote agents for async coding. API pricing at $1.5/M input tokens positions Mistral as the leading open-weight challenger to frontier closed models.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The cloud async agent capability mirrors what OpenAI is doing with Codex — but with an open model. For organizations that want agentic AI without vendor lock-in, Mistral&#039;s architecture is worth serious evaluation. The 4-GPU self-hosting option opens private deployment for regulated industries.
+          </div>
+        <a href="https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5" target="_blank" rel="noopener" class="story-source">
+            📰 Mistral AI →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-10">
+      <div class="story-card-body">
+        <span class="story-card-tag">Research</span>
+        <h2 class="story-card-headline">OpenClaw Pi Hits 68K GitHub Stars as Open-Source Coding Agent Goes Viral</h2>
+        <p class="story-card-summary">OpenClaw — an open-source personal AI agent built around a minimalist 4-tool coding agent called Pi — hit 68,000 GitHub stars this week. Any API key, any OS, no subscription. The radical simplicity and self-modifying design is drawing massive developer interest.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The 68k star velocity signals genuine developer hunger for open, private, self-hosted agentic workflows — a market segment that commercial labs are consistently underserving. For organizations with strict data privacy requirements, OpenClaw&#039;s self-hosting model offers a zero-data-egress alternative.
+          </div>
+        <a href="https://www.eweek.com/news/openclaw-pi-coding-agent-ai-tools-neuron/" target="_blank" rel="noopener" class="story-source">
+            📰 eWeek →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-11">
+      <div class="story-card-body">
+        <span class="story-card-tag">OpenAI</span>
+        <h2 class="story-card-headline">Musk vs. OpenAI Trial Begins: Landmark Governance Case</h2>
+        <p class="story-card-summary">Elon Musk&#039;s lawsuit against OpenAI officially went to trial on April 27. The case alleges OpenAI broke its founding nonprofit mission by transforming into a for-profit entity, and seeks to block the company&#039;s restructuring and force a return to open-source principles.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Internal OpenAI documents being introduced as evidence are revealing strategic thinking about the mission-commerce tradeoff that has never been public before. Whether or not Musk prevails, the trial is forcing OpenAI to articulate its governance philosophy on the public record.
+          </div>
+        <a href="https://www.cnbc.com/2026/04/27/openai-microsoft-partnership-revenue-cap.html" target="_blank" rel="noopener" class="story-source">
+            📰 CNBC →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-12">
+      <div class="story-card-body">
+        <span class="story-card-tag">Security</span>
+        <h2 class="story-card-headline">GPT-5.5-Cyber: Restricted Cybersecurity Model for Critical Defenders</h2>
+        <p class="story-card-summary">OpenAI began rolling out GPT-5.5-Cyber through its Trusted Access for Cyber (TAC) program — a restricted-access model for government entities, critical infrastructure operators, and financial institutions. Access is risk-tiered to enable advanced security capabilities while maintaining controlled deployment.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> For AI governance professionals, the TAC program is a live case study in tiered access controls — the kind of risk-based deployment framework the EU AI Act envisions for high-risk AI systems. Security teams at qualifying organizations should begin the TAC program application process now.
+          </div>
+        <a href="https://dataconomy.com/2026/04/30/openai-expands-trusted-access-program-with-gpt-5-5-cyber/" target="_blank" rel="noopener" class="story-source">
+            📰 Dataconomy →
+          </a>
+      </div>
+    </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What to Watch -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="watch-next">
+          <h2>🔭 What to Watch Next Week</h2>
+          <p>Watch for fallout from the Anthropic-Pentagon standoff as the company&#039;s federal lawsuits progress. Expect OpenAI to announce new cloud partnerships following its non-exclusive Microsoft restructuring. EU AI Act negotiators reconvene — if no deal by June, the original August 2026 deadline becomes binding for thousands of organizations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="community">
+      <div class="container">
+        <h2 class="community-title">Join the AI Onboarded Community</h2>
+        <p class="community-subtitle">Connect with 150+ AI practitioners sharing strategic insights and staying ahead of the curve.</p>
+        <div class="community-buttons">
+          <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" class="btn btn-whatsapp">💬 WhatsApp Group</a>
+          <a href="https://discord.com/invite/SW4HZAv37" class="btn btn-discord">🎮 Discord Server</a>
+          <a href="https://aionboarded.ai" class="btn btn-website">🌐 Visit Website</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="newsletter-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2026 AI Onboarded. All rights reserved.</span>
+          <a href="https://aionboarded.ai/newsletter" style="color: var(--gray-light);">Newsletter Archive</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,148 @@
+name: Weekly Newsletter Pipeline
+
+# ── Schedule: Every Saturday at 6:00 AM EDT (10:00 UTC) ──
+on:
+  schedule:
+    - cron: '0 10 * * 6'
+
+  # Manual trigger with optional parameters
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (send preview email only, no subscriber blast)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      skip_email:
+        description: 'Skip email dispatch entirely'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      week_number:
+        description: 'Force specific week number (leave empty for auto-detect)'
+        required: false
+        default: ''
+
+jobs:
+  publish:
+    name: Build & Publish Weekly Newsletter
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ── 1. Checkout repo ──────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Setup Node.js ──────────────────────────────────
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      # ── 3. Install dependencies ───────────────────────────
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install pipeline dependencies
+        run: pnpm add googleapis mammoth @anthropic-ai/sdk --save-dev
+
+      # ── 4. Write Google Service Account key ───────────────
+      - name: Write Google Service Account key
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          echo "$GOOGLE_SERVICE_ACCOUNT_JSON" > google-service-account.json
+          echo "Service account key written."
+
+      # ── 5. Create tmp-pipeline directory ─────────────────
+      - name: Prepare working directories
+        run: mkdir -p tmp-pipeline
+
+      # ── 6. Run the weekly pipeline ────────────────────────
+      - name: Run weekly pipeline
+        env:
+          # Authentication
+          AGENT_API_KEY: ${{ secrets.AGENT_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+          # Google Drive
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+          GOOGLE_SERVICE_ACCOUNT_KEY_PATH: ./google-service-account.json
+
+          # Site & email
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          AGENT_TEST_EMAIL: ${{ secrets.AGENT_TEST_EMAIL }}
+
+          # Database (for direct subscriber query)
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+          # Resend
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
+        run: |
+          ARGS=""
+
+          # Dry run flag
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+            echo "Running in DRY RUN mode"
+          fi
+
+          # Skip email flag
+          if [ "${{ github.event.inputs.skip_email }}" = "true" ]; then
+            ARGS="$ARGS --skip-email"
+            echo "Skipping email dispatch"
+          fi
+
+          # Force specific week number
+          if [ -n "${{ github.event.inputs.week_number }}" ]; then
+            ARGS="$ARGS --week ${{ github.event.inputs.week_number }}"
+            echo "Forcing week ${{ github.event.inputs.week_number }}"
+          fi
+
+          node scripts/pipeline/run-weekly-pipeline.mjs $ARGS
+
+      # ── 7. Commit & push generated newsletter HTML ────────
+      - name: Commit generated newsletter files
+        run: |
+          git config --local user.email "pipeline@aionboarded.ai"
+          git config --local user.name "AI Onboarded Pipeline"
+          git add public/newsletter/
+          git diff --staged --quiet || git commit -m "feat: auto-publish weekly newsletter [skip ci]"
+          git push
+
+      # ── 8. Upload pipeline log as artifact ───────────────
+      - name: Upload pipeline log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-log-${{ github.run_id }}
+          path: tmp-pipeline/
+          retention-days: 30
+
+      # ── 9. Notify on failure ──────────────────────────────
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `⚠️ Weekly Pipeline Failed — ${new Date().toDateString()}`,
+              body: `The weekly newsletter pipeline failed on run [#${context.runNumber}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).\n\nCheck the pipeline log artifact for details.`,
+              labels: ['pipeline-failure']
+            })
