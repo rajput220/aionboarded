@@ -5,25 +5,20 @@ on:
   schedule:
     - cron: '0 10 * * 6'
 
-  # Manual trigger with optional parameters
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Dry run (send preview email only, no subscriber blast)'
+        description: 'Dry run (preview email only, no subscriber blast)'
         required: false
         default: 'false'
         type: choice
-        options:
-          - 'false'
-          - 'true'
+        options: ['false', 'true']
       skip_email:
         description: 'Skip email dispatch entirely'
         required: false
         default: 'false'
         type: choice
-        options:
-          - 'false'
-          - 'true'
+        options: ['false', 'true']
       week_number:
         description: 'Force specific week number (leave empty for auto-detect)'
         required: false
@@ -33,89 +28,62 @@ jobs:
   publish:
     name: Build & Publish Weekly Newsletter
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
-      # ── 1. Checkout repo ──────────────────────────────────
+      # ── 1. Checkout ───────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ── 2. Setup Node.js ──────────────────────────────────
+      # ── 2. Node.js + pnpm ─────────────────────────────────
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      # ── 3. Install dependencies ───────────────────────────
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Install pipeline dependencies
         run: pnpm add googleapis mammoth @anthropic-ai/sdk --save-dev
 
-      # ── 4. Write Google Service Account key ───────────────
+      # ── 3. Write Google Service Account key ───────────────
       - name: Write Google Service Account key
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
         run: |
           echo "$GOOGLE_SERVICE_ACCOUNT_JSON" > google-service-account.json
-          echo "Service account key written."
 
-      # ── 5. Create tmp-pipeline directory ─────────────────
-      - name: Prepare working directories
-        run: mkdir -p tmp-pipeline
-
-      # ── 6. Run the weekly pipeline ────────────────────────
-      - name: Run weekly pipeline
+      # ── 4. Run pipeline: fetch + generate + build HTML ────
+      - name: Run content generation pipeline
         env:
-          # Authentication
           AGENT_API_KEY: ${{ secrets.AGENT_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-
-          # Google Drive
           GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
           GOOGLE_SERVICE_ACCOUNT_KEY_PATH: ./google-service-account.json
-
-          # Site & email
           NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
           AGENT_TEST_EMAIL: ${{ secrets.AGENT_TEST_EMAIL }}
-
-          # Database (for direct subscriber query)
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-          # Resend
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-
         run: |
-          ARGS=""
+          mkdir -p tmp-pipeline
 
-          # Dry run flag
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            ARGS="$ARGS --dry-run"
-            echo "Running in DRY RUN mode"
-          fi
+          ARGS="--skip-email --skip-ingest"
 
-          # Skip email flag
-          if [ "${{ github.event.inputs.skip_email }}" = "true" ]; then
-            ARGS="$ARGS --skip-email"
-            echo "Skipping email dispatch"
-          fi
-
-          # Force specific week number
           if [ -n "${{ github.event.inputs.week_number }}" ]; then
             ARGS="$ARGS --week ${{ github.event.inputs.week_number }}"
-            echo "Forcing week ${{ github.event.inputs.week_number }}"
           fi
 
+          # Run pipeline: Drive fetch → Claude generate → build HTML only
           node scripts/pipeline/run-weekly-pipeline.mjs $ARGS
 
-      # ── 7. Commit & push generated newsletter HTML ────────
+      # ── 5. Commit & push newsletter HTML ──────────────────
       - name: Commit generated newsletter files
         run: |
           git config --local user.email "pipeline@aionboarded.ai"
@@ -124,7 +92,148 @@ jobs:
           git diff --staged --quiet || git commit -m "feat: auto-publish weekly newsletter [skip ci]"
           git push
 
-      # ── 8. Upload pipeline log as artifact ───────────────
+      # ── 6. SSH Deploy to production server ────────────────
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          timeout: 300s
+          script: |
+            set -e
+            echo "=== Deploying AI Onboarded ==="
+            cd ${{ secrets.SERVER_PATH }}
+            git pull origin main
+            docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build app
+            docker compose -f docker-compose.prod.yml restart nginx
+            echo "=== Deploy complete ==="
+
+      # ── 7. Wait for server to be ready ────────────────────
+      - name: Wait for server to be healthy
+        run: |
+          echo "Waiting 60s for server to rebuild and restart..."
+          sleep 60
+          # Poll until the site responds
+          for i in {1..10}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.NEXT_PUBLIC_SITE_URL }}" || echo "000")
+            echo "Attempt $i: HTTP $STATUS"
+            if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
+              echo "Server is up!"
+              break
+            fi
+            sleep 15
+          done
+
+      # ── 8. Ingest news items into Payload CMS ─────────────
+      - name: Ingest news items into Payload CMS
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          WEEK=$(node -e "
+            const d = require('fs').readdirSync('tmp-pipeline').find(f => f.includes('content.json') || f.includes('dry-run.json'));
+            if (!d) { console.log(15); process.exit(0); }
+            const c = JSON.parse(require('fs').readFileSync('tmp-pipeline/' + d, 'utf8'));
+            console.log(c.weekNumber);
+          ")
+
+          NEWS_ITEMS=$(node -e "
+            const d = require('fs').readdirSync('tmp-pipeline').find(f => f.includes('content.json') || f.includes('dry-run.json'));
+            const c = JSON.parse(require('fs').readFileSync('tmp-pipeline/' + d, 'utf8'));
+            console.log(JSON.stringify(c.newsItems));
+          ")
+
+          echo "Ingesting news for Week $WEEK..."
+
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.NEXT_PUBLIC_SITE_URL }}/api/agent/ingest-news" \
+            -H "Content-Type: application/json" \
+            -d "{\"apiKey\":\"${{ secrets.AGENT_API_KEY }}\",\"weekNumber\":$WEEK,\"newsItems\":$NEWS_ITEMS}")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | head -1)
+
+          echo "Response ($HTTP_CODE): $BODY"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "⚠️ Ingest returned HTTP $HTTP_CODE — continuing anyway"
+          else
+            echo "✅ News items ingested successfully"
+          fi
+
+      # ── 9. Archive old articles ───────────────────────────
+      - name: Archive old news articles
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.NEXT_PUBLIC_SITE_URL }}/api/agent/archive-news" \
+            -H "Content-Type: application/json" \
+            -d "{\"apiKey\":\"${{ secrets.AGENT_API_KEY }}\",\"keepWeeks\":4}")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | head -1)
+          echo "Archive response ($HTTP_CODE): $BODY"
+
+      # ── 10. Send newsletter email ─────────────────────────
+      - name: Send newsletter email to subscribers
+        env:
+          AGENT_API_KEY: ${{ secrets.AGENT_API_KEY }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AGENT_TEST_EMAIL: ${{ secrets.AGENT_TEST_EMAIL }}
+        run: |
+          CONTENT_FILE=$(ls tmp-pipeline/*.json | head -1)
+          WEEK=$(node -e "const c=JSON.parse(require('fs').readFileSync('$CONTENT_FILE','utf8')); console.log(c.weekNumber)")
+          THEME=$(node -e "const c=JSON.parse(require('fs').readFileSync('$CONTENT_FILE','utf8')); console.log(c.weekTheme)")
+          SUBJECT=$(node -e "const c=JSON.parse(require('fs').readFileSync('$CONTENT_FILE','utf8')); console.log(c.emailSubject)")
+          HTML=$(node -e "const c=JSON.parse(require('fs').readFileSync('$CONTENT_FILE','utf8')); process.stdout.write(c.newsletterHtml)")
+
+          DRY_RUN="false"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            DRY_RUN="true"
+            echo "DRY RUN — sending preview only to ${{ secrets.AGENT_TEST_EMAIL }}"
+          fi
+
+          node -e "
+            import('dotenv/config').then(async () => {
+              const { Resend } = await import('resend');
+              const pg = await import('pg');
+              const fs = await import('fs');
+
+              const resend = new Resend(process.env.RESEND_API_KEY);
+              const client = new pg.default.Client({ connectionString: process.env.DATABASE_URL });
+              await client.connect();
+
+              const isDryRun = '$DRY_RUN' === 'true';
+              let subs;
+              if (isDryRun) {
+                subs = [{ email: process.env.AGENT_TEST_EMAIL, first_name: 'Sanjay' }];
+              } else {
+                const res = await client.query('SELECT email, first_name FROM subscribers WHERE confirmed = true');
+                subs = res.rows;
+              }
+              await client.end();
+
+              const html = fs.readFileSync('$CONTENT_FILE', 'utf8');
+              const content = JSON.parse(html);
+              let successCount = 0;
+              for (const sub of subs) {
+                const personalised = content.newsletterHtml.replace(/\{\{firstName\}\}/g, sub.first_name || 'there');
+                await resend.emails.send({
+                  from: 'AI Onboarded <newsletter@aionboarded.ai>',
+                  to: sub.email,
+                  subject: content.emailSubject,
+                  html: personalised,
+                });
+                successCount++;
+                await new Promise(r => setTimeout(r, 100));
+              }
+              console.log('Sent to ' + successCount + ' subscribers');
+            });
+          "
+
+      # ── 11. Upload pipeline artifacts ─────────────────────
       - name: Upload pipeline log
         if: always()
         uses: actions/upload-artifact@v4
@@ -133,7 +242,7 @@ jobs:
           path: tmp-pipeline/
           retention-days: 30
 
-      # ── 9. Notify on failure ──────────────────────────────
+      # ── 12. Notify on failure ─────────────────────────────
       - name: Notify on failure
         if: failure()
         uses: actions/github-script@v7
@@ -143,6 +252,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `⚠️ Weekly Pipeline Failed — ${new Date().toDateString()}`,
-              body: `The weekly newsletter pipeline failed on run [#${context.runNumber}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).\n\nCheck the pipeline log artifact for details.`,
+              body: `Pipeline failed on run [#${context.runNumber}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).\n\nCheck the pipeline log artifact for details.`,
               labels: ['pipeline-failure']
             })
