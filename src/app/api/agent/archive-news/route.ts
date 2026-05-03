@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         id: article.id,
         data: { status: 'archived' } as any,
       })
-      archived.push(article.id as string)
+      archived.push(String(article.id))
     }
 
     console.log(`[Agent] Archived ${archived.length} articles`)
