@@ -91,9 +91,9 @@ export async function POST(req: NextRequest) {
         : item.content
 
       const postData = {
-        title: item.title,
+        title: item.title?.slice(0, 200),
         slug: item.slug,
-        excerpt: item.excerpt,
+        excerpt: item.excerpt?.slice(0, 295),   // CMS max is 300
         status: 'published',
         publishedAt: item.publishedAt,
         sourceName: item.sourceName,
