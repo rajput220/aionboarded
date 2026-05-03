@@ -7,8 +7,25 @@ export const metadata: Metadata = generateSeo({
     description: 'Browse all past editions of the AI Onboarded weekly newsletter — weekly AI intelligence briefings organized by week.',
 })
 
-// Static newsletter archive — add new entries here as new weeks are published
+// Static newsletter archive — new entries are added automatically by the pipeline
+// Add new weeks at the TOP of this array (newest first)
 const newsletters = [
+    {
+        week: 15,
+        slug: 'week-15',
+        title: 'Governance Stakes Get Real',
+        subtitle: 'Pentagon Picks Sides, AI Capex Hits $725B',
+        dateRange: 'April 27 – May 3, 2026',
+        theme: 'The US defense establishment draws hard lines on AI alliances, Big Tech commits $725B in infrastructure, and EU governance reform stalls.',
+        highlights: [
+            'Pentagon excludes Anthropic from key AI contracts',
+            'Big Tech commits $725B in AI capex for 2026',
+            'EU AI Act reform talks collapse',
+            'Microsoft-OpenAI partnership confirmed non-exclusive to 2032',
+        ],
+        emoji: '🔒',
+        htmlFile: '/newsletter/week-15.html',
+    },
     {
         week: 14,
         slug: 'week-14',

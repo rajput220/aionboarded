@@ -174,7 +174,12 @@ async function runPipeline() {
       publishDate,
     })
     const filePath = writeNewsletterHtml(weekNumber, html)
-    updateArchivePage(weekNumber, content.weekTheme, publishDate)
+    updateArchivePage(
+      weekNumber,
+      content.weekTheme,
+      content.newsletterHighlights.map(h => h.title),
+      publishDate
+    )
     log(`✅ Newsletter HTML built: ${filePath}`)
 
     if (DRY_RUN) {

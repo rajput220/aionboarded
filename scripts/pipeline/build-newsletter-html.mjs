@@ -290,43 +290,62 @@ export function writeNewsletterHtml(weekNumber, html) {
   return filePath
 }
 
-// ── Update the archive page ────────────────────────────────
-export function updateArchivePage(weekNumber, weekTheme, publishDate) {
-  const archivePath = path.join(NEWSLETTER_DIR, 'archive.html')
-  
-  if (!fs.existsSync(archivePath)) {
-    console.warn('[Builder] archive.html not found — skipping archive update')
+// ── Update the newsletter archive page.tsx ─────────────────
+export function updateArchivePage(weekNumber, weekTheme, highlights, publishDate) {
+  const pagePath = path.join(PROJECT_ROOT, 'src', 'app', '(frontend)', 'newsletter', 'page.tsx')
+
+  if (!fs.existsSync(pagePath)) {
+    console.warn('[Builder] newsletter/page.tsx not found — skipping archive update')
     return
   }
 
-  const archiveContent = fs.readFileSync(archivePath, 'utf-8')
+  const content = fs.readFileSync(pagePath, 'utf-8')
+
+  // Don't add if already present
+  if (content.includes(`week: ${weekNumber},`)) {
+    console.log(`[Builder] Week ${weekNumber} already in archive — skipping`)
+    return
+  }
+
   const dateFormatted = new Date(publishDate).toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric',
   })
 
-  const newEntry = `
-        <li>
-          <a href="week-${weekNumber}.html">
-            <strong>Week ${weekNumber}:</strong> ${escapeHtml(weekTheme)}
-            <span class="archive-date">${dateFormatted}</span>
-          </a>
-        </li>`
+  // Build the highlights array string
+  const highlightsStr = (highlights || [])
+    .slice(0, 4)
+    .map(h => `            '${String(h).replace(/'/g, "\\'")}',`)
+    .join('\n')
 
-  // Insert after the opening <ul> in the archive
-  const updated = archiveContent.replace(
-    /(<ul[^>]*class="[^"]*archive[^"]*"[^>]*>)/i,
-    `$1${newEntry}`,
+  const newEntry = `    {
+        week: ${weekNumber},
+        slug: 'week-${weekNumber}',
+        title: '${weekTheme.replace(/'/g, "\\'")}',
+        subtitle: 'Week ${weekNumber} AI Intelligence Briefing',
+        dateRange: '${dateFormatted}',
+        theme: '${weekTheme.replace(/'/g, "\\'")}',
+        highlights: [
+${highlightsStr}
+        ],
+        emoji: '📡',
+        htmlFile: '/newsletter/week-${weekNumber}.html',
+    },\n`
+
+  // Insert after "const newsletters = [" line
+  const updated = content.replace(
+    /(\/\/ Add new weeks at the TOP.*?\n)(const newsletters = \[\n)/s,
+    `$1$2${newEntry}`,
   )
 
-  if (updated === archiveContent) {
-    // Fallback: try generic <ul>
-    const fallback = archiveContent.replace('<ul>', `<ul>${newEntry}`)
-    fs.writeFileSync(archivePath, fallback, 'utf-8')
+  if (updated === content) {
+    // Fallback: insert after the array opening
+    const fallback = content.replace('const newsletters = [\n', `const newsletters = [\n${newEntry}`)
+    fs.writeFileSync(pagePath, fallback, 'utf-8')
   } else {
-    fs.writeFileSync(archivePath, updated, 'utf-8')
+    fs.writeFileSync(pagePath, updated, 'utf-8')
   }
 
-  console.log(`[Builder] Archive page updated with Week ${weekNumber} entry`)
+  console.log(`[Builder] newsletter/page.tsx updated with Week ${weekNumber}: "${weekTheme}"`)
 }
 
 // ── Helpers ────────────────────────────────────────────────
