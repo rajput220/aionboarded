@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infrastructure, Security, and Accountability Converge — Week 16 | AI Onboarded</title>
+    <meta name="description" content="This week marked a turning point: AI moved from innovation showcase to enterprise infrastructure with all the security, governance, and accountability demands t" />
+    <meta property="og:title" content="Infrastructure, Security, and Accountability Converge — Week 16 | AI Onboarded" />
+    <meta property="og:description" content="This week marked a turning point: AI moved from innovation showcase to enterprise infrastructure with all the security, governance, and accountability demands t" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://aionboarded.ai/newsletter/week-16" />
+    <link rel="canonical" href="https://aionboarded.ai/newsletter/week-16" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #0a84ff; --primary-dark: #0066cc; --accent: #1db954;
+        --dark: #0f172a; --dark-700: #334155; --dark-600: #475569;
+        --gray: #64748b; --gray-light: #94a3b8; --light: #f8fafc;
+        --light-200: #e2e8f0; --white: #ffffff;
+        --gradient-primary: linear-gradient(135deg, #0a84ff, #1db954);
+        --gradient-hero: linear-gradient(135deg, #0a84ff 0%, #0066cc 40%, #1db954 100%);
+        --gradient-dark: linear-gradient(135deg, #0f172a, #1e293b);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+        --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+        --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+        --transition: all .3s cubic-bezier(.4,0,.2,1);
+        --max-width: 1200px;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; font-size: 16px; }
+      a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+      a:hover { color: var(--primary-dark); }
+      .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+      /* Header */
+      .newsletter-header { background: rgba(255,255,255,.92); border-bottom: 1px solid var(--light-200); padding: 16px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; }
+      .header-logo { display: flex; align-items: center; gap: 12px; }
+      .header-logo-icon { width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px; }
+      .header-logo-text { font-weight: 700; font-size: 18px; color: var(--dark); }
+      .header-logo-text span { color: var(--primary); }
+      .header-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--gray); }
+      .header-badge { background: var(--gradient-primary); color: white; padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+
+      /* Hero */
+      .hero { background: var(--gradient-hero); padding: 80px 0; position: relative; overflow: hidden; }
+      .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(29,185,84,.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(10,132,255,.2) 0%, transparent 50%); }
+      .hero-inner { position: relative; z-index: 1; }
+      .hero-content { color: white; max-width: 720px; }
+      .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.2); }
+      .hero-title { font-size: 42px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.5px; }
+      .hero-subtitle { font-size: 18px; line-height: 1.6; opacity: .9; max-width: 600px; font-weight: 300; }
+
+      /* Section */
+      .section { padding: 64px 0; }
+      .section-header { text-align: center; margin-bottom: 48px; }
+      .section-label { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(10,132,255,.08), rgba(29,185,84,.08)); color: var(--primary); padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+      .section-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; }
+      .section-title span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+      /* Story cards */
+      .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px; }
+      .story-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); transition: var(--transition); display: flex; flex-direction: column; }
+      .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(10,132,255,.2); }
+      .story-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; width: fit-content; }
+      .story-card-headline { font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--dark); }
+      .story-card-summary { font-size: 15px; line-height: 1.7; color: var(--dark-600); flex: 1; }
+      .story-card-whyitmatters { padding: 14px 16px; background: linear-gradient(135deg, rgba(10,132,255,.04), rgba(29,185,84,.04)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: var(--dark-700); line-height: 1.6; }
+      .story-card-whyitmatters strong { color: #17a34a; }
+      .story-source { font-size: 13px; color: var(--gray); margin-top: 4px; }
+      .story-source:hover { color: var(--primary); }
+
+      /* TOC */
+      .toc { background: var(--white); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 48px; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); }
+      .toc-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+      .toc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; list-style: none; }
+      .toc-list li a { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 14px; color: var(--dark-600); transition: var(--transition); }
+      .toc-list li a:hover { background: rgba(10,132,255,.06); color: var(--primary); }
+      .toc-list li a::before { content: "→"; color: var(--primary); font-weight: 600; }
+
+      /* What to watch */
+      .watch-next { background: var(--gradient-dark); border-radius: var(--radius-lg); padding: 40px; color: white; margin: 64px 0; }
+      .watch-next h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+      .watch-next p { font-size: 16px; line-height: 1.7; opacity: .9; }
+
+      /* Community */
+      .community { background: var(--gradient-dark); padding: 64px 0; text-align: center; }
+      .community-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 10px; }
+      .community-subtitle { font-size: 16px; color: var(--gray-light); margin-bottom: 36px; }
+      .community-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; transition: var(--transition); text-decoration: none; }
+      .btn-whatsapp { background: #25d366; color: white; }
+      .btn-whatsapp:hover { background: #20bd5a; transform: translateY(-2px); color: white; }
+      .btn-discord { background: #5865f2; color: white; }
+      .btn-discord:hover { background: #4752c4; transform: translateY(-2px); color: white; }
+      .btn-website { background: rgba(255,255,255,.1); color: white; border: 1px solid rgba(255,255,255,.2); }
+      .btn-website:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); color: white; }
+
+      /* Footer */
+      .newsletter-footer { background: var(--dark); color: var(--gray-light); padding: 48px 0 32px; }
+      .footer-bottom { border-top: 1px solid var(--dark-700); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--gray); margin-top: 32px; }
+
+      @media (max-width: 768px) {
+        .hero { padding: 48px 0; }
+        .hero-title { font-size: 28px; }
+        .stories-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header class="newsletter-header">
+      <div class="container">
+        <div class="header-inner">
+          <a href="https://aionboarded.ai" class="header-logo">
+            <div class="header-logo-icon">AI</div>
+            <span class="header-logo-text">AI <span>Onboarded</span></span>
+          </a>
+          <div class="header-meta">
+            <span>May 10, 2026</span>
+            <span class="header-badge">Week 16</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-eyebrow">📡 Weekly AI Brief · Week 16</div>
+            <h1 class="hero-title">Infrastructure, Security, and Accountability Converge</h1>
+            <p class="hero-subtitle">This week marked a turning point: AI moved from innovation showcase to enterprise infrastructure with all the security, governance, and accountability demands that entails. OpenAI launched a dedicated cybersecurity model while critical vulnerabilities emerged in agent frameworks. Meanwhile, the U.S. House passed landmark AI legislation and DeepMind staff voted to unionize—signaling that the voluntary governance era is definitively over.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="section">
+      <div class="container">
+
+        <!-- TOC -->
+        <nav class="toc">
+          <p class="toc-title">📋 This Week's Stories</p>
+          <ul class="toc-list">
+            
+      <li><a href="#story-1">OpenAI Launches GPT-5.5-Cyber: Autonomous Security Research at Enterprise Scale</a></li>
+
+      <li><a href="#story-2">ChatGPT Gets Persistent Memory and GPT-5.5 Instant as Default for All Users</a></li>
+
+      <li><a href="#story-3">OpenAI Releases GPT-Realtime-2 and Whisper v4 with Sub-200ms Voice Latency</a></li>
+
+      <li><a href="#story-4">Musk v. Altman Trial Reveals OpenAI Governance History in Week 2 Testimony</a></li>
+
+      <li><a href="#story-5">OpenAI Raises $4B at $340B Valuation, Declares Itself &#039;The Deployment Company&#039;</a></li>
+
+      <li><a href="#story-6">Google Cloud Next 2026: Gemini 3.1 Flash-Lite GA at 60% Price Cut with Agent Builder</a></li>
+
+      <li><a href="#story-7">Google Unveils Ironwood TPU with 4.7x Training Throughput, 25% Lower Energy Cost</a></li>
+
+      <li><a href="#story-8">DeepMind UK Research Staff Vote to Unionize in AI Industry First</a></li>
+
+      <li><a href="#story-9">Anthropic Secures SpaceX Colossus 1 Deal, Doubles Claude Code Rate Limits</a></li>
+
+      <li><a href="#story-10">Anthropic Partners with Blackstone and Goldman Sachs for Enterprise AI Deployment</a></li>
+
+      <li><a href="#story-11">Anthropic Maps Emotions and Intentions in Claude&#039;s Neural Networks</a></li>
+
+      <li><a href="#story-12">Microsoft Global AI Diffusion Report: 51% of Knowledge Workers Now Use AI Weekly</a></li>
+          </ul>
+        </nav>
+
+        <div class="section-header">
+          <span class="section-label">🔍 Week 16 Coverage</span>
+          <h2 class="section-title">This Week in <span>Artificial Intelligence</span></h2>
+        </div>
+
+        <div class="stories-grid">
+          
+    <article class="story-card" id="story-1">
+      <div class="story-card-body">
+        <span class="story-card-tag">OpenAI</span>
+        <h2 class="story-card-headline">OpenAI Launches GPT-5.5-Cyber: Autonomous Security Research at Enterprise Scale</h2>
+        <p class="story-card-summary">OpenAI released GPT-5.5-Cyber, a specialized Codex variant trained exclusively on offensive and defensive cybersecurity tasks. The model identified novel attack paths in 10 of 12 published CVEs before human testers, ships with mandatory enterprise verification and session logging, and positions OpenAI directly against Palantir and CrowdStrike in the security market.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Specialized domain AI is now outperforming general-purpose models in high-stakes professional work, while the dual-use nature of security AI demands new governance frameworks that balance capability with accountability.
+          </div>
+        <a href="https://www.theverge.com/2026/5/7/openai-gpt-5-5-codex-cybersecurity" target="_blank" rel="noopener" class="story-source">
+            📰 The Verge →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-2">
+      <div class="story-card-body">
+        <span class="story-card-tag">OpenAI</span>
+        <h2 class="story-card-headline">ChatGPT Gets Persistent Memory and GPT-5.5 Instant as Default for All Users</h2>
+        <p class="story-card-summary">OpenAI made GPT-5.5 Instant the default model for all ChatGPT users and rolled out persistent Memory to free-tier users globally. With 600 million users now having access to AI that remembers their preferences across sessions, ChatGPT transforms from a transactional tool to a longitudinal digital colleague.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Persistent memory transforms AI assistance from transactional queries to ongoing collaboration, while the free-tier rollout to 600 million users creates immediate competitive pressure on rivals and new enterprise data governance requirements.
+          </div>
+        <a href="https://openai.com/blog/chatgpt-memory-gpt-5-5-instant" target="_blank" rel="noopener" class="story-source">
+            📰 OpenAI Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-3">
+      <div class="story-card-body">
+        <span class="story-card-tag">OpenAI</span>
+        <h2 class="story-card-headline">OpenAI Releases GPT-Realtime-2 and Whisper v4 with Sub-200ms Voice Latency</h2>
+        <p class="story-card-summary">OpenAI&#039;s GPT-Realtime-2 achieves sub-200ms end-to-end latency for genuinely conversational voice interaction, while Whisper v4 reduces word error rate by 31% across 20 languages and adds speaker diarization. Both are available via API immediately at $0.06 per minute.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Sub-200ms voice latency enables genuinely conversational AI applications that were previously impossible, while 31% accuracy improvements in multilingual transcription remove a major barrier to global enterprise deployment.
+          </div>
+        <a href="https://techcrunch.com/2026/05/08/openai-gpt-realtime-2-whisper-v4/" target="_blank" rel="noopener" class="story-source">
+            📰 TechCrunch →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-4">
+      <div class="story-card-body">
+        <span class="story-card-tag">OpenAI</span>
+        <h2 class="story-card-headline">Musk v. Altman Trial Reveals OpenAI Governance History in Week 2 Testimony</h2>
+        <p class="story-card-summary">The second week of testimony in Musk v. Altman surfaced internal OpenAI communications showing 2015 written agreements establishing OpenAI as permanently non-profit, plus testimony that the board received insufficient information about GPT-4 capabilities before launch.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The trial is producing an unprecedented public record of AI lab governance decisions and failures, creating a reference case that will shape how future AI organizations structure their boards, charters, and safety review processes.
+          </div>
+        <a href="https://www.reuters.com/technology/musk-altman-trial-week-2-2026-05-08/" target="_blank" rel="noopener" class="story-source">
+            📰 Reuters →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-5">
+      <div class="story-card-body">
+        <span class="story-card-tag">OpenAI</span>
+        <h2 class="story-card-headline">OpenAI Raises $4B at $340B Valuation, Declares Itself &#039;The Deployment Company&#039;</h2>
+        <p class="story-card-summary">OpenAI closed a $4 billion secondary raise pushing 2026 fundraising past $14 billion, with CEO Sam Altman reframing OpenAI as &#039;The Deployment Company&#039; focused on enterprise integration, developer tooling, and agentic infrastructure rather than pure research.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> OpenAI&#039;s pivot from research lab to deployment-focused infrastructure provider signals that enterprise reliability and integration are now the competitive battleground, not just model capability.
+          </div>
+        <a href="https://www.bloomberg.com/news/openai-4b-deployment-company-2026-05-06" target="_blank" rel="noopener" class="story-source">
+            📰 Bloomberg →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-6">
+      <div class="story-card-body">
+        <span class="story-card-tag">Google</span>
+        <h2 class="story-card-headline">Google Cloud Next 2026: Gemini 3.1 Flash-Lite GA at 60% Price Cut with Agent Builder</h2>
+        <p class="story-card-summary">Google made Gemini 3.1 Flash-Lite generally available at $0.10 per million tokens—a 60% price reduction—and launched Agent Builder for no-code multi-step AI agents that work across Google Workspace, Salesforce, SAP, and ServiceNow without custom integration.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Google&#039;s full-stack enterprise AI strategy—model, orchestration, no-code agents, and infrastructure as an integrated offering—is harder to match than any single capability, while the 60% price cut compresses margins industry-wide.
+          </div>
+        <a href="https://cloud.google.com/blog/gemini-3-1-flash-lite-agentic-enterprise-2026" target="_blank" rel="noopener" class="story-source">
+            📰 Google Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-7">
+      <div class="story-card-body">
+        <span class="story-card-tag">Google</span>
+        <h2 class="story-card-headline">Google Unveils Ironwood TPU with 4.7x Training Throughput, 25% Lower Energy Cost</h2>
+        <p class="story-card-summary">Google&#039;s 8th-generation Ironwood TPU delivers 4.7x improvement in AI training throughput over the previous generation, trains GPT-4-scale models 38% faster than equivalent Nvidia H100 clusters at 25% lower energy cost, and is available exclusively through Google Cloud.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Google&#039;s custom silicon supremacy compounds with each generation—controlling the full compute stack while competitors depend on Nvidia creates a structural advantage that becomes more valuable as energy efficiency draws regulatory attention.
+          </div>
+        <a href="https://venturebeat.com/2026/05/07/google-tpu-ironwood-cloud-next/" target="_blank" rel="noopener" class="story-source">
+            📰 VentureBeat →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-8">
+      <div class="story-card-body">
+        <span class="story-card-tag">Google</span>
+        <h2 class="story-card-headline">DeepMind UK Research Staff Vote to Unionize in AI Industry First</h2>
+        <p class="story-card-summary">A majority of DeepMind&#039;s UK research staff voted for union representation, making it the first major frontier AI lab with an organized research workforce. Key demands include project assignment governance, whistleblower protections, and transparency on dual-use research decisions.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The first major AI lab unionization creates an internal accountability mechanism that comes from the workforce rather than regulators or boards, establishing a template for researcher governance participation across the industry.
+          </div>
+        <a href="https://www.theguardian.com/technology/2026/may/07/deepmind-uk-staff-union-vote" target="_blank" rel="noopener" class="story-source">
+            📰 The Guardian →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-9">
+      <div class="story-card-body">
+        <span class="story-card-tag">Anthropic</span>
+        <h2 class="story-card-headline">Anthropic Secures SpaceX Colossus 1 Deal, Doubles Claude Code Rate Limits</h2>
+        <p class="story-card-summary">Anthropic secured dedicated training and inference capacity on SpaceX&#039;s Colossus 1 supercomputing cluster, immediately doubling Claude Code rate limits to 4,000 agentic turns per day for Pro users. The partnership also reserves primary training capacity for Claude 5.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The overnight doubling of rate limits demonstrates that compute access—not product decisions—was the binding constraint, while the Claude 5 training reservation signals Anthropic&#039;s next major capability push is underway.
+          </div>
+        <a href="https://venturebeat.com/2026/05/06/anthropic-spacex-colossus-1-claude-code/" target="_blank" rel="noopener" class="story-source">
+            📰 VentureBeat →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-10">
+      <div class="story-card-body">
+        <span class="story-card-tag">Anthropic</span>
+        <h2 class="story-card-headline">Anthropic Partners with Blackstone and Goldman Sachs for Enterprise AI Deployment</h2>
+        <p class="story-card-summary">Anthropic announced strategic partnerships with Blackstone and Goldman Sachs, embedding Claude into financial analysis, due diligence, and risk assessment workflows. Both firms negotiated data residency and audit trail provisions that will become the enterprise standard.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Adoption by Goldman Sachs and Blackstone validates Claude for the highest regulatory and fiduciary standards in any industry, with their negotiated governance provisions likely to become the enterprise deployment standard.
+          </div>
+        <a href="https://www.ft.com/content/anthropic-blackstone-goldman-enterprise-2026-05-06" target="_blank" rel="noopener" class="story-source">
+            📰 Financial Times →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-11">
+      <div class="story-card-body">
+        <span class="story-card-tag">Anthropic</span>
+        <h2 class="story-card-headline">Anthropic Maps Emotions and Intentions in Claude&#039;s Neural Networks</h2>
+        <p class="story-card-summary">Anthropic&#039;s interpretability research identified distinct activation patterns corresponding to frustration, curiosity, and caution that are stable across diverse prompts, plus goal representations maintained across multi-step reasoning chains—advancing AI transparency from output analysis to internal state analysis.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Reading internal states rather than just outputs is the foundational capability for verifiable AI safety and genuine alignment—this research advances the science needed to audit frontier models before deployment.
+          </div>
+        <a href="https://www.technologyreview.com/2026/05/08/anthropic-interpretability-emotions-claude/" target="_blank" rel="noopener" class="story-source">
+            📰 MIT Technology Review →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-12">
+      <div class="story-card-body">
+        <span class="story-card-tag">Microsoft</span>
+        <h2 class="story-card-headline">Microsoft Global AI Diffusion Report: 51% of Knowledge Workers Now Use AI Weekly</h2>
+        <p class="story-card-summary">Microsoft&#039;s Global AI Diffusion Report reveals AI use crossed 50% globally for the first time, with 51% of knowledge workers using AI tools weekly. The report identifies a growing AI Skills Gap between high- and low-income economies using different adoption paths.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Crossing 50% workplace AI adoption means AI assistance is now the baseline expectation rather than competitive advantage, while the divergence between high- and low-income economy adoption paths will compound existing global inequality without intervention.
+          </div>
+        <a href="https://blogs.microsoft.com/ai-diffusion-report-2026" target="_blank" rel="noopener" class="story-source">
+            📰 Microsoft Blog →
+          </a>
+      </div>
+    </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What to Watch -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="watch-next">
+          <h2>🔭 What to Watch Next Week</h2>
+          <p>All eyes turn to the Senate Commerce Committee as the House AI governance package moves forward—expect significant amendments that will shape the final compliance landscape. Watch for enterprise responses to the agent framework vulnerabilities as the 72-hour patch window closes, and track Google Cloud customer adoption metrics following the Flash-Lite GA and Ironwood announcements.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="community">
+      <div class="container">
+        <h2 class="community-title">Join the AI Onboarded Community</h2>
+        <p class="community-subtitle">Connect with 150+ AI practitioners sharing strategic insights and staying ahead of the curve.</p>
+        <div class="community-buttons">
+          <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" class="btn btn-whatsapp">💬 WhatsApp Group</a>
+          <a href="https://discord.com/invite/SW4HZAv37" class="btn btn-discord">🎮 Discord Server</a>
+          <a href="https://aionboarded.ai" class="btn btn-website">🌐 Visit Website</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="newsletter-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2026 AI Onboarded. All rights reserved.</span>
+          <a href="https://aionboarded.ai/newsletter" style="color: var(--gray-light);">Newsletter Archive</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

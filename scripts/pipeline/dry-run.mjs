@@ -69,7 +69,7 @@ async function dryRun() {
     publishDate,
   })
   const htmlPath = writeNewsletterHtml(weekNumber, html)
-  updateArchivePage(weekNumber, content.weekTheme, publishDate)
+  updateArchivePage(weekNumber, content.weekTheme, content.newsletterHighlights.map(h => h.title), publishDate)
   console.log(`✅ Built: ${htmlPath}`)
 
   // ── Step 4: Send preview email ──────────────────────────
