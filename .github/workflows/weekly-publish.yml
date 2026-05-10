@@ -29,11 +29,17 @@ jobs:
     name: Build & Publish Weekly Newsletter
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    permissions:
+      contents: write   # Required to push newsletter HTML back to repo
+      issues: write     # Required to create failure notification issues
 
     steps:
       # ── 1. Checkout ───────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       # ── 2. Node.js + pnpm ─────────────────────────────────
       - name: Install pnpm
@@ -83,14 +89,14 @@ jobs:
           # Run pipeline: Drive fetch → Claude generate → build HTML only
           node scripts/pipeline/run-weekly-pipeline.mjs $ARGS
 
-      # ── 5. Commit & push newsletter HTML ──────────────────
+      # ── 5. Commit & push newsletter HTML + updated archive page ────
       - name: Commit generated newsletter files
         run: |
           git config --local user.email "pipeline@aionboarded.ai"
           git config --local user.name "AI Onboarded Pipeline"
-          git add public/newsletter/
+          git add public/newsletter/ src/app/\(frontend\)/newsletter/page.tsx
           git diff --staged --quiet || git commit -m "feat: auto-publish weekly newsletter [skip ci]"
-          git push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
 
       # ── 6. SSH Deploy to production server ────────────────
       - name: Deploy to production server
