@@ -66,7 +66,9 @@
       .story-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); transition: var(--transition); display: flex; flex-direction: column; }
       .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(10,132,255,.2); }
       .story-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
-      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; width: fit-content; }
+      .story-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+      .story-card-readtime { font-size: 12px; color: var(--gray); font-weight: 500; }
       .story-card-headline { font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--dark); }
       .story-card-summary { font-size: 15px; line-height: 1.7; color: var(--dark-600); flex: 1; }
       .story-card-whyitmatters { padding: 14px 16px; background: linear-gradient(135deg, rgba(10,132,255,.04), rgba(29,185,84,.04)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: var(--dark-700); line-height: 1.6; }
@@ -187,7 +189,10 @@
           
     <article class="story-card" id="story-1">
       <div class="story-card-body">
-        <span class="story-card-tag">OpenAI</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">OpenAI Launches GPT-5.5-Cyber: Autonomous Security Research at Enterprise Scale</h2>
         <p class="story-card-summary">OpenAI released GPT-5.5-Cyber, a specialized Codex variant trained exclusively on offensive and defensive cybersecurity tasks. The model identified novel attack paths in 10 of 12 published CVEs before human testers, ships with mandatory enterprise verification and session logging, and positions OpenAI directly against Palantir and CrowdStrike in the security market.</p>
         <div class="story-card-whyitmatters">
@@ -201,7 +206,10 @@
 
     <article class="story-card" id="story-2">
       <div class="story-card-body">
-        <span class="story-card-tag">OpenAI</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">ChatGPT Gets Persistent Memory and GPT-5.5 Instant as Default for All Users</h2>
         <p class="story-card-summary">OpenAI made GPT-5.5 Instant the default model for all ChatGPT users and rolled out persistent Memory to free-tier users globally. With 600 million users now having access to AI that remembers their preferences across sessions, ChatGPT transforms from a transactional tool to a longitudinal digital colleague.</p>
         <div class="story-card-whyitmatters">
@@ -215,7 +223,10 @@
 
     <article class="story-card" id="story-3">
       <div class="story-card-body">
-        <span class="story-card-tag">OpenAI</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">OpenAI Releases GPT-Realtime-2 and Whisper v4 with Sub-200ms Voice Latency</h2>
         <p class="story-card-summary">OpenAI&#039;s GPT-Realtime-2 achieves sub-200ms end-to-end latency for genuinely conversational voice interaction, while Whisper v4 reduces word error rate by 31% across 20 languages and adds speaker diarization. Both are available via API immediately at $0.06 per minute.</p>
         <div class="story-card-whyitmatters">
@@ -229,7 +240,10 @@
 
     <article class="story-card" id="story-4">
       <div class="story-card-body">
-        <span class="story-card-tag">OpenAI</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">Musk v. Altman Trial Reveals OpenAI Governance History in Week 2 Testimony</h2>
         <p class="story-card-summary">The second week of testimony in Musk v. Altman surfaced internal OpenAI communications showing 2015 written agreements establishing OpenAI as permanently non-profit, plus testimony that the board received insufficient information about GPT-4 capabilities before launch.</p>
         <div class="story-card-whyitmatters">
@@ -243,7 +257,10 @@
 
     <article class="story-card" id="story-5">
       <div class="story-card-body">
-        <span class="story-card-tag">OpenAI</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">OpenAI Raises $4B at $340B Valuation, Declares Itself &#039;The Deployment Company&#039;</h2>
         <p class="story-card-summary">OpenAI closed a $4 billion secondary raise pushing 2026 fundraising past $14 billion, with CEO Sam Altman reframing OpenAI as &#039;The Deployment Company&#039; focused on enterprise integration, developer tooling, and agentic infrastructure rather than pure research.</p>
         <div class="story-card-whyitmatters">
@@ -257,7 +274,10 @@
 
     <article class="story-card" id="story-6">
       <div class="story-card-body">
-        <span class="story-card-tag">Google</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">Google Cloud Next 2026: Gemini 3.1 Flash-Lite GA at 60% Price Cut with Agent Builder</h2>
         <p class="story-card-summary">Google made Gemini 3.1 Flash-Lite generally available at $0.10 per million tokens—a 60% price reduction—and launched Agent Builder for no-code multi-step AI agents that work across Google Workspace, Salesforce, SAP, and ServiceNow without custom integration.</p>
         <div class="story-card-whyitmatters">
@@ -271,7 +291,10 @@
 
     <article class="story-card" id="story-7">
       <div class="story-card-body">
-        <span class="story-card-tag">Google</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">Google Unveils Ironwood TPU with 4.7x Training Throughput, 25% Lower Energy Cost</h2>
         <p class="story-card-summary">Google&#039;s 8th-generation Ironwood TPU delivers 4.7x improvement in AI training throughput over the previous generation, trains GPT-4-scale models 38% faster than equivalent Nvidia H100 clusters at 25% lower energy cost, and is available exclusively through Google Cloud.</p>
         <div class="story-card-whyitmatters">
@@ -285,7 +308,10 @@
 
     <article class="story-card" id="story-8">
       <div class="story-card-body">
-        <span class="story-card-tag">Google</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">DeepMind UK Research Staff Vote to Unionize in AI Industry First</h2>
         <p class="story-card-summary">A majority of DeepMind&#039;s UK research staff voted for union representation, making it the first major frontier AI lab with an organized research workforce. Key demands include project assignment governance, whistleblower protections, and transparency on dual-use research decisions.</p>
         <div class="story-card-whyitmatters">
@@ -299,7 +325,10 @@
 
     <article class="story-card" id="story-9">
       <div class="story-card-body">
-        <span class="story-card-tag">Anthropic</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">Anthropic Secures SpaceX Colossus 1 Deal, Doubles Claude Code Rate Limits</h2>
         <p class="story-card-summary">Anthropic secured dedicated training and inference capacity on SpaceX&#039;s Colossus 1 supercomputing cluster, immediately doubling Claude Code rate limits to 4,000 agentic turns per day for Pro users. The partnership also reserves primary training capacity for Claude 5.</p>
         <div class="story-card-whyitmatters">
@@ -313,7 +342,10 @@
 
     <article class="story-card" id="story-10">
       <div class="story-card-body">
-        <span class="story-card-tag">Anthropic</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">Anthropic Partners with Blackstone and Goldman Sachs for Enterprise AI Deployment</h2>
         <p class="story-card-summary">Anthropic announced strategic partnerships with Blackstone and Goldman Sachs, embedding Claude into financial analysis, due diligence, and risk assessment workflows. Both firms negotiated data residency and audit trail provisions that will become the enterprise standard.</p>
         <div class="story-card-whyitmatters">
@@ -327,7 +359,10 @@
 
     <article class="story-card" id="story-11">
       <div class="story-card-body">
-        <span class="story-card-tag">Anthropic</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">Anthropic Maps Emotions and Intentions in Claude&#039;s Neural Networks</h2>
         <p class="story-card-summary">Anthropic&#039;s interpretability research identified distinct activation patterns corresponding to frustration, curiosity, and caution that are stable across diverse prompts, plus goal representations maintained across multi-step reasoning chains—advancing AI transparency from output analysis to internal state analysis.</p>
         <div class="story-card-whyitmatters">
@@ -341,7 +376,10 @@
 
     <article class="story-card" id="story-12">
       <div class="story-card-body">
-        <span class="story-card-tag">Microsoft</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">Microsoft</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
         <h2 class="story-card-headline">Microsoft Global AI Diffusion Report: 51% of Knowledge Workers Now Use AI Weekly</h2>
         <p class="story-card-summary">Microsoft&#039;s Global AI Diffusion Report reveals AI use crossed 50% globally for the first time, with 51% of knowledge workers using AI tools weekly. The report identifies a growing AI Skills Gap between high- and low-income economies using different adoption paths.</p>
         <div class="story-card-whyitmatters">

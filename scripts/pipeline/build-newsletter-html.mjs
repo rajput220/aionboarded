@@ -17,6 +17,16 @@ const PROJECT_ROOT = path.resolve(__dirname, '../..')
 const NEWSLETTER_DIR = path.join(PROJECT_ROOT, 'public', 'newsletter')
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://aionboarded.ai'
 
+// ── Reading time estimator (220 wpm average) ──────────────
+function readingTime(item) {
+  const words = [item.content || '', item.excerpt || '', item.whyItMatters || '']
+    .join(' ')
+    .trim()
+    .split(/\s+/).length
+  const mins = Math.max(1, Math.round(words / 220))
+  return `${mins} min read`
+}
+
 // ── Build the full newsletter HTML page ───────────────────
 export function buildNewsletterHtml({
   weekNumber,
@@ -39,7 +49,10 @@ export function buildNewsletterHtml({
       (item, i) => `
     <article class="story-card" id="story-${i + 1}">
       <div class="story-card-body">
-        <span class="story-card-tag">${item.category || 'AI News'}</span>
+        <div class="story-card-meta">
+          <span class="story-card-tag">${item.category || 'AI News'}</span>
+          <span class="story-card-readtime">🕐 ${readingTime(item)}</span>
+        </div>
         <h2 class="story-card-headline">${escapeHtml(item.title)}</h2>
         <p class="story-card-summary">${escapeHtml(item.excerpt)}</p>
         ${
@@ -144,7 +157,9 @@ export function buildNewsletterHtml({
       .story-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); transition: var(--transition); display: flex; flex-direction: column; }
       .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(10,132,255,.2); }
       .story-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
-      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; width: fit-content; }
+      .story-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+      .story-card-readtime { font-size: 12px; color: var(--gray); font-weight: 500; }
       .story-card-headline { font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--dark); }
       .story-card-summary { font-size: 15px; line-height: 1.7; color: var(--dark-600); flex: 1; }
       .story-card-whyitmatters { padding: 14px 16px; background: linear-gradient(135deg, rgba(10,132,255,.04), rgba(29,185,84,.04)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: var(--dark-700); line-height: 1.6; }
