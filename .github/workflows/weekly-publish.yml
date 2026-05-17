@@ -106,30 +106,39 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          timeout: 300s
+          timeout: 30s
+          command_timeout: 20m
           script: |
             set -e
             echo "=== Deploying AI Onboarded ==="
             cd ${{ secrets.SERVER_PATH }}
             git pull origin main
-            docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build app
-            docker compose -f docker-compose.prod.yml restart nginx
-            echo "=== Deploy complete ==="
+            # Run Docker build in background so SSH session doesn't time out
+            nohup bash -c "
+              docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build app &&
+              docker compose -f docker-compose.prod.yml restart nginx &&
+              echo '[DEPLOY] Build complete' >> /tmp/aio-deploy.log
+            " >> /tmp/aio-deploy.log 2>&1 &
+            echo "Deploy started in background (PID: $!)"
+            echo "=== SSH session complete — deploy running ===" 
 
       # ── 7. Wait for server to be ready ────────────────────
       - name: Wait for server to be healthy
         run: |
-          echo "Waiting 60s for server to rebuild and restart..."
-          sleep 60
-          # Poll until the site responds
-          for i in {1..10}; do
+          echo "Waiting 3 minutes for Docker build to complete..."
+          sleep 180
+          # Poll until the site responds (up to 20 attempts × 30s = 10 more minutes)
+          for i in {1..20}; do
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.NEXT_PUBLIC_SITE_URL }}" || echo "000")
             echo "Attempt $i: HTTP $STATUS"
             if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
-              echo "Server is up!"
+              echo "✅ Server is up and healthy!"
               break
             fi
-            sleep 15
+            if [ $i -eq 20 ]; then
+              echo "⚠️ Server did not respond in time — continuing anyway (deploy may still be running)"
+            fi
+            sleep 30
           done
 
       # ── 8. Ingest news items into Payload CMS ─────────────
