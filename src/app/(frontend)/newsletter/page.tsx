@@ -11,21 +11,24 @@ export const metadata: Metadata = generateSeo({
 // Add new weeks at the TOP of this array (newest first)
 const newsletters = [
     {
-        week: 20,
-        slug: 'week-20',
-        title: 'AI Becomes the Operator',
-        subtitle: 'Week 20 AI Intelligence Briefing',
+        week: 17,
+        slug: 'week-17',
+        title: 'AI Moves from Advisor to Operator',
+        subtitle: 'Week 17 AI Intelligence Briefing',
         dateRange: 'May 17, 2026',
-        theme: 'AI Becomes the Operator',
+        theme: 'AI Moves from Advisor to Operator',
         highlights: [
-            'OpenAI DeployCo',
-            'Gemini Intelligence on Android',
+            'OpenAI Launches DeployCo',
+            'Google Gemini Intelligence',
             'Claude Mythos Cracks Apple M5',
-            'AI-Powered Mass Exploitation Thwarted',
+            'Microsoft MDASH',
+            'US Ranks 21st in AI Adoption'
         ],
         emoji: '📡',
-        htmlFile: '/newsletter/week-20.html',
+        htmlFile: '/newsletter/week-17.html',
     },
+
+
     {
         week: 16,
         slug: 'week-16',
