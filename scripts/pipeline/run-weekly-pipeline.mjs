@@ -59,8 +59,8 @@ function logError(message, err) {
 
 // ── Determine week number from current date ────────────────
 function getCurrentWeekNumber() {
-  // Week 1 = Jan 4, 2026 (first Saturday)
-  const BASE_DATE = new Date('2026-01-04T00:00:00Z')
+  // Week 1 = Jan 19, 2026
+  const BASE_DATE = new Date('2026-01-19T00:00:00Z')
   const now = new Date()
   const diffMs = now.getTime() - BASE_DATE.getTime()
   const diffWeeks = Math.floor(diffMs / (7 * 24 * 60 * 60 * 1000)) + 1

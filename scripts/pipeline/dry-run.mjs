@@ -20,9 +20,9 @@ import fs from 'fs'
 const TEST_EMAIL = process.env.AGENT_TEST_EMAIL
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://aionboarded.ai'
 
-// Week number: auto-detect from date (Week 1 = Jan 4, 2026)
+// Week number: auto-detect from date (Week 1 = Jan 19, 2026)
 function getWeekNumber() {
-  const BASE = new Date('2026-01-04T00:00:00Z')
+  const BASE = new Date('2026-01-19T00:00:00Z')
   const diff = Date.now() - BASE.getTime()
   return Math.max(1, Math.floor(diff / (7 * 24 * 60 * 60 * 1000)) + 1)
 }

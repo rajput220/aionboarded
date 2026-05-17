@@ -127,12 +127,19 @@ export function buildNewsletterHtml({
       .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
 
       /* Header */
-      .newsletter-header { background: rgba(255,255,255,.92); border-bottom: 1px solid var(--light-200); padding: 16px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
-      .header-inner { display: flex; align-items: center; justify-content: space-between; }
-      .header-logo { display: flex; align-items: center; gap: 12px; }
-      .header-logo-icon { width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px; }
-      .header-logo-text { font-weight: 700; font-size: 18px; color: var(--dark); }
+      .newsletter-header { background: rgba(255,255,255,.92); border-bottom: 1px solid var(--light-200); padding: 14px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .header-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .header-logo-icon { width: 36px; height: 36px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+      .header-logo-text { font-weight: 700; font-size: 17px; color: var(--dark); }
       .header-logo-text span { color: var(--primary); }
+      /* Site nav */
+      .site-nav { display: flex; align-items: center; gap: 4px; }
+      .site-nav a { font-size: 14px; font-weight: 500; color: var(--dark-600); padding: 6px 12px; border-radius: var(--radius-sm); transition: var(--transition); white-space: nowrap; }
+      .site-nav a:hover { background: var(--light-200); color: var(--dark); }
+      .site-nav a.active { background: linear-gradient(135deg,rgba(10,132,255,.1),rgba(29,185,84,.1)); color: var(--primary); }
+      .header-right { display: flex; align-items: center; gap: 12px; }
+      @media (max-width: 640px) { .site-nav { display: none; } }
       .header-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--gray); }
       .header-badge { background: var(--gradient-primary); color: white; padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; }
 
@@ -215,8 +222,16 @@ export function buildNewsletterHtml({
             <div class="header-logo-icon">AI</div>
             <span class="header-logo-text">AI <span>Onboarded</span></span>
           </a>
-          <div class="header-meta">
-            <span>${dateFormatted}</span>
+          <nav class="site-nav">
+            <a href="${SITE_URL}">Home</a>
+            <a href="${SITE_URL}/news">News</a>
+            <a href="${SITE_URL}/newsletter" class="active">Newsletter</a>
+            <a href="${SITE_URL}/podcast">Podcast</a>
+            <a href="${SITE_URL}/#subscribe">Subscribe</a>
+            <a href="${SITE_URL}/#contact">Contact Us</a>
+          </nav>
+          <div class="header-right">
+            <span style="font-size:13px;color:var(--gray)">${dateFormatted}</span>
             <span class="header-badge">Week ${weekNumber}</span>
           </div>
         </div>
