@@ -101,6 +101,7 @@ export const NewsItems: CollectionConfig = {
             options: [
                 { label: 'Draft', value: 'draft' },
                 { label: 'Published', value: 'published' },
+                { label: 'Archived', value: 'archived' },
             ],
             admin: { position: 'sidebar' },
         },

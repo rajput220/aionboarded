@@ -211,40 +211,34 @@ jobs:
           fi
 
           node -e "
-            import('dotenv/config').then(async () => {
-              const { Resend } = await import('resend');
-              const pg = await import('pg');
-              const fs = await import('fs');
-
-              const resend = new Resend(process.env.RESEND_API_KEY);
-              const client = new pg.default.Client({ connectionString: process.env.DATABASE_URL });
-              await client.connect();
-
-              const isDryRun = '$DRY_RUN' === 'true';
-              let subs;
-              if (isDryRun) {
-                subs = [{ email: process.env.AGENT_TEST_EMAIL, first_name: 'Sanjay' }];
+            const fs = require('fs');
+            const c = JSON.parse(fs.readFileSync('$CONTENT_FILE', 'utf8'));
+            const htmlBody = fs.readFileSync('public/newsletter/week-' + c.weekNumber + '.html', 'utf8');
+            
+            fetch('${{ secrets.NEXT_PUBLIC_SITE_URL }}/api/agent/dispatch-newsletter', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                apiKey: process.env.AGENT_API_KEY,
+                weekNumber: c.weekNumber,
+                theme: c.weekTheme,
+                subject: c.emailSubject,
+                htmlBody: htmlBody,
+                dryRun: '$DRY_RUN' === 'true'
+              })
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.success) {
+                console.log('✅ Campaign dispatched — Sent: ' + data.sent + ', Failed: ' + data.failed);
               } else {
-                const res = await client.query('SELECT email, first_name FROM subscribers WHERE confirmed = true');
-                subs = res.rows;
+                console.error('❌ Failed:', data);
+                process.exit(1);
               }
-              await client.end();
-
-              const html = fs.readFileSync('$CONTENT_FILE', 'utf8');
-              const content = JSON.parse(html);
-              let successCount = 0;
-              for (const sub of subs) {
-                const personalised = content.newsletterHtml.replace(/\{\{firstName\}\}/g, sub.first_name || 'there');
-                await resend.emails.send({
-                  from: 'AI Onboarded <newsletter@aionboarded.ai>',
-                  to: sub.email,
-                  subject: content.emailSubject,
-                  html: personalised,
-                });
-                successCount++;
-                await new Promise(r => setTimeout(r, 100));
-              }
-              console.log('Sent to ' + successCount + ' subscribers');
+            })
+            .catch(err => {
+              console.error('❌ Request error:', err);
+              process.exit(1);
             });
           "
 
