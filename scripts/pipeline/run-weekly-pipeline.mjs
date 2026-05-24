@@ -199,6 +199,8 @@ async function runPipeline() {
         weekNumber,
         theme: content.weekTheme,
         subject: content.emailSubject,
+        // Use the Claude-generated email-safe HTML (with inline styles and absolute links),
+        // NOT the full webpage HTML which is browser-only and has broken anchor (#) links in email
         htmlBody: content.newsletterHtml,
         dryRun: DRY_RUN,
       })

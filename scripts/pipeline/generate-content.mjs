@@ -72,19 +72,35 @@ Return a single valid JSON object with this EXACT schema:
   "newsletterHtml": "<complete HTML email body using the template below>"
 }
 
-For newsletterHtml, generate a complete HTML email body using this template structure:
-- Greeting: Hi {{firstName}},
-- Hero paragraph (bold theme intro)
-- "In this week's edition, we cover <theme> — highlights include:" followed by <ul> with 5 bullet points
-- A prominent CTA button: Read the Full Week ${weekNumber} Newsletter → https://aionboarded.ai/newsletter/week-${weekNumber}
-- Community section with WhatsApp (https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ) and Discord (https://discord.com/invite/SW4HZAv37) links
-- Footer: unsubscribe notice, "The AI Onboarded Team", aionboarded.ai
+For newsletterHtml, generate a complete, EMAIL-CLIENT-SAFE HTML email body. All styles MUST be inline. Use this EXACT structure:
 
-HTML email style (inline):
-- Font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
-- Max width: 600px, centered
-- Colors: primary #0A84FF, accent #1DB954
-- CTA button: background linear-gradient(135deg, #0A84FF, #1DB954), white text, border-radius 12px
+1. Header bar: AI Onboarded logo text left, "Week ${weekNumber}" badge right. Background white, border-bottom 1px solid #e2e8f0.
+
+2. Hero block: gradient background (linear-gradient(135deg, #0a84ff, #1db954)), white text. Show "📡 Weekly AI Brief · Week ${weekNumber}", the weekTheme as h1, and a 1-2 sentence intro.
+
+3. CTA button (REQUIRED, centered): Large button linking to https://aionboarded.ai/newsletter/week-${weekNumber}.html with text "Read the Full Newsletter →". Style: background: linear-gradient(135deg, #0a84ff, #1db954); color: white; padding: 14px 32px; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; display: inline-block.
+
+4. Top Stories section heading, then for each of the top 5 news items include:
+   - Story title as a CLICKABLE LINK: <a href="https://aionboarded.ai/news/SLUG" style="color:#0a84ff;font-weight:700;font-size:17px;text-decoration:none;">TITLE</a>
+   - Reading time estimate (e.g. "3 min read")
+   - 1-sentence excerpt
+   - "Why It Matters:" in green bold, followed by the whyItMatters text
+   - A "Read more →" link to https://aionboarded.ai/news/SLUG
+   Use the actual slug from the newsItems array for each story's URL.
+
+5. Second CTA button (same style as above): "View All Week ${weekNumber} Stories →" linking to https://aionboarded.ai/newsletter/week-${weekNumber}.html
+
+6. Community section: dark background (#0f172a), white text. WhatsApp link (https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ) and Discord link (https://discord.com/invite/SW4HZAv37) as styled buttons.
+
+7. Footer: dark background, small text. "© 2026 AI Onboarded" left, "Visit aionboarded.ai" right. Unsubscribe notice.
+
+HTML email rules (CRITICAL):
+- ALL CSS must be INLINE on each element (no <style> blocks, no CSS classes)
+- Font: font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+- Max width: 600px, margin: 0 auto
+- Colors: primary #0A84FF, accent #1DB954, dark #0f172a
+- Every <a href> MUST use a full absolute https:// URL — NO relative paths, NO anchor (#) links
+- Use <table> layouts for email client compatibility where needed
 
 Source document:
 ---

@@ -213,7 +213,10 @@ jobs:
           node -e "
             const fs = require('fs');
             const c = JSON.parse(fs.readFileSync('$CONTENT_FILE', 'utf8'));
-            const htmlBody = fs.readFileSync('public/newsletter/week-' + c.weekNumber + '.html', 'utf8');
+            
+            // Use the Claude-generated email-safe HTML (inline styles, absolute links)
+            // NOT the webpage HTML which has broken anchor (#) links in email clients
+            const htmlBody = c.newsletterHtml;
             
             fetch('${{ secrets.NEXT_PUBLIC_SITE_URL }}/api/agent/dispatch-newsletter', {
               method: 'POST',
