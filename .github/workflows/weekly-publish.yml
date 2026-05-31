@@ -23,6 +23,10 @@ on:
         description: 'Force specific week number (leave empty for auto-detect)'
         required: false
         default: ''
+      subject_override:
+        description: 'Override email subject line (e.g. "Part 2: Updated Week 19 Newsletter")'
+        required: false
+        default: ''
 
 jobs:
   publish:
@@ -225,7 +229,7 @@ jobs:
                 apiKey: process.env.AGENT_API_KEY,
                 weekNumber: c.weekNumber,
                 theme: c.weekTheme,
-                subject: c.emailSubject,
+                subject: '${{ github.event.inputs.subject_override }}' || c.emailSubject,
                 htmlBody: htmlBody,
                 dryRun: '$DRY_RUN' === 'true'
               })
