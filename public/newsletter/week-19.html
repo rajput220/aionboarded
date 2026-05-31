@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Enters the Capital Markets Era — Week 19 | AI Onboarded</title>
+    <meta name="description" content="The AI industry&#039;s adolescence officially ended this week. OpenAI filed for an IPO targeting up to $1 trillion, Anthropic projected its first profitable quarter " />
+    <meta property="og:title" content="AI Enters the Capital Markets Era — Week 19 | AI Onboarded" />
+    <meta property="og:description" content="The AI industry&#039;s adolescence officially ended this week. OpenAI filed for an IPO targeting up to $1 trillion, Anthropic projected its first profitable quarter " />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://aionboarded.ai/newsletter/week-19" />
+    <link rel="canonical" href="https://aionboarded.ai/newsletter/week-19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #0a84ff; --primary-dark: #0066cc; --accent: #1db954;
+        --dark: #0f172a; --dark-700: #334155; --dark-600: #475569;
+        --gray: #64748b; --gray-light: #94a3b8; --light: #f8fafc;
+        --light-200: #e2e8f0; --white: #ffffff;
+        --gradient-primary: linear-gradient(135deg, #0a84ff, #1db954);
+        --gradient-hero: linear-gradient(135deg, #0a84ff 0%, #0066cc 40%, #1db954 100%);
+        --gradient-dark: linear-gradient(135deg, #0f172a, #1e293b);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+        --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+        --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+        --transition: all .3s cubic-bezier(.4,0,.2,1);
+        --max-width: 1200px;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; font-size: 16px; }
+      a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+      a:hover { color: var(--primary-dark); }
+      .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+      /* Header */
+      .newsletter-header { background: rgba(255,255,255,.92); border-bottom: 1px solid var(--light-200); padding: 14px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .header-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .header-logo-icon { width: 36px; height: 36px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+      .header-logo-text { font-weight: 700; font-size: 17px; color: var(--dark); }
+      .header-logo-text span { color: var(--primary); }
+      /* Site nav */
+      .site-nav { display: flex; align-items: center; gap: 4px; }
+      .site-nav a { font-size: 14px; font-weight: 500; color: var(--dark-600); padding: 6px 12px; border-radius: var(--radius-sm); transition: var(--transition); white-space: nowrap; }
+      .site-nav a:hover { background: var(--light-200); color: var(--dark); }
+      .site-nav a.active { background: linear-gradient(135deg,rgba(10,132,255,.1),rgba(29,185,84,.1)); color: var(--primary); }
+      .header-right { display: flex; align-items: center; gap: 12px; }
+      @media (max-width: 640px) { .site-nav { display: none; } }
+      .header-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--gray); }
+      .header-badge { background: var(--gradient-primary); color: white; padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+
+      /* Hero */
+      .hero { background: var(--gradient-hero); padding: 80px 0; position: relative; overflow: hidden; }
+      .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(29,185,84,.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(10,132,255,.2) 0%, transparent 50%); }
+      .hero-inner { position: relative; z-index: 1; }
+      .hero-content { color: white; max-width: 720px; }
+      .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.2); }
+      .hero-title { font-size: 42px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.5px; }
+      .hero-subtitle { font-size: 18px; line-height: 1.6; opacity: .9; max-width: 600px; font-weight: 300; }
+
+      /* Section */
+      .section { padding: 64px 0; }
+      .section-header { text-align: center; margin-bottom: 48px; }
+      .section-label { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(10,132,255,.08), rgba(29,185,84,.08)); color: var(--primary); padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+      .section-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; }
+      .section-title span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+      /* Story cards */
+      .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px; }
+      .story-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); transition: var(--transition); display: flex; flex-direction: column; }
+      .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(10,132,255,.2); }
+      .story-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+      .story-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+      .story-card-readtime { font-size: 12px; color: var(--gray); font-weight: 500; }
+      .story-card-headline { font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--dark); }
+      .story-card-summary { font-size: 15px; line-height: 1.7; color: var(--dark-600); flex: 1; }
+      .story-card-whyitmatters { padding: 14px 16px; background: linear-gradient(135deg, rgba(10,132,255,.04), rgba(29,185,84,.04)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: var(--dark-700); line-height: 1.6; }
+      .story-card-whyitmatters strong { color: #17a34a; }
+      .story-source { font-size: 13px; color: var(--gray); margin-top: 4px; }
+      .story-source:hover { color: var(--primary); }
+
+      /* TOC */
+      .toc { background: var(--white); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 48px; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); }
+      .toc-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+      .toc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; list-style: none; }
+      .toc-list li a { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 14px; color: var(--dark-600); transition: var(--transition); }
+      .toc-list li a:hover { background: rgba(10,132,255,.06); color: var(--primary); }
+      .toc-list li a::before { content: "→"; color: var(--primary); font-weight: 600; }
+
+      /* What to watch */
+      .watch-next { background: var(--gradient-dark); border-radius: var(--radius-lg); padding: 40px; color: white; margin: 64px 0; }
+      .watch-next h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+      .watch-next p { font-size: 16px; line-height: 1.7; opacity: .9; }
+
+      /* Community */
+      .community { background: var(--gradient-dark); padding: 64px 0; text-align: center; }
+      .community-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 10px; }
+      .community-subtitle { font-size: 16px; color: var(--gray-light); margin-bottom: 36px; }
+      .community-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; transition: var(--transition); text-decoration: none; }
+      .btn-whatsapp { background: #25d366; color: white; }
+      .btn-whatsapp:hover { background: #20bd5a; transform: translateY(-2px); color: white; }
+      .btn-discord { background: #5865f2; color: white; }
+      .btn-discord:hover { background: #4752c4; transform: translateY(-2px); color: white; }
+      .btn-website { background: rgba(255,255,255,.1); color: white; border: 1px solid rgba(255,255,255,.2); }
+      .btn-website:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); color: white; }
+
+      /* Footer */
+      .newsletter-footer { background: var(--dark); color: var(--gray-light); padding: 48px 0 32px; }
+      .footer-bottom { border-top: 1px solid var(--dark-700); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--gray); margin-top: 32px; }
+
+      @media (max-width: 768px) {
+        .hero { padding: 48px 0; }
+        .hero-title { font-size: 28px; }
+        .stories-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header class="newsletter-header">
+      <div class="container">
+        <div class="header-inner">
+          <a href="https://aionboarded.ai" class="header-logo">
+            <div class="header-logo-icon">AI</div>
+            <span class="header-logo-text">AI <span>Onboarded</span></span>
+          </a>
+          <nav class="site-nav">
+            <a href="https://aionboarded.ai">Home</a>
+            <a href="https://aionboarded.ai/news">News</a>
+            <a href="https://aionboarded.ai/newsletter" class="active">Newsletter</a>
+            <a href="https://aionboarded.ai/podcast">Podcast</a>
+            <a href="https://aionboarded.ai/#subscribe">Subscribe</a>
+            <a href="https://aionboarded.ai/#contact">Contact Us</a>
+          </nav>
+          <div class="header-right">
+            <span style="font-size:13px;color:var(--gray)">May 31, 2026</span>
+            <span class="header-badge">Week 19</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-eyebrow">📡 Weekly AI Brief · Week 19</div>
+            <h1 class="hero-title">AI Enters the Capital Markets Era</h1>
+            <p class="hero-subtitle">The AI industry&#039;s adolescence officially ended this week. OpenAI filed for an IPO targeting up to $1 trillion, Anthropic projected its first profitable quarter on $10.9B revenue, and Google I/O redrew the competitive map with Gemini 3.5 Flash and world-model video generation. Meanwhile, AI security research found 10,000+ critical vulnerabilities in 30 days — a number that demands new mental models, not just faster patching.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="section">
+      <div class="container">
+
+        <!-- TOC -->
+        <nav class="toc">
+          <p class="toc-title">📋 This Week's Stories</p>
+          <ul class="toc-list">
+            
+      <li><a href="#story-1">OpenAI Files Confidential IPO Targeting $852B to $1 Trillion Valuation</a></li>
+
+      <li><a href="#story-2">Anthropic Projects First Profitable Quarter on $10.9B Q2 Revenue</a></li>
+
+      <li><a href="#story-3">Google I/O 2026: Gemini 3.5 Flash Delivers Frontier Intelligence at Flash Speed</a></li>
+
+      <li><a href="#story-4">Anthropic Glasswing: Claude Mythos Finds 10,000+ Critical Vulnerabilities in 30 Days</a></li>
+
+      <li><a href="#story-5">Google I/O 2026: Antigravity 2.0 and WebMCP Set Agentic Standards</a></li>
+
+      <li><a href="#story-6">EU Commission Publishes Draft High-Risk AI Classification Guidelines</a></li>
+
+      <li><a href="#story-7">OpenAI and Dell Partner to Bring Codex On-Premises for Enterprise</a></li>
+
+      <li><a href="#story-8">Microsoft and EY Launch $1 Billion AI Initiative for Enterprise Scale</a></li>
+
+      <li><a href="#story-9">OpenAI Pursues Reverse Federalism: State-by-State AI Governance Strategy</a></li>
+
+      <li><a href="#story-10">Google I/O 2026: Gemini Omni World Model Brings Multimodal Video Creation</a></li>
+
+      <li><a href="#story-11">Google Android XR Smart Glasses: Fashion Meets AI Hardware</a></li>
+
+      <li><a href="#story-12">Microsoft Build 2026 Preview: Agent 365 GA and Shadow AI Management</a></li>
+          </ul>
+        </nav>
+
+        <div class="section-header">
+          <span class="section-label">🔍 Week 19 Coverage</span>
+          <h2 class="section-title">This Week in <span>Artificial Intelligence</span></h2>
+        </div>
+
+        <div class="stories-grid">
+          
+    <article class="story-card" id="story-1">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">OpenAI Files Confidential IPO Targeting $852B to $1 Trillion Valuation</h2>
+        <p class="story-card-summary">OpenAI filed a confidential S-1 with the SEC on May 22, with Goldman Sachs and Morgan Stanley leading an offering targeting $852 billion to $1 trillion. The September 2026 debut will be the most consequential technology IPO in over a decade, subjecting AI&#039;s leading company to unprecedented public market scrutiny.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The S-1 will reveal actual AI market economics — gross margins, compute costs, customer concentration — that private investors have estimated but never verified. This benchmark will reshape how the entire AI industry is valued, financed, and governed.
+          </div>
+        <a href="https://www.cnbc.com/2026/05/20/openai-ipo-filing.html" target="_blank" rel="noopener" class="story-source">
+            📰 CNBC →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-2">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Anthropic Projects First Profitable Quarter on $10.9B Q2 Revenue</h2>
+        <p class="story-card-summary">Anthropic is on track for its first operating profit in Q2 2026, with revenue projected at $10.9 billion — more than double Q1&#039;s $4.8 billion. Claude Code surpassing $1 billion in annualized revenue within six months of launch is the primary driver, alongside enterprise security and API demand.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> First-quarter profitability in a frontier AI company validates that the economics of frontier AI are no longer purely speculative. Combined with OpenAI&#039;s IPO filing, 2026 becomes the inflection year for AI company financial transparency.
+          </div>
+        <a href="https://www.cnbc.com/2026/05/20/anthropic-revenue-explosive-growth-ipo-profitable-quarter.html" target="_blank" rel="noopener" class="story-source">
+            📰 CNBC →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-3">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Google I/O 2026: Gemini 3.5 Flash Delivers Frontier Intelligence at Flash Speed</h2>
+        <p class="story-card-summary">Google announced Gemini 3.5 Flash at I/O 2026, the first model combining frontier-class intelligence with Flash-tier speed and pricing. It outperforms Gemini 3.1 Pro on coding and agentic benchmarks while delivering output tokens 4x faster than competing frontier models.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> A frontier-class model at Flash pricing expands Gemini&#039;s addressable market immediately. For enterprise agentic workloads, eliminating the latency penalty changes which applications are practically viable.
+          </div>
+        <a href="https://blog.google/innovation-and-ai/technology/ai/google-io-2026-all-our-announcements/" target="_blank" rel="noopener" class="story-source">
+            📰 Google Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-4">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Anthropic Glasswing: Claude Mythos Finds 10,000+ Critical Vulnerabilities in 30 Days</h2>
+        <p class="story-card-summary">Anthropic&#039;s Project Glasswing reported that Claude Mythos autonomously discovered more than 10,000 high-or-critical-severity vulnerabilities in one month, including a wolfSSL exploit affecting billions of devices and a 17-year-old FreeBSD remote code execution flaw. Cloudflare reported 10x improvement in bug detection rates.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Every production system in use today was built before AI-scale vulnerability scanning existed. The appropriate response is architectural redesign, not faster patching. Security leaders should prioritize wolfSSL and FreeBSD remediation immediately.
+          </div>
+        <a href="https://www.anthropic.com/research/glasswing-initial-update" target="_blank" rel="noopener" class="story-source">
+            📰 Anthropic Research →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-5">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Google I/O 2026: Antigravity 2.0 and WebMCP Set Agentic Standards</h2>
+        <p class="story-card-summary">Google announced Antigravity 2.0 with Managed Agents — provisioning full agentic Linux environments from a single API call — and introduced WebMCP, an open standard for cross-platform tool connectivity designed to become the interoperability protocol for multi-agent systems.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The single-API-call provisioning of full agentic environments could cut infrastructure setup time from weeks to hours. WebMCP positions Google as the infrastructure layer for multi-agent systems — the deepest competitive moat announced in years.
+          </div>
+        <a href="https://cloud.google.com/blog/products/ai-machine-learning/innovations-from-google-io-26-on-google-cloud" target="_blank" rel="noopener" class="story-source">
+            📰 Google Cloud Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-6">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Governance</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">EU Commission Publishes Draft High-Risk AI Classification Guidelines</h2>
+        <p class="story-card-summary">The European Commission published draft guidelines on May 19 clarifying how AI systems are classified as high-risk under the EU AI Act, launching a public consultation open until June 23. The guidelines arrived three and a half months late but provide the compliance clarity that had frozen significant EU AI investment.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The examples provided are the most practical compliance tool published since the AI Act was finalized. Organizations can now proceed with deployment planning — though final guidelines may adjust based on consultation responses.
+          </div>
+        <a href="https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" target="_blank" rel="noopener" class="story-source">
+            📰 European Commission →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-7">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">OpenAI and Dell Partner to Bring Codex On-Premises for Enterprise</h2>
+        <p class="story-card-summary">OpenAI and Dell Technologies announced a partnership enabling Codex deployment in hybrid and on-premises enterprise environments, connecting Codex agents to Dell&#039;s AI Data Platform. The move addresses data residency and security requirements that have been the primary barrier to enterprise AI coding adoption.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Organizations that deferred Codex evaluation due to data residency concerns now have the primary technical objection removed. Schedule a Dell-OpenAI evaluation for Q3 2026 deployment planning.
+          </div>
+        <a href="https://openai.com/index/dell-codex-enterprise-partnership/" target="_blank" rel="noopener" class="story-source">
+            📰 OpenAI Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-8">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Microsoft</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Microsoft and EY Launch $1 Billion AI Initiative for Enterprise Scale</h2>
+        <p class="story-card-summary">Microsoft and EY announced a $1 billion, five-year global initiative to help organizations move AI from pilot projects into production at enterprise scale. EY serves as &#039;Client Zero&#039; to validate the approach on its own operations before external deployment.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The $1 billion commitment confirms that enterprise AI&#039;s constraint is implementation capacity, not technology availability. This mirrors the ERP implementation market of the 1990s — software was available, but 80% of value came from services.
+          </div>
+        <a href="https://news.microsoft.com/source/2026/05/21/ey-and-microsoft-announce-global-initiative-to-help-clients-scale-ai-enterprisewide-value-creation-and-move-beyond-experimentation/" target="_blank" rel="noopener" class="story-source">
+            📰 Microsoft News →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-9">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Governance</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">OpenAI Pursues Reverse Federalism: State-by-State AI Governance Strategy</h2>
+        <p class="story-card-summary">OpenAI&#039;s Chris Lehane outlined a &#039;reverse federalism&#039; strategy on May 20, describing efforts to align AI safety legislation across California, New York, and Illinois. The goal is creating a de facto national regulatory baseline from consistent state laws rather than waiting for federal action.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> AI governance professionals should track the Illinois AI safety bill closely. It is the third leg of what may become the de facto US national AI governance framework, and its audit requirements could set enterprise AI procurement standards.
+          </div>
+        <a href="https://openaiglobalaffairs.substack.com/p/reverse-federalism-for-ai" target="_blank" rel="noopener" class="story-source">
+            📰 OpenAI Global Affairs →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-10">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Google I/O 2026: Gemini Omni World Model Brings Multimodal Video Creation</h2>
+        <p class="story-card-summary">Google unveiled Gemini Omni at I/O 2026, a model series accepting image, audio, video, and text input and outputting video grounded in real-world knowledge. It represents the first deployment of a &#039;world model&#039; architecture that understands physical context and generates editable, factually accurate video.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The gap between AI-generated content and professional media production narrows significantly. Content creators should explore Gemini Omni for use cases where factual accuracy in video matters: product demonstrations, educational content, technical documentation.
+          </div>
+        <a href="https://developers.googleblog.com/all-the-news-from-the-google-io-2026-developer-keynote/" target="_blank" rel="noopener" class="story-source">
+            📰 Google Developers Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-11">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Google Android XR Smart Glasses: Fashion Meets AI Hardware</h2>
+        <p class="story-card-summary">Google unveiled Android XR smart glasses at I/O 2026 in partnership with Samsung, Gentle Monster, and Warby Parker. The AI-native wearables run a dedicated AI OS with Gemini integration, marking Google&#039;s recognition that hardware adoption depends on form factor acceptability, not just capability.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Enterprise mobility professionals should track Android XR for workplace applications: hands-free AI assistance for field service, manufacturing, healthcare, and logistics becomes viable once a consumer-grade wearable platform is available at scale.
+          </div>
+        <a href="https://9to5google.com/2026/05/19/google-io-2026-news/" target="_blank" rel="noopener" class="story-source">
+            📰 9to5Google →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-12">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Microsoft</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Microsoft Build 2026 Preview: Agent 365 GA and Shadow AI Management</h2>
+        <p class="story-card-summary">Microsoft Build 2026 approaches its June 2-3 date in San Francisco with Agent 365 reaching general availability and new shadow AI management capabilities in preview. The San Francisco location signals Microsoft&#039;s positioning in the AI startup ecosystem.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Enterprise IT leaders should prioritize evaluating Agent 365 GA capabilities. The shadow AI discovery tools address an immediate governance gap that most organizations have not formally assessed — before you govern AI agents, you must count them.
+          </div>
+        <a href="https://windowsnews.ai/article/microsoft-build-2026-in-san-francisco-ai-agents-trust-and-developer-platform-shift.418934" target="_blank" rel="noopener" class="story-source">
+            📰 Windows News →
+          </a>
+      </div>
+    </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What to Watch -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="watch-next">
+          <h2>🔭 What to Watch Next Week</h2>
+          <p>Microsoft Build 2026 kicks off June 2-3 in San Francisco with Agent 365 going GA and shadow AI management tools in preview. Watch for OpenAI&#039;s S-1 to become public in late July — the most consequential transparency event in AI history. The Illinois AI safety bill vote could establish the third pillar of US state-level AI governance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="community">
+      <div class="container">
+        <h2 class="community-title">Join the AI Onboarded Community</h2>
+        <p class="community-subtitle">Connect with 150+ AI practitioners sharing strategic insights and staying ahead of the curve.</p>
+        <div class="community-buttons">
+          <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" class="btn btn-whatsapp">💬 WhatsApp Group</a>
+          <a href="https://discord.com/invite/SW4HZAv37" class="btn btn-discord">🎮 Discord Server</a>
+          <a href="https://aionboarded.ai" class="btn btn-website">🌐 Visit Website</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="newsletter-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2026 AI Onboarded. All rights reserved.</span>
+          <a href="https://aionboarded.ai/newsletter" style="color: var(--gray-light);">Newsletter Archive</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
