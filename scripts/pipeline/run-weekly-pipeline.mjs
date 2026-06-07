@@ -109,6 +109,28 @@ async function runPipeline() {
     const doc = await fetchLatestNewsDocument()
     docText = doc.text
     log(`✅ Fetched: "${doc.fileName}" (${doc.text.length} chars)`)
+    log(`   Modified: ${doc.modifiedTime}`)
+
+    // ── Staleness guard ──────────────────────────────────────
+    // Fail fast if the document is older than 5 days.
+    // This prevents publishing stale news when the source file
+    // hasn't been uploaded to Google Drive for the current week.
+    const docAge = Date.now() - new Date(doc.modifiedTime).getTime()
+    const docAgeDays = docAge / (1000 * 60 * 60 * 24)
+    if (docAgeDays > 5) {
+      logError(
+        'Stale document detected',
+        new Error(
+          `The most recent file "${doc.fileName}" was last modified ${docAgeDays.toFixed(1)} days ago (${doc.modifiedTime}). ` +
+          'Please upload this week\'s news document to Google Drive before running the pipeline. ' +
+          'To override this check and use the old document anyway, set ALLOW_STALE_DOC=true.'
+        )
+      )
+      if (process.env.ALLOW_STALE_DOC !== 'true') {
+        process.exit(1)
+      }
+      log('⚠️  ALLOW_STALE_DOC=true — continuing with stale document')
+    }
   } catch (err) {
     logError('Google Drive fetch failed', err)
     process.exit(1)

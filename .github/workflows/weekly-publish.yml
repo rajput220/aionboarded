@@ -24,9 +24,15 @@ on:
         required: false
         default: ''
       subject_override:
-        description: 'Override email subject line (e.g. "Part 2: Updated Week 19 Newsletter")'
+        description: 'Override email subject line (e.g. "Part 2: Updated Week 20 Newsletter")'
         required: false
         default: ''
+      allow_stale_doc:
+        description: 'Allow document older than 5 days (use for reruns/Part 2 when no new file uploaded yet)'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
 
 jobs:
   publish:
@@ -81,6 +87,7 @@ jobs:
           AGENT_TEST_EMAIL: ${{ secrets.AGENT_TEST_EMAIL }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ALLOW_STALE_DOC: ${{ github.event.inputs.allow_stale_doc || 'false' }}
         run: |
           mkdir -p tmp-pipeline
 
