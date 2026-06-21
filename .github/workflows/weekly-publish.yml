@@ -123,6 +123,7 @@ jobs:
             set -e
             echo "=== Deploying AI Onboarded ==="
             cd ${{ secrets.SERVER_PATH }}
+            # Pull AFTER the pipeline has committed the newsletter HTML
             git pull origin main
             # Run Docker build in background so SSH session doesn't time out
             nohup bash -c "
@@ -136,18 +137,24 @@ jobs:
       # ── 7. Wait for server to be ready ────────────────────
       - name: Wait for server to be healthy
         run: |
+          # Get the week number from pipeline output
+          CONTENT_FILE=$(ls tmp-pipeline/*.json 2>/dev/null | head -1)
+          WEEK=$(node -e "const c=JSON.parse(require('fs').readFileSync('$CONTENT_FILE','utf8')); console.log(c.weekNumber)" 2>/dev/null || echo "")
+          NEWSLETTER_URL="${{ secrets.NEXT_PUBLIC_SITE_URL }}/newsletter/week-${WEEK}.html"
           echo "Waiting 3 minutes for Docker build to complete..."
           sleep 180
-          # Poll until the site responds (up to 20 attempts × 30s = 10 more minutes)
+          # Poll until the newsletter HTML itself responds with 200
+          echo "Checking: $NEWSLETTER_URL"
           for i in {1..20}; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.NEXT_PUBLIC_SITE_URL }}" || echo "000")
-            echo "Attempt $i: HTTP $STATUS"
-            if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
-              echo "✅ Server is up and healthy!"
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${NEWSLETTER_URL}" || echo "000")
+            echo "Attempt $i: HTTP $STATUS — ${NEWSLETTER_URL}"
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ Newsletter week-${WEEK}.html is live!"
               break
             fi
             if [ $i -eq 20 ]; then
-              echo "⚠️ Server did not respond in time — continuing anyway (deploy may still be running)"
+              echo "❌ Newsletter HTML did not become available — deploy may have failed"
+              exit 1
             fi
             sleep 30
           done
