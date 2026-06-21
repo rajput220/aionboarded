@@ -37,32 +37,36 @@ function getAuthClient() {
   })
 }
 
-// ── Find latest .docx in folder ───────────────────────────
+// ── Find latest .docx OR Google Doc in folder ────────────
 export async function findLatestDocx() {
   const auth = getAuthClient()
   const drive = google.drive({ version: 'v3', auth })
 
-  console.log(`[Drive] Searching folder ${DRIVE_FOLDER_ID} for latest .docx...`)
+  console.log(`[Drive] Searching folder ${DRIVE_FOLDER_ID} for latest document...`)
 
+  // Search for both .docx files AND native Google Docs
   const res = await drive.files.list({
-    q: `'${DRIVE_FOLDER_ID}' in parents and mimeType='application/vnd.openxmlformats-officedocument.wordprocessingml.document' and trashed=false`,
+    q: `'${DRIVE_FOLDER_ID}' in parents and (
+      mimeType='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      or mimeType='application/vnd.google-apps.document'
+    ) and trashed=false`,
     orderBy: 'modifiedTime desc',
     pageSize: 5,
-    fields: 'files(id,name,modifiedTime)',
+    fields: 'files(id,name,mimeType,modifiedTime)',
   })
 
   const files = res.data.files || []
   if (files.length === 0) {
-    throw new Error(`No .docx files found in Google Drive folder ${DRIVE_FOLDER_ID}`)
+    throw new Error(`No documents found in Google Drive folder ${DRIVE_FOLDER_ID}`)
   }
 
   const latest = files[0]
-  console.log(`[Drive] Found: "${latest.name}" (modified: ${latest.modifiedTime})`)
+  console.log(`[Drive] Found: "${latest.name}" (type: ${latest.mimeType}, modified: ${latest.modifiedTime})`)
   return latest
 }
 
-// ── Download file ──────────────────────────────────────────
-export async function downloadFile(fileId, fileName) {
+// ── Download file (or export Google Doc as docx) ──────────
+export async function downloadFile(fileId, fileName, mimeType) {
   const auth = getAuthClient()
   const drive = google.drive({ version: 'v3', auth })
 
@@ -70,15 +74,28 @@ export async function downloadFile(fileId, fileName) {
     fs.mkdirSync(DOWNLOAD_DIR, { recursive: true })
   }
 
-  const destPath = path.join(DOWNLOAD_DIR, fileName)
+  // Ensure local filename always ends in .docx
+  const safeName = fileName.endsWith('.docx') ? fileName : `${fileName}.docx`
+  const destPath = path.join(DOWNLOAD_DIR, safeName)
   const dest = fs.createWriteStream(destPath)
 
   console.log(`[Drive] Downloading to ${destPath}...`)
 
-  const response = await drive.files.get(
-    { fileId, alt: 'media' },
-    { responseType: 'stream' }
-  )
+  let response
+  if (mimeType === 'application/vnd.google-apps.document') {
+    // Export native Google Doc as .docx
+    console.log('[Drive] Exporting Google Doc as .docx...')
+    response = await drive.files.export(
+      { fileId, mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
+      { responseType: 'stream' }
+    )
+  } else {
+    // Download .docx directly
+    response = await drive.files.get(
+      { fileId, alt: 'media' },
+      { responseType: 'stream' }
+    )
+  }
 
   await new Promise((resolve, reject) => {
     response.data
@@ -108,7 +125,7 @@ export async function parseDocx(filePath) {
 // ── Main export: fetch latest doc and return text ──────────
 export async function fetchLatestNewsDocument() {
   const file = await findLatestDocx()
-  const filePath = await downloadFile(file.id, file.name)
+  const filePath = await downloadFile(file.id, file.name, file.mimeType)
   const text = await parseDocx(filePath)
 
   return {
