@@ -342,9 +342,17 @@ export function updateArchivePage(weekNumber, weekTheme, highlights, publishDate
   })
 
   // Build the highlights array string
+  // Sanitize: strip single-line comments (//) and newlines that would break the string literal
   const highlightsStr = (highlights || [])
     .slice(0, 4)
-    .map(h => `            '${String(h).replace(/'/g, "\\'")}',`)
+    .map(h => {
+      const safe = String(h)
+        .replace(/\/\/.*/g, '')   // strip // comments
+        .replace(/[\r\n]+/g, ' ') // collapse newlines to space
+        .replace(/'/g, "\\'")     // escape single quotes
+        .trim()
+      return `            '${safe}',`
+    })
     .join('\n')
 
   const newEntry = `    {
@@ -361,19 +369,16 @@ ${highlightsStr}
         htmlFile: '/newsletter/week-${weekNumber}.html',
     },\n`
 
-  // Insert after "const newsletters = [" line
-  const updated = content.replace(
-    /(\/\/ Add new weeks at the TOP.*?\n)(const newsletters = \[\n)/s,
-    `$1$2${newEntry}`,
-  )
-
-  if (updated === content) {
-    // Fallback: insert after the array opening
-    const fallback = content.replace('const newsletters = [\n', `const newsletters = [\n${newEntry}`)
-    fs.writeFileSync(pagePath, fallback, 'utf-8')
-  } else {
-    fs.writeFileSync(pagePath, updated, 'utf-8')
+  // Insert immediately after the "const newsletters = [" opening line
+  // Use a fixed-string replacement (not regex) to avoid any comment/special-char issues
+  const MARKER = 'const newsletters = [\n'
+  if (!content.includes(MARKER)) {
+    console.warn('[Builder] Could not find newsletters array marker — skipping archive update')
+    return
   }
+
+  const updated = content.replace(MARKER, `${MARKER}${newEntry}`)
+  fs.writeFileSync(pagePath, updated, 'utf-8')
 
   console.log(`[Builder] newsletter/page.tsx updated with Week ${weekNumber}: "${weekTheme}"`)
 }

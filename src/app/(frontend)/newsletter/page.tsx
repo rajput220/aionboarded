@@ -35,8 +35,7 @@ const newsletters = [
         theme: 'Emergency Controls Meet Trillion-Dollar Ambitions',
         highlights: [
             'Anthropic Claude Fable 5 & Mythos 5 Recalled',
-            'OpenAI Files // Add new weeks at the TOP of this array (newest first)
-T+ IPO Amid Legal Storm',
+            'OpenAI T+ IPO Amid Legal Storm',
             'Visa Enables AI Autonomous Payments',
             'Munich Court Rules Google Liable for AI Hallucinations',
         ],
