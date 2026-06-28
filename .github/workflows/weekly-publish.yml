@@ -209,6 +209,7 @@ jobs:
 
       # ── 10. Send newsletter email ─────────────────────────
       - name: Send newsletter email to subscribers
+        if: github.event.inputs.skip_email != 'true'
         env:
           AGENT_API_KEY: ${{ secrets.AGENT_API_KEY }}
           NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
