@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Platform Wars Begin — Week 25 | AI Onboarded</title>
+    <meta name="description" content="OpenAI launched its three-tier GPT-5.6 family while SpaceXAI countered with Grok 4.5 at half the price. Microsoft quietly started replacing its AI partners with" />
+    <meta property="og:title" content="The Platform Wars Begin — Week 25 | AI Onboarded" />
+    <meta property="og:description" content="OpenAI launched its three-tier GPT-5.6 family while SpaceXAI countered with Grok 4.5 at half the price. Microsoft quietly started replacing its AI partners with" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://aionboarded.ai/newsletter/week-25" />
+    <link rel="canonical" href="https://aionboarded.ai/newsletter/week-25" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #0a84ff; --primary-dark: #0066cc; --accent: #1db954;
+        --dark: #0f172a; --dark-700: #334155; --dark-600: #475569;
+        --gray: #64748b; --gray-light: #94a3b8; --light: #f8fafc;
+        --light-200: #e2e8f0; --white: #ffffff;
+        --gradient-primary: linear-gradient(135deg, #0a84ff, #1db954);
+        --gradient-hero: linear-gradient(135deg, #0a84ff 0%, #0066cc 40%, #1db954 100%);
+        --gradient-dark: linear-gradient(135deg, #0f172a, #1e293b);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+        --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+        --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+        --transition: all .3s cubic-bezier(.4,0,.2,1);
+        --max-width: 1200px;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; font-size: 16px; }
+      a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+      a:hover { color: var(--primary-dark); }
+      .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+      /* Header */
+      .newsletter-header { background: rgba(255,255,255,.92); border-bottom: 1px solid var(--light-200); padding: 14px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .header-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .header-logo-icon { width: 36px; height: 36px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+      .header-logo-text { font-weight: 700; font-size: 17px; color: var(--dark); }
+      .header-logo-text span { color: var(--primary); }
+      /* Site nav */
+      .site-nav { display: flex; align-items: center; gap: 4px; }
+      .site-nav a { font-size: 14px; font-weight: 500; color: var(--dark-600); padding: 6px 12px; border-radius: var(--radius-sm); transition: var(--transition); white-space: nowrap; }
+      .site-nav a:hover { background: var(--light-200); color: var(--dark); }
+      .site-nav a.active { background: linear-gradient(135deg,rgba(10,132,255,.1),rgba(29,185,84,.1)); color: var(--primary); }
+      .header-right { display: flex; align-items: center; gap: 12px; }
+      @media (max-width: 640px) { .site-nav { display: none; } }
+      .header-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--gray); }
+      .header-badge { background: var(--gradient-primary); color: white; padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+
+      /* Hero */
+      .hero { background: var(--gradient-hero); padding: 80px 0; position: relative; overflow: hidden; }
+      .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(29,185,84,.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(10,132,255,.2) 0%, transparent 50%); }
+      .hero-inner { position: relative; z-index: 1; }
+      .hero-content { color: white; max-width: 720px; }
+      .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.2); }
+      .hero-title { font-size: 42px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.5px; }
+      .hero-subtitle { font-size: 18px; line-height: 1.6; opacity: .9; max-width: 600px; font-weight: 300; }
+
+      /* Section */
+      .section { padding: 64px 0; }
+      .section-header { text-align: center; margin-bottom: 48px; }
+      .section-label { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(10,132,255,.08), rgba(29,185,84,.08)); color: var(--primary); padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+      .section-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; }
+      .section-title span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+      /* Story cards */
+      .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px; }
+      .story-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); transition: var(--transition); display: flex; flex-direction: column; }
+      .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(10,132,255,.2); }
+      .story-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+      .story-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+      .story-card-readtime { font-size: 12px; color: var(--gray); font-weight: 500; }
+      .story-card-headline { font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--dark); }
+      .story-card-summary { font-size: 15px; line-height: 1.7; color: var(--dark-600); flex: 1; }
+      .story-card-whyitmatters { padding: 14px 16px; background: linear-gradient(135deg, rgba(10,132,255,.04), rgba(29,185,84,.04)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: var(--dark-700); line-height: 1.6; }
+      .story-card-whyitmatters strong { color: #17a34a; }
+      .story-source { font-size: 13px; color: var(--gray); margin-top: 4px; }
+      .story-source:hover { color: var(--primary); }
+
+      /* TOC */
+      .toc { background: var(--white); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 48px; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); }
+      .toc-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+      .toc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; list-style: none; }
+      .toc-list li a { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 14px; color: var(--dark-600); transition: var(--transition); }
+      .toc-list li a:hover { background: rgba(10,132,255,.06); color: var(--primary); }
+      .toc-list li a::before { content: "→"; color: var(--primary); font-weight: 600; }
+
+      /* What to watch */
+      .watch-next { background: var(--gradient-dark); border-radius: var(--radius-lg); padding: 40px; color: white; margin: 64px 0; }
+      .watch-next h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+      .watch-next p { font-size: 16px; line-height: 1.7; opacity: .9; }
+
+      /* Community */
+      .community { background: var(--gradient-dark); padding: 64px 0; text-align: center; }
+      .community-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 10px; }
+      .community-subtitle { font-size: 16px; color: var(--gray-light); margin-bottom: 36px; }
+      .community-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; transition: var(--transition); text-decoration: none; }
+      .btn-whatsapp { background: #25d366; color: white; }
+      .btn-whatsapp:hover { background: #20bd5a; transform: translateY(-2px); color: white; }
+      .btn-discord { background: #5865f2; color: white; }
+      .btn-discord:hover { background: #4752c4; transform: translateY(-2px); color: white; }
+      .btn-website { background: rgba(255,255,255,.1); color: white; border: 1px solid rgba(255,255,255,.2); }
+      .btn-website:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); color: white; }
+
+      /* Footer */
+      .newsletter-footer { background: var(--dark); color: var(--gray-light); padding: 48px 0 32px; }
+      .footer-bottom { border-top: 1px solid var(--dark-700); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--gray); margin-top: 32px; }
+
+      @media (max-width: 768px) {
+        .hero { padding: 48px 0; }
+        .hero-title { font-size: 28px; }
+        .stories-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header class="newsletter-header">
+      <div class="container">
+        <div class="header-inner">
+          <a href="https://aionboarded.ai" class="header-logo">
+            <div class="header-logo-icon">AI</div>
+            <span class="header-logo-text">AI <span>Onboarded</span></span>
+          </a>
+          <nav class="site-nav">
+            <a href="https://aionboarded.ai">Home</a>
+            <a href="https://aionboarded.ai/news">News</a>
+            <a href="https://aionboarded.ai/newsletter" class="active">Newsletter</a>
+            <a href="https://aionboarded.ai/podcast">Podcast</a>
+            <a href="https://aionboarded.ai/#subscribe">Subscribe</a>
+            <a href="https://aionboarded.ai/#contact">Contact Us</a>
+          </nav>
+          <div class="header-right">
+            <span style="font-size:13px;color:var(--gray)">July 12, 2026</span>
+            <span class="header-badge">Week 25</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-eyebrow">📡 Weekly AI Brief · Week 25</div>
+            <h1 class="hero-title">The Platform Wars Begin</h1>
+            <p class="hero-subtitle">OpenAI launched its three-tier GPT-5.6 family while SpaceXAI countered with Grok 4.5 at half the price. Microsoft quietly started replacing its AI partners with in-house models. And Illinois just passed the first comprehensive US state AI safety law. The platform wars are officially underway.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="section">
+      <div class="container">
+
+        <!-- TOC -->
+        <nav class="toc">
+          <p class="toc-title">📋 This Week's Stories</p>
+          <ul class="toc-list">
+            
+      <li><a href="#story-1">GPT-5.6 Sol, Terra &amp; Luna Launch Globally After Government Review</a></li>
+
+      <li><a href="#story-2">SpaceXAI and Cursor Release Grok 4.5 at $2/$6 Per Million Tokens</a></li>
+
+      <li><a href="#story-3">Microsoft Replaces OpenAI and Anthropic Models with MAI in Office Apps</a></li>
+
+      <li><a href="#story-4">Illinois Signs First Comprehensive US State AI Safety Law</a></li>
+
+      <li><a href="#story-5">SK Hynix Lists on Nasdaq for $26.5 Billion—Largest Foreign Tech IPO Ever</a></li>
+
+      <li><a href="#story-6">OpenAI GPT-Live Brings Full-Duplex Voice to ChatGPT</a></li>
+
+      <li><a href="#story-7">ChatGPT Work Superapp Launches as Atlas Browser Retires</a></li>
+
+      <li><a href="#story-8">Google and Microsoft Back ARD Protocol to Counter AI Superapps</a></li>
+
+      <li><a href="#story-9">Claude Fable 5 Usage Caps End—Model Moves to Credits-Only Pricing</a></li>
+
+      <li><a href="#story-10">Gemini 3.5 Pro Enters Limited Enterprise Preview—GA Date Still Unknown</a></li>
+
+      <li><a href="#story-11">TypeScript 7.0 Ships with 8-12x Faster Go-Native Compiler</a></li>
+
+      <li><a href="#story-12">UN Global AI Governance Dialogue Opens in Geneva with 169 Countries</a></li>
+          </ul>
+        </nav>
+
+        <div class="section-header">
+          <span class="section-label">🔍 Week 25 Coverage</span>
+          <h2 class="section-title">This Week in <span>Artificial Intelligence</span></h2>
+        </div>
+
+        <div class="stories-grid">
+          
+    <article class="story-card" id="story-1">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">GPT-5.6 Sol, Terra &amp; Luna Launch Globally After Government Review</h2>
+        <p class="story-card-summary">OpenAI released its GPT-5.6 family worldwide on July 9, featuring three tiered models—Sol for flagship reasoning, Terra for everyday work, and Luna for high-volume tasks. The launch followed a government-requested security review, establishing a new precedent for frontier AI releases.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Three-tier pricing lets organizations cut AI costs by 40-60% by routing tasks intentionally. The government security review establishes a new template that will affect every frontier model launch going forward.
+          </div>
+        <a href="https://openai.com/index/previewing-gpt-5-6-sol/" target="_blank" rel="noopener" class="story-source">
+            📰 OpenAI →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-2">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Industry</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">SpaceXAI and Cursor Release Grok 4.5 at $2/$6 Per Million Tokens</h2>
+        <p class="story-card-summary">SpaceXAI launched Grok 4.5 on July 8 in partnership with Cursor, pricing it at $2/$6 per million tokens—dramatically undercutting rivals. The model uses 60% fewer output tokens on complex coding tasks and outperforms Fable 5 on real-world software engineering benchmarks.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> At $2/$6 per million tokens with 60% token efficiency gains, Grok 4.5 represents the most aggressive price-performance entry in the frontier model market—forcing competitors to justify their pricing.
+          </div>
+        <a href="https://techcrunch.com/2026/07/08/spacexai-releases-grok-4-5-which-elon-describes-as-an-opus-class-model/" target="_blank" rel="noopener" class="story-source">
+            📰 TechCrunch →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-3">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Microsoft</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Microsoft Replaces OpenAI and Anthropic Models with MAI in Office Apps</h2>
+        <p class="story-card-summary">Bloomberg confirmed Microsoft is quietly routing tens of thousands of weekly AI prompts in Excel and Outlook through its own MAI models—reducing dependence on OpenAI and Anthropic. AI chief Mustafa Suleiman stated the goal is to &#039;reduce and ultimately eliminate&#039; partner spending.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Microsoft—the world&#039;s most committed AI investor—is building its own models to replace its partners. If Microsoft sees vendor concentration as a risk worth billions to eliminate, every enterprise should evaluate their own AI vendor dependencies.
+          </div>
+        <a href="https://www.bloomberg.com/news/articles/2026-07-07/microsoft-replaces-openai-anthropic-with-own-ai-in-some-apps" target="_blank" rel="noopener" class="story-source">
+            📰 Bloomberg →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-4">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Governance</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Illinois Signs First Comprehensive US State AI Safety Law</h2>
+        <p class="story-card-summary">Governor Pritzker signed the AI Safety Measures Act on July 6, requiring independent audits of large AI systems, mandatory incident reporting, and whistleblower protections with penalties up to $3 million. The near-unanimous passage signals a legislative blueprint other states will follow.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The first comprehensive US state AI safety law creates concrete requirements—audits, incident reporting, whistleblower protections—that will likely spread to other states. Organizations have 18 months to build compliance programs before enforcement begins.
+          </div>
+        <a href="https://capitolnewsillinois.com/news/pritzker-signs-landmark-ai-regulation-bill-that-aims-to-mitigate-risks/" target="_blank" rel="noopener" class="story-source">
+            📰 Capitol News Illinois →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-5">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Industry</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">SK Hynix Lists on Nasdaq for $26.5 Billion—Largest Foreign Tech IPO Ever</h2>
+        <p class="story-card-summary">South Korean chip giant SK Hynix raised $26.5 billion in its Nasdaq listing on July 10—the largest foreign tech IPO in US history. The company controls nearly 60% of the global High-Bandwidth Memory market, the specialized chips that power every AI server.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Institutional capital is betting that hardware scarcity—not software—is the defining constraint of AI&#039;s next decade. Organizations doing AI cost modeling should build in hardware supply risk factors.
+          </div>
+        <a href="https://www.nasdaq.com/newsroom/global-innovation-meets-global-capital-sk-hynix-lists-on-nasdaq" target="_blank" rel="noopener" class="story-source">
+            📰 Nasdaq →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-6">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">OpenAI GPT-Live Brings Full-Duplex Voice to ChatGPT</h2>
+        <p class="story-card-summary">OpenAI launched GPT-Live on July 8, replacing turn-based voice with native full-duplex architecture. ChatGPT can now listen and speak simultaneously—handling interruptions naturally and filtering background noise in real time.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Full-duplex voice transforms AI from a turn-based tool into a natural conversational partner—opening new use cases in customer service, field work, and accessibility that were not practical before.
+          </div>
+        <a href="https://venturebeat.com/technology/openai-launches-gpt-live-a-full-duplex-voice-upgrade-that-lets-chatgpt-talk-more-like-a-person/" target="_blank" rel="noopener" class="story-source">
+            📰 VentureBeat →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-7">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">ChatGPT Work Superapp Launches as Atlas Browser Retires</h2>
+        <p class="story-card-summary">OpenAI launched ChatGPT Work on July 9, consolidating ChatGPT, Codex, and browser capabilities into a single desktop superapp. The standalone Atlas browser will shut down August 9—a sign OpenAI is betting everything on the unified workspace strategy.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The choice of primary AI workspace will become a significant productivity and vendor-lock decision in 2026. OpenAI is betting that whoever controls the unified AI environment controls enterprise AI adoption.
+          </div>
+        <a href="https://thenextweb.com/news/openai-chatgpt-atlas-browser-shutdown-superapp" target="_blank" rel="noopener" class="story-source">
+            📰 The Next Web →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-8">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Industry</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Google and Microsoft Back ARD Protocol to Counter AI Superapps</h2>
+        <p class="story-card-summary">Google, Microsoft, Salesforce, Snowflake, and ServiceNow have backed the Agentic Resource Discovery (ARD) protocol—a new standard designed to make AI models interchangeable components inside existing enterprise applications, countering the superapp strategies of OpenAI and Anthropic.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The ARD vs. superapp battle will determine whether AI labs capture enterprise value or traditional software vendors do. Understanding this divide is essential for navigating AI procurement and architecture decisions.
+          </div>
+        <a href="https://finance.biggo.com/news/c5fda16c-8d1a-4e9c-80b3-450f1be7a987" target="_blank" rel="noopener" class="story-source">
+            📰 Finance BigGo →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-9">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Claude Fable 5 Usage Caps End—Model Moves to Credits-Only Pricing</h2>
+        <p class="story-card-summary">The temporary 50% weekly usage cap on Claude Fable 5 expired July 7. From July 8, all Fable 5 access requires usage credits at $10/$50 per million tokens. Claude Sonnet 5 remains the default at $2-$3 per million tokens for most use cases.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> With Fable 5 now at $10/$50 per million tokens credits-only, organizations must audit which workflows genuinely require its capabilities versus Sonnet 5 at a fraction of the cost.
+          </div>
+        <a href="https://www.saasrise.com/news/anthropic-restores-claude-fable-5-with-temporary-usage-caps-after-us-export-control-lift-d13330bc-eb6d-4e68-ba41-e9633adbb3be" target="_blank" rel="noopener" class="story-source">
+            📰 SaasRise →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-10">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Gemini 3.5 Pro Enters Limited Enterprise Preview—GA Date Still Unknown</h2>
+        <p class="story-card-summary">Google&#039;s Gemini 3.5 Pro entered limited enterprise preview on Vertex AI this week, but without a confirmed general availability date—having missed two self-imposed public launch deadlines as GPT-5.6 and Grok 4.5 launched with confirmed access.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Model availability timelines are unpredictable across every vendor. Organizations should build model-agnostic architectures and maintain fallback options rather than betting on any single release date.
+          </div>
+        <a href="https://www.theneuron.ai/explainer-articles/around-the-horn-digest-everything-that-happened-in-ai-today-monday-july-6-2026/" target="_blank" rel="noopener" class="story-source">
+            📰 The Neuron →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-11">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Microsoft</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">TypeScript 7.0 Ships with 8-12x Faster Go-Native Compiler</h2>
+        <p class="story-card-summary">Microsoft announced TypeScript 7.0 general availability on July 8, featuring a complete native rewrite of its compiler in Go. Full-build speedups of 8 to 12 times faster mean a 60-second build now takes 5-7 seconds—particularly valuable for AI-assisted coding workflows.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> Faster compilation means faster feedback loops when building AI systems in TypeScript. The 8-12x speedup translates directly to more iterations per hour during AI-assisted development.
+          </div>
+        <a href="https://www.digitalapplied.com/blog/typescript-7-0-ga-native-compiler-migration-playbook-2026" target="_blank" rel="noopener" class="story-source">
+            📰 Digital Applied →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-12">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Governance</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">UN Global AI Governance Dialogue Opens in Geneva with 169 Countries</h2>
+        <p class="story-card-summary">The inaugural UN Global Dialogue on AI Governance opened in Geneva on July 6, bringing together 169 countries—the largest international AI governance gathering to date. Key themes include sovereign AI capacity, compute access equity, and shared safety standards for frontier models.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> International AI policy is accelerating. Organizations operating globally must now map emerging AI governance requirements across multiple jurisdictions—the EU AI Act, Illinois law, and UN process represent a converging wave of compliance requirements.
+          </div>
+        <a href="https://www.promethean-ai.com/post/the-week-in-ai-news-july-6-10-2026" target="_blank" rel="noopener" class="story-source">
+            📰 Promethean AI →
+          </a>
+      </div>
+    </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What to Watch -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="watch-next">
+          <h2>🔭 What to Watch Next Week</h2>
+          <p>Watch for Gemini 3.5 Pro general availability news from Google—the missed deadlines are piling up. EU compliance rulings on Grok 4.5 could drop late July. And with Illinois&#039;s law now signed, expect at least two more states to announce similar legislation drafts before August.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="community">
+      <div class="container">
+        <h2 class="community-title">Join the AI Onboarded Community</h2>
+        <p class="community-subtitle">Connect with 150+ AI practitioners sharing strategic insights and staying ahead of the curve.</p>
+        <div class="community-buttons">
+          <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" class="btn btn-whatsapp">💬 WhatsApp Group</a>
+          <a href="https://discord.com/invite/SW4HZAv37" class="btn btn-discord">🎮 Discord Server</a>
+          <a href="https://aionboarded.ai" class="btn btn-website">🌐 Visit Website</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="newsletter-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2026 AI Onboarded. All rights reserved.</span>
+          <a href="https://aionboarded.ai/newsletter" style="color: var(--gray-light);">Newsletter Archive</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
