@@ -110,7 +110,11 @@ jobs:
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
 
       # ── 6. SSH Deploy to production server ────────────────
+      # NOTE: continue-on-error=true — a server SSH timeout must not block
+      # the email dispatch. The newsletter HTML is already committed to Git.
       - name: Deploy to production server
+        id: deploy
+        continue-on-error: true
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -132,10 +136,15 @@ jobs:
               echo '[DEPLOY] Build complete' >> /tmp/aio-deploy.log
             " >> /tmp/aio-deploy.log 2>&1 &
             echo "Deploy started in background (PID: $!)"
-            echo "=== SSH session complete — deploy running ===" 
+            echo "=== SSH session complete — deploy running ==="
 
-      # ── 7. Wait for server to be ready ────────────────────
+      - name: Log deploy outcome
+        if: steps.deploy.outcome == 'failure'
+        run: echo "⚠️ SSH deploy step failed (server may be temporarily unreachable). Newsletter HTML is in Git. Continuing to send email." 
+
+      # ── 7. Wait for server to be ready (only if deploy succeeded) ────
       - name: Wait for server to be healthy
+        if: steps.deploy.outcome == 'success'
         run: |
           # Get the week number from pipeline output
           CONTENT_FILE=$(ls tmp-pipeline/*.json 2>/dev/null | head -1)
@@ -153,15 +162,14 @@ jobs:
               break
             fi
             if [ $i -eq 20 ]; then
-              echo "❌ Newsletter HTML did not become available — deploy may have failed"
-              exit 1
+              echo "⚠️ Newsletter HTML health check failed — server may still be building"
             fi
             sleep 30
           done
 
       # ── 8. Ingest news items into Payload CMS ─────────────
       - name: Ingest news items into Payload CMS
-        if: github.event.inputs.dry_run != 'true'
+        if: github.event.inputs.dry_run != 'true' && always()
         run: |
           WEEK=$(node -e "
             const d = require('fs').readdirSync('tmp-pipeline').find(f => f.includes('content.json') || f.includes('dry-run.json'));
@@ -196,7 +204,7 @@ jobs:
 
       # ── 9. Archive old articles ───────────────────────────
       - name: Archive old news articles
-        if: github.event.inputs.dry_run != 'true'
+        if: github.event.inputs.dry_run != 'true' && always()
         run: |
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
             "${{ secrets.NEXT_PUBLIC_SITE_URL }}/api/agent/archive-news" \
@@ -208,8 +216,10 @@ jobs:
           echo "Archive response ($HTTP_CODE): $BODY"
 
       # ── 10. Send newsletter email ─────────────────────────
+      # NOTE: always() ensures this runs even if the SSH deploy failed.
+      # The email is the most critical step — it must not be gated on server deploy.
       - name: Send newsletter email to subscribers
-        if: github.event.inputs.skip_email != 'true'
+        if: always() && github.event.inputs.skip_email != 'true'
         env:
           AGENT_API_KEY: ${{ secrets.AGENT_API_KEY }}
           NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
