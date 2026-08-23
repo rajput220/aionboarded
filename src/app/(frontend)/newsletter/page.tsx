@@ -11,6 +11,22 @@ export const metadata: Metadata = generateSeo({
 // Add new weeks at the TOP of this array (newest first)
 const newsletters = [
     {
+        week: 31,
+        slug: 'week-31',
+        title: 'Anthropic Takes the Crown',
+        subtitle: 'Week 31 AI Intelligence Briefing',
+        dateRange: 'August 23, 2026',
+        theme: 'Anthropic Takes the Crown',
+        highlights: [
+            'Anthropic Hits $65B Revenue',
+            'Stripe Acquires OpenRouter',
+            'ChatGPT for Teens Launches',
+            'Claude Doubles Drug Discovery Success',
+        ],
+        emoji: '📡',
+        htmlFile: '/newsletter/week-31.html',
+    },
+    {
         week: 30,
         slug: 'week-30',
         title: 'The Quiet Before the Signal',
