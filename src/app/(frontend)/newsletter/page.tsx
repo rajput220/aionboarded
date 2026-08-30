@@ -18,12 +18,12 @@ const newsletters = [
         dateRange: 'August 23, 2026',
         theme: 'Anthropic Takes the Crown',
         highlights: [
-            'Anthropic Hits $65B Revenue',
-            'Stripe Acquires OpenRouter',
-            'ChatGPT for Teens Launches',
-            'Claude Doubles Drug Discovery Success',
+            'Anthropic Hits $65B Revenue Run Rate — Surpasses OpenAI',
+            'Stripe Acquires OpenRouter for $7B+',
+            'ChatGPT for Teens Launches with Parental Controls',
+            'EU Orders Google to Grant Rival AI Assistants Android Access',
         ],
-        emoji: '📡',
+        emoji: '👑',
         htmlFile: '/newsletter/week-31.html',
     },
     {
