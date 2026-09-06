@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGI Era Meets Infrastructure Consolidation — Week 33 | AI Onboarded</title>
+    <meta name="description" content="OpenAI launched GPT-6 Astra — the first commercially released model to cross its internal &#039;Critical&#039; cybersecurity threshold — while Greg Brockman declared &#039;Wel" />
+    <meta property="og:title" content="AGI Era Meets Infrastructure Consolidation — Week 33 | AI Onboarded" />
+    <meta property="og:description" content="OpenAI launched GPT-6 Astra — the first commercially released model to cross its internal &#039;Critical&#039; cybersecurity threshold — while Greg Brockman declared &#039;Wel" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://aionboarded.ai/newsletter/week-33" />
+    <link rel="canonical" href="https://aionboarded.ai/newsletter/week-33" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #0a84ff; --primary-dark: #0066cc; --accent: #1db954;
+        --dark: #0f172a; --dark-700: #334155; --dark-600: #475569;
+        --gray: #64748b; --gray-light: #94a3b8; --light: #f8fafc;
+        --light-200: #e2e8f0; --white: #ffffff;
+        --gradient-primary: linear-gradient(135deg, #0a84ff, #1db954);
+        --gradient-hero: linear-gradient(135deg, #0a84ff 0%, #0066cc 40%, #1db954 100%);
+        --gradient-dark: linear-gradient(135deg, #0f172a, #1e293b);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+        --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+        --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+        --transition: all .3s cubic-bezier(.4,0,.2,1);
+        --max-width: 1200px;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; font-size: 16px; }
+      a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+      a:hover { color: var(--primary-dark); }
+      .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+      /* Header */
+      .newsletter-header { background: rgba(255,255,255,.92); border-bottom: 1px solid var(--light-200); padding: 14px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+      .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .header-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .header-logo-icon { width: 36px; height: 36px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+      .header-logo-text { font-weight: 700; font-size: 17px; color: var(--dark); }
+      .header-logo-text span { color: var(--primary); }
+      /* Site nav */
+      .site-nav { display: flex; align-items: center; gap: 4px; }
+      .site-nav a { font-size: 14px; font-weight: 500; color: var(--dark-600); padding: 6px 12px; border-radius: var(--radius-sm); transition: var(--transition); white-space: nowrap; }
+      .site-nav a:hover { background: var(--light-200); color: var(--dark); }
+      .site-nav a.active { background: linear-gradient(135deg,rgba(10,132,255,.1),rgba(29,185,84,.1)); color: var(--primary); }
+      .header-right { display: flex; align-items: center; gap: 12px; }
+      @media (max-width: 640px) { .site-nav { display: none; } }
+      .header-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--gray); }
+      .header-badge { background: var(--gradient-primary); color: white; padding: 4px 14px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+
+      /* Hero */
+      .hero { background: var(--gradient-hero); padding: 80px 0; position: relative; overflow: hidden; }
+      .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(29,185,84,.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(10,132,255,.2) 0%, transparent 50%); }
+      .hero-inner { position: relative; z-index: 1; }
+      .hero-content { color: white; max-width: 720px; }
+      .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.2); }
+      .hero-title { font-size: 42px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.5px; }
+      .hero-subtitle { font-size: 18px; line-height: 1.6; opacity: .9; max-width: 600px; font-weight: 300; }
+
+      /* Section */
+      .section { padding: 64px 0; }
+      .section-header { text-align: center; margin-bottom: 48px; }
+      .section-label { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(10,132,255,.08), rgba(29,185,84,.08)); color: var(--primary); padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+      .section-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; }
+      .section-title span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+      /* Story cards */
+      .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px; }
+      .story-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); transition: var(--transition); display: flex; flex-direction: column; }
+      .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(10,132,255,.2); }
+      .story-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+      .story-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .story-card-tag { display: inline-block; background: linear-gradient(135deg, rgba(10,132,255,.1), rgba(29,185,84,.1)); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+      .story-card-readtime { font-size: 12px; color: var(--gray); font-weight: 500; }
+      .story-card-headline { font-size: 21px; font-weight: 700; line-height: 1.35; color: var(--dark); }
+      .story-card-summary { font-size: 15px; line-height: 1.7; color: var(--dark-600); flex: 1; }
+      .story-card-whyitmatters { padding: 14px 16px; background: linear-gradient(135deg, rgba(10,132,255,.04), rgba(29,185,84,.04)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 13px; color: var(--dark-700); line-height: 1.6; }
+      .story-card-whyitmatters strong { color: #17a34a; }
+      .story-source { font-size: 13px; color: var(--gray); margin-top: 4px; }
+      .story-source:hover { color: var(--primary); }
+
+      /* TOC */
+      .toc { background: var(--white); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 48px; box-shadow: var(--shadow-sm); border: 1px solid var(--light-200); }
+      .toc-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+      .toc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; list-style: none; }
+      .toc-list li a { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 14px; color: var(--dark-600); transition: var(--transition); }
+      .toc-list li a:hover { background: rgba(10,132,255,.06); color: var(--primary); }
+      .toc-list li a::before { content: "→"; color: var(--primary); font-weight: 600; }
+
+      /* What to watch */
+      .watch-next { background: var(--gradient-dark); border-radius: var(--radius-lg); padding: 40px; color: white; margin: 64px 0; }
+      .watch-next h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+      .watch-next p { font-size: 16px; line-height: 1.7; opacity: .9; }
+
+      /* Community */
+      .community { background: var(--gradient-dark); padding: 64px 0; text-align: center; }
+      .community-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 10px; }
+      .community-subtitle { font-size: 16px; color: var(--gray-light); margin-bottom: 36px; }
+      .community-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; transition: var(--transition); text-decoration: none; }
+      .btn-whatsapp { background: #25d366; color: white; }
+      .btn-whatsapp:hover { background: #20bd5a; transform: translateY(-2px); color: white; }
+      .btn-discord { background: #5865f2; color: white; }
+      .btn-discord:hover { background: #4752c4; transform: translateY(-2px); color: white; }
+      .btn-website { background: rgba(255,255,255,.1); color: white; border: 1px solid rgba(255,255,255,.2); }
+      .btn-website:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); color: white; }
+
+      /* Footer */
+      .newsletter-footer { background: var(--dark); color: var(--gray-light); padding: 48px 0 32px; }
+      .footer-bottom { border-top: 1px solid var(--dark-700); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--gray); margin-top: 32px; }
+
+      @media (max-width: 768px) {
+        .hero { padding: 48px 0; }
+        .hero-title { font-size: 28px; }
+        .stories-grid { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header class="newsletter-header">
+      <div class="container">
+        <div class="header-inner">
+          <a href="https://aionboarded.ai" class="header-logo">
+            <div class="header-logo-icon">AI</div>
+            <span class="header-logo-text">AI <span>Onboarded</span></span>
+          </a>
+          <nav class="site-nav">
+            <a href="https://aionboarded.ai">Home</a>
+            <a href="https://aionboarded.ai/news">News</a>
+            <a href="https://aionboarded.ai/newsletter" class="active">Newsletter</a>
+            <a href="https://aionboarded.ai/podcast">Podcast</a>
+            <a href="https://aionboarded.ai/#subscribe">Subscribe</a>
+            <a href="https://aionboarded.ai/#contact">Contact Us</a>
+          </nav>
+          <div class="header-right">
+            <span style="font-size:13px;color:var(--gray)">September 6, 2026</span>
+            <span class="header-badge">Week 33</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-eyebrow">📡 Weekly AI Brief · Week 33</div>
+            <h1 class="hero-title">AGI Era Meets Infrastructure Consolidation</h1>
+            <p class="hero-subtitle">OpenAI launched GPT-6 Astra — the first commercially released model to cross its internal &#039;Critical&#039; cybersecurity threshold — while Greg Brockman declared &#039;Welcome to the AGI era.&#039; In the same week, Nvidia agreed to acquire Hugging Face for $12.9 billion, reshaping who controls the infrastructure that open-source AI depends on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="section">
+      <div class="container">
+
+        <!-- TOC -->
+        <nav class="toc">
+          <p class="toc-title">📋 This Week's Stories</p>
+          <ul class="toc-list">
+            
+      <li><a href="#story-1">GPT-6 Astra Launches as OpenAI Declares &#039;AGI Era&#039; Has Arrived</a></li>
+
+      <li><a href="#story-2">Nvidia Acquires Hugging Face for $12.9 Billion</a></li>
+
+      <li><a href="#story-3">Sanders-Casar Bill Would Ban Superintelligent AI Development</a></li>
+
+      <li><a href="#story-4">Claude Fable 5.1 Ships 25% Cheaper with Built-in Content Authentication</a></li>
+
+      <li><a href="#story-5">Commerce Secretary Lutnick: &#039;We Trust Anthropic&#039;</a></li>
+
+      <li><a href="#story-6">Gemini 3.8 Flash Launches with Restricted Cybersecurity Variant</a></li>
+
+      <li><a href="#story-7">DeepSeek Plans 160,000-Chip Huawei Cluster at 1GW Site</a></li>
+
+      <li><a href="#story-8">South Korea Chip Exports Triple to $46.65 Billion Record</a></li>
+
+      <li><a href="#story-9">HiddenLayer Raises $100M as AI Security ARR Jumps 10x</a></li>
+
+      <li><a href="#story-10">AI-Generated Deepfake Attorney Videos Execute $4,820 Fraud</a></li>
+
+      <li><a href="#story-11">Vals AI: Complex Agentic Tasks Carry 10,000x Environmental Footprint</a></li>
+
+      <li><a href="#story-12">K2 Horizon: Six Fully Open Models from 0.9B to 375B Parameters</a></li>
+          </ul>
+        </nav>
+
+        <div class="section-header">
+          <span class="section-label">🔍 Week 33 Coverage</span>
+          <h2 class="section-title">This Week in <span>Artificial Intelligence</span></h2>
+        </div>
+
+        <div class="stories-grid">
+          
+    <article class="story-card" id="story-1">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">OpenAI</span>
+          <span class="story-card-readtime">🕐 2 min read</span>
+        </div>
+        <h2 class="story-card-headline">GPT-6 Astra Launches as OpenAI Declares &#039;AGI Era&#039; Has Arrived</h2>
+        <p class="story-card-summary">OpenAI released GPT-6 Astra, its first model to cross the &#039;Critical&#039; cybersecurity threshold, featuring autonomous computer use and multi-day task capability. President Greg Brockman declared the arrival of the AGI era, noting the model found two unknown software vulnerabilities during pre-launch testing.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The Critical cybersecurity threshold triggers mandatory safeguards that will affect deployment in regulated industries. The gap between capability and human oversight is widening, defining the governance challenge of the next phase of AI.
+          </div>
+        <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener" class="story-source">
+            📰 OpenAI Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-2">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Industry</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Nvidia Acquires Hugging Face for $12.9 Billion</h2>
+        <p class="story-card-summary">Nvidia agreed to acquire Hugging Face — open-source AI&#039;s central repository for model weights, datasets, and tools — for $12.9 billion. The deal includes $11.9B in cash and $1B in retention equity, with Nvidia promising to keep the hub open to competing models and chips.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The acquisition puts open-source AI&#039;s most critical shared infrastructure under the control of the world&#039;s dominant AI chip maker, raising questions about long-term neutrality and access for competitors.
+          </div>
+        
+      </div>
+    </article>
+
+    <article class="story-card" id="story-3">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Governance</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Sanders-Casar Bill Would Ban Superintelligent AI Development</h2>
+        <p class="story-card-summary">Senators Bernie Sanders and Greg Casar introduced legislation that would ban the development of superintelligent AI outright and impose up to 20 years in prison for violators — an opening legislative bid that reframes the conversation about safety-first AI policy in the United States.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The bill establishes a maximalist position on AI safety legislation in Congress, setting the frame for how frontier AI development may be regulated even if this specific bill does not pass.
+          </div>
+        
+      </div>
+    </article>
+
+    <article class="story-card" id="story-4">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Claude Fable 5.1 Ships 25% Cheaper with Built-in Content Authentication</h2>
+        <p class="story-card-summary">Anthropic released Claude Fable 5.1 with 25% lower cost than its predecessor and C2PA content watermarking built into every output. The model also blocks 60% more false positives in cybersecurity prompts and demonstrates improved scope adherence.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The price reduction changes the cost equation for organizations deferring AI adoption, while built-in C2PA watermarking provides a direct path to EU AI Act compliance without additional tooling.
+          </div>
+        <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1" target="_blank" rel="noopener" class="story-source">
+            📰 Anthropic Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-5">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Anthropic</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Commerce Secretary Lutnick: &#039;We Trust Anthropic&#039;</h2>
+        <p class="story-card-summary">Commerce Secretary Howard Lutnick told the G20 Innovation Ministerial that the U.S. government &#039;trusts Anthropic,&#039; signaling a marked shift after months of friction with the Trump administration. The statement follows the lifting of export controls and a federal court dismissal.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The public endorsement materially changes Anthropic&#039;s political risk profile, opening doors for government-adjacent contracts and reducing uncertainty for enterprise customers in sensitive sectors.
+          </div>
+        <a href="https://www.axios.com/2026/09/02/lutnick-anthropic-g20-trust" target="_blank" rel="noopener" class="story-source">
+            📰 Axios →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-6">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Google</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Gemini 3.8 Flash Launches with Restricted Cybersecurity Variant</h2>
+        <p class="story-card-summary">Google released Gemini 3.8 Flash at $0.75 per million input tokens while revealing the Fairwind Program — a restricted cybersecurity version achieving 70%+ vulnerability discovery and 2.6x better patch quality than leading commercial alternatives.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The 2.6x patch quality improvement over commercial alternatives represents a significant capability advantage for security teams, while the restricted access model establishes a governance precedent for dual-use AI capabilities.
+          </div>
+        <a href="https://blog.google/technology/google-deepmind/gemini-3-8-flash-ga" target="_blank" rel="noopener" class="story-source">
+            📰 Google Blog →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-7">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Industry</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">DeepSeek Plans 160,000-Chip Huawei Cluster at 1GW Site</h2>
+        <p class="story-card-summary">DeepSeek revealed plans to deploy at least 160,000 Huawei Ascend AI accelerators at a 1-gigawatt site in Inner Mongolia — the largest known domestic Chinese AI compute build and a major test of China&#039;s alternative to U.S.-restricted NVIDIA GPUs.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The deployment tests whether China&#039;s domestic chip stack can support frontier AI training at scale, with implications for the effectiveness of U.S. export controls and the global AI compute landscape.
+          </div>
+        
+      </div>
+    </article>
+
+    <article class="story-card" id="story-8">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Industry</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">South Korea Chip Exports Triple to $46.65 Billion Record</h2>
+        <p class="story-card-summary">South Korea&#039;s August chip exports tripled year-over-year to a record $46.65 billion, representing 47.5% of all the country&#039;s goods exports — a signal of hyperscaler AI spending driving semiconductor demand to unprecedented levels.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The tripling of chip exports demonstrates that AI infrastructure investment has become a macroeconomic force, with national economies increasingly tied to hyperscaler compute demand.
+          </div>
+        
+      </div>
+    </article>
+
+    <article class="story-card" id="story-9">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Security</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">HiddenLayer Raises $100M as AI Security ARR Jumps 10x</h2>
+        <p class="story-card-summary">AI security company HiddenLayer raised a $100 million Series B as its annual recurring revenue jumped 10x in the past year. The round was led by Delta-v Capital with participation from Microsoft&#039;s M12, Morgan Stanley, and Booz Allen Hamilton.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The 10x ARR growth and participation from defense and enterprise investors signals that AI security is maturing from a niche concern into a category with significant market demand.
+          </div>
+        
+      </div>
+    </article>
+
+    <article class="story-card" id="story-10">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Security</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">AI-Generated Deepfake Attorney Videos Execute $4,820 Fraud</h2>
+        <p class="story-card-summary">AI-generated video of a supposed attorney was used to conduct a fraudulent consultation and extract $4,820 from a victim. The videos were indistinguishable from authentic recordings, representing a new category of AI-enabled professional impersonation fraud.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The case demonstrates that AI-generated professional impersonation fraud has moved from theoretical to operational, requiring immediate updates to fraud prevention training and verification protocols.
+          </div>
+        
+      </div>
+    </article>
+
+    <article class="story-card" id="story-11">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Research</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">Vals AI: Complex Agentic Tasks Carry 10,000x Environmental Footprint</h2>
+        <p class="story-card-summary">Vals AI found that some complex long-running agentic tasks carry approximately 10,000 times the environmental footprint of a simple query. Building a single web application on some models matched 2.5 hours of home electricity consumption.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The documented environmental cost of agentic AI creates a new compliance and ESG reporting requirement that most organizations have not yet begun measuring.
+          </div>
+        <a href="https://www.bloomberg.com/news/articles/2026-09-04/vals-ai-agentic-footprint" target="_blank" rel="noopener" class="story-source">
+            📰 Bloomberg →
+          </a>
+      </div>
+    </article>
+
+    <article class="story-card" id="story-12">
+      <div class="story-card-body">
+        <div class="story-card-meta">
+          <span class="story-card-tag">Research</span>
+          <span class="story-card-readtime">🕐 1 min read</span>
+        </div>
+        <h2 class="story-card-headline">K2 Horizon: Six Fully Open Models from 0.9B to 375B Parameters</h2>
+        <p class="story-card-summary">IFM and MBZUAI released K2 Horizon — six fully open Apache 2.0 models ranging from 0.9B to 375B parameters with weights, training code, data, and checkpoints published. The smallest tiers claim state-of-the-art results at their sizes.</p>
+        <div class="story-card-whyitmatters">
+            <strong>⚡ Why It Matters:</strong> The fully open release with training data and code provides researchers and enterprises with complete transparency and reproducibility — a counterweight to proprietary model opacity.
+          </div>
+        
+      </div>
+    </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What to Watch -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="watch-next">
+          <h2>🔭 What to Watch Next Week</h2>
+          <p>Watch for GPT-6 Astra&#039;s full rollout to paid ChatGPT users and the first large-scale real-world usage data. EU AI Act compliance responses from leading labs are due, and the Nvidia-Hugging Face deal will face early regulatory scrutiny from the EU and FTC. The Sanders-Casar superintelligent AI ban bill may see first committee hearings.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="community">
+      <div class="container">
+        <h2 class="community-title">Join the AI Onboarded Community</h2>
+        <p class="community-subtitle">Connect with 150+ AI practitioners sharing strategic insights and staying ahead of the curve.</p>
+        <div class="community-buttons">
+          <a href="https://chat.whatsapp.com/Gwl3CkJ6hsXFRsJD14VyJJ" class="btn btn-whatsapp">💬 WhatsApp Group</a>
+          <a href="https://discord.com/invite/SW4HZAv37" class="btn btn-discord">🎮 Discord Server</a>
+          <a href="https://aionboarded.ai" class="btn btn-website">🌐 Visit Website</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="newsletter-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2026 AI Onboarded. All rights reserved.</span>
+          <a href="https://aionboarded.ai/newsletter" style="color: var(--gray-light);">Newsletter Archive</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
