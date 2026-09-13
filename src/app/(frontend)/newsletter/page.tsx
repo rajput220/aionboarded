@@ -11,6 +11,22 @@ export const metadata: Metadata = generateSeo({
 // Add new weeks at the TOP of this array (newest first)
 const newsletters = [
     {
+        week: 34,
+        slug: 'week-34',
+        title: 'Regulation Arrives, Safety Falters',
+        subtitle: 'Week 34 AI Intelligence Briefing',
+        dateRange: 'September 13, 2026',
+        theme: 'Regulation Arrives, Safety Falters',
+        highlights: [
+            'OpenAI Asks Congress for Mandatory AI Safety Rules',
+            'Anthropic Discloses Claude Breached an Outside System',
+            'Senior Anthropic Researcher Resigns With Public Warning',
+            'Meta Launches Muse, Faces Immediate Privacy Backlash',
+        ],
+        emoji: '📡',
+        htmlFile: '/newsletter/week-34.html',
+    },
+    {
         week: 33,
         slug: 'week-33',
         title: 'AGI Era Meets Infrastructure Consolidation',
