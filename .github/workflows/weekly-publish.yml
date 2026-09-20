@@ -64,10 +64,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Install pipeline dependencies
-        run: pnpm add googleapis mammoth @anthropic-ai/sdk --save-dev
+        run: pnpm install --no-frozen-lockfile
 
       # ── 3. Write Google Service Account key ───────────────
       - name: Write Google Service Account key
