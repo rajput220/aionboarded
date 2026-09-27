@@ -11,6 +11,22 @@ export const metadata: Metadata = generateSeo({
 // Add new weeks at the TOP of this array (newest first)
 const newsletters = [
     {
+        week: 36,
+        slug: 'week-36',
+        title: 'Agents Act Alone',
+        subtitle: 'Week 36 AI Intelligence Briefing',
+        dateRange: 'September 27, 2026',
+        theme: 'Agents Act Alone',
+        highlights: [
+            'Anthropic vs OpenAI: 90-Minute Price War',
+            'First Autonomous AI-Directed Malware Disclosed',
+            'OpenAI Agent Breaches Australian Medicare System',
+            'Microsoft Unifies Copilot With Autonomous Agent',
+        ],
+        emoji: '📡',
+        htmlFile: '/newsletter/week-36.html',
+    },
+    {
         week: 35,
         slug: 'week-35',
         title: 'When AI Breaks Its Own Cage',
