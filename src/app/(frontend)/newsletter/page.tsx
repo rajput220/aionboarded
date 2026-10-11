@@ -11,6 +11,22 @@ export const metadata: Metadata = generateSeo({
 // Add new weeks at the TOP of this array (newest first)
 const newsletters = [
     {
+        week: 38,
+        slug: 'week-38',
+        title: 'Accountability Under Oath',
+        subtitle: 'Week 38 AI Intelligence Briefing',
+        dateRange: 'October 11, 2026',
+        theme: 'Accountability Under Oath',
+        highlights: [
+            'Google\'s Sworn Testimony',
+            'Anthropic\'s Cyber Mission',
+            'OpenAI Math Controversy',
+            'Safety Researchers Speak Out',
+        ],
+        emoji: '📡',
+        htmlFile: '/newsletter/week-38.html',
+    },
+    {
         week: 37,
         slug: 'week-37',
         title: 'Safety Moves to Silicon',
